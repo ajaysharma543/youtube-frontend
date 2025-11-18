@@ -1,0 +1,40 @@
+@import "tailwindcss";
+/* hide scrollbar (WebKit, Firefox, Edge/IE) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* optional slim light scrollbar for dark theme (if you want to show one) */
+.dark-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+.dark-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.dark-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+}
+.dark-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.dark-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+
+/* ensure root fills viewport so sticky works reliably */
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/* make image smoothly cover area (optional) */
+.liked-cover-img {
+  object-fit: cover;
+}
