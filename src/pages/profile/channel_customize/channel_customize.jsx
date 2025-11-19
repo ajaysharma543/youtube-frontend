@@ -281,14 +281,13 @@ function CustomizeChannel() {
           errors={errors}
         />
 
-        <Inputfields
-          label="description"
-          description=""
-          register={register("description", {
-            required: "description is required",
-          })}
-          errors={errors}
-        />
+     <Inputfields
+  label="description"
+  description=""
+  register={register("description")}
+  errors={errors}
+/>
+
 
         <Inputfields
           label="email"

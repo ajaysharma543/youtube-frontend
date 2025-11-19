@@ -7,10 +7,6 @@ function Seting() {
   const { data: user } = useSelector((state) => state.user);
   console.log(user);
 
-  const handleLogout = () => {
-    dispatch(logoutUser());
-  };
-
   return (
     <div className=" bg-black text-white p-6 flex justify-center">
       <div className="w-full max-w-xl bg-gray-900 p-6 rounded-2xl shadow-lg space-y-6">
