@@ -32,6 +32,7 @@ function Login() {
       console.log("✅ User logged in:", response.data);
 
       const current = await authApi.getcurrentuser();
+        navigate("/");
 
       if (current) {
         dispatch(
@@ -41,7 +42,6 @@ function Login() {
           })
         );
         dispatch(resetSignup());
-        navigate("/");
       }
     } catch (error) {
       const errorMessage =

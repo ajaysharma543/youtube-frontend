@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";   // ✔ added
 import { useForm } from "react-hook-form";
 import { setBasicInfo } from "../../redux/features/singupslice";
 import InputField from "../../components/inputfiled";
@@ -15,6 +15,15 @@ function SignupStep1() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const { user, token } = useSelector((state) => state.auth);
+
+  // 🚀 If already logged in → redirect immediately
+  useEffect(() => {
+    if (user || token) {
+      navigate("/");
+    }
+  }, [user, token, navigate]);
 
   const {
     register,
@@ -36,10 +45,7 @@ function SignupStep1() {
     setLoading(true);
     try {
       dispatch(setBasicInfo({ ...data, avatar, coverImage }));
-
       navigate("/signup-email");
-    } catch (error) {
-      console.error("❌ Signup step 1 error:", error);
     } finally {
       setLoading(false);
     }
@@ -72,6 +78,7 @@ function SignupStep1() {
             onChange={handleFileChange}
           />
         </div>
+
         <InputField
           label="Full Name"
           type="text"
@@ -91,6 +98,7 @@ function SignupStep1() {
         {errors.username && (
           <p className="text-red-500 text-sm">{errors.username.message}</p>
         )}
+
         <Button
           type="submit"
           text={loading ? "Loading..." : "Next"}
