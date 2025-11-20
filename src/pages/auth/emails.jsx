@@ -44,38 +44,42 @@ const SignupStep2 = () => {
     }
   }, [fullname, username, avatar, navigate]);
 
-  const onSubmit = async (data) => {
-    dispatch(signupStart());
-    setLocalError("");
+const onSubmit = async (data) => {
+  dispatch(signupStart());
+  setLocalError("");
 
-    try {
-      const formData = new FormData();
-      formData.append("fullname", fullname);
-      formData.append("username", username);
-      formData.append("avatar", avatar);
-      if (coverImage) formData.append("coverImage", coverImage);
-      formData.append("email", data.email);
-      formData.append("password", data.password);
+  try {
+    const formData = new FormData();
+    formData.append("fullname", fullname);
+    formData.append("username", username);
+    formData.append("avatar", avatar);
+    if (coverImage) formData.append("coverImage", coverImage);
+    formData.append("email", data.email);
+    formData.append("password", data.password);
 
-      const response = await authApi.signup(formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+    const response = await authApi.signup(formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
 
-      dispatch(
-        signupSuccess({
-          user: response.data.data.user,
-          token: response.data.data.accesstoken,
-        })
-      );
+    // 🚀 FIRST redirect to dashboard immediately
+    navigate("/");
 
-      dispatch(resetSignup());
-      navigate("/");
-    } catch (error) {
-      const message = error.response?.data?.message || error.message;
-      dispatch(signupFailure(message));
-      setLocalError(message);
-    }
-  };
+    // 🟢 Update Redux AFTER redirect to avoid UI flashing
+    dispatch(
+      signupSuccess({
+        user: response.data.data.user,
+        token: response.data.data.accesstoken,
+      })
+    );
+
+    dispatch(resetSignup());
+  } catch (error) {
+    const message = error.response?.data?.message || error.message;
+    dispatch(signupFailure(message));
+    setLocalError(message);
+  }
+};
+
 
   return (
     <FormContainer
