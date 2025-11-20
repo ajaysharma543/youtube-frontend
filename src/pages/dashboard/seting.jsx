@@ -33,6 +33,7 @@ function Seting() {
             </div>
 
             <LogoutButton />
+            {/* thast neow */}
           </div>
         ) : (
           <p className="text-gray-400">User data not found.</p>
