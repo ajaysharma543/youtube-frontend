@@ -16,20 +16,17 @@ function SignupStep1() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // ✅ React Hook Form setup
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  // ✅ Handle file upload normally
   const handleFileChange = (e) => {
     if (e.target.name === "avatar") setAvatar(e.target.files[0]);
     if (e.target.name === "coverImage") setCoverImage(e.target.files[0]);
   };
 
-  // ✅ Submit handler
   const onSubmit = async (data) => {
     if (!avatar) {
       alert("Please upload an avatar!");
@@ -85,7 +82,6 @@ function SignupStep1() {
           <p className="text-red-500 text-sm">{errors.fullname.message}</p>
         )}
 
-        {/* ✅ Username field */}
         <InputField
           label="Username"
           type="text"
@@ -95,10 +91,6 @@ function SignupStep1() {
         {errors.username && (
           <p className="text-red-500 text-sm">{errors.username.message}</p>
         )}
-
-        {/* ✅ File upload fields */}
-
-        {/* ✅ Button with loading state */}
         <Button
           type="submit"
           text={loading ? "Loading..." : "Next"}

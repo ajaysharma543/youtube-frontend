@@ -6,7 +6,6 @@ import Signup from "./pages/auth/signup";
 import Login from "./pages/auth/login";
 import authApi from "./api/userapi";
 import SignupStep2 from "./pages/auth/emails";
-import Password from "./pages/auth/password";
 import Videouploads from "./pages/video/videouploads";
 import VideoUpload from "./pages/video/title_Description";
 import PublishPage from "./pages/video/publish";
@@ -217,7 +216,6 @@ function App() {
       {/* Auth Routes */}
       <Route path="/signup" element={<Signup />} />
       <Route path="/signup-email" element={<SignupStep2 />} />
-      <Route path="/set-password" element={<Password />} />
       <Route path="/login" element={<Login />} />
       <Route path="/login/resetpassword" element={<Resetpassword />} />
       <Route path="/login/newpassword" element={<New_password />} />

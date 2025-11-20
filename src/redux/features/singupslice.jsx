@@ -22,17 +22,6 @@ const signupSlice = createSlice({
       state.coverImage = coverImage;
     },
 
-    // Step 2
-    setEmail: (state, action) => {
-      state.email = action.payload.email;
-    },
-
-    // Step 3
-    setPassword: (state, action) => {
-      state.password = action.payload.password;
-    },
-
-    // Optional combined setter
     setCredentials: (state, action) => {
       const { email, password } = action.payload;
       state.email = email;

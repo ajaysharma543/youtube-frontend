@@ -8,9 +8,6 @@ function Inputfields({
   errors,
   type = "text",
   placeholder,
-  showOtpButton = false,
-  onSendOtp,
-  isSendingOtp = false,
 }) {
   return (
     <div className="w-[60%] mb-6">
@@ -29,21 +26,7 @@ function Inputfields({
           }`}
         />
 
-        {showOtpButton && (
-          <button
-            type="button"
-            onClick={onSendOtp}
-            disabled={isSendingOtp}
-            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 disabled:bg-gray-400"
-          >
-            {isSendingOtp ? "Sending..." : "Send OTP"}
-          </button>
-        )}
       </div>
-
-      {errors[name] && (
-        <p className="text-red-500 text-sm mt-1">{errors[name].message}</p>
-      )}
     </div>
   );
 }

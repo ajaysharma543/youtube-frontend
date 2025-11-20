@@ -1,74 +1,79 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { setEmail } from "../../redux/features/singupslice";
-import { signupStart, signupFailure } from "../../redux/features/authslice";
+import { resetSignup } from "../../redux/features/singupslice";
+import {
+  signupStart,
+  signupFailure,
+  signupSuccess,
+} from "../../redux/features/authslice";
 import FormContainer from "../../components/form-container";
 import InputField from "../../components/inputfiled";
 import Button from "../../components/button";
-import OtpApi from "../../api/otp.jsx";
+import authApi from "../../api/userapi.jsx";
 
 const SignupStep2 = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { error: globalError } = useSelector((state) => state.auth);
 
-  const [otpSent, setOtpSent] = useState(false);
-  const [enteredOtp, setEnteredOtp] = useState("");
+  const { fullname, username, avatar, coverImage } = useSelector(
+    (state) => state.signup
+  );
+
+  const { loading, error: globalError } = useSelector((state) => state.auth);
+
   const [localError, setLocalError] = useState("");
-
-  // ✅ Local loading states
-  const [sendingOtp, setSendingOtp] = useState(false);
-  const [verifyingOtp, setVerifyingOtp] = useState(false);
 
   const {
     register,
     handleSubmit,
+    formState: { errors, isSubmitting },
     getValues,
-    formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onBlur" });
 
-  const handleSendOtp = async () => {
-    const email = getValues("email");
-    if (!email) return setLocalError("Please enter an email first");
+  // Clear previous errors on mount
+  useEffect(() => {
+    dispatch(signupFailure(null));
+  }, [dispatch]);
 
-    setSendingOtp(true);
-    setLocalError("");
-    try {
-      dispatch(signupStart());
-      const res = await OtpApi.sendOtp(email);
-      console.log("OTP sent:", res.data);
-      dispatch(setEmail({ email }));
-      setOtpSent(true);
-    } catch (err) {
-      const message = err.response?.data?.message || "Failed to send OTP";
-      dispatch(signupFailure(message));
-      setLocalError(message);
-    } finally {
-      setSendingOtp(false);
+  // Prevent direct access to Step2
+  useEffect(() => {
+    if (!fullname || !username || !avatar) {
+      navigate("/signup");
     }
-  };
+  }, [fullname, username, avatar, navigate]);
 
-  const handleVerifyOtp = async (data) => {
-    const { email } = data;
-    setVerifyingOtp(true);
+  const onSubmit = async (data) => {
+    dispatch(signupStart());
     setLocalError("");
 
     try {
-      dispatch(signupStart());
-      const res = await OtpApi.verifyOtp({ email, otp: enteredOtp });
-      console.log("Verification:", res.data);
+      const formData = new FormData();
+      formData.append("fullname", fullname);
+      formData.append("username", username);
+      formData.append("avatar", avatar);
+      if (coverImage) formData.append("coverImage", coverImage);
+      formData.append("email", data.email);
+      formData.append("password", data.password);
 
-      if (res.data?.data?.verified) {
-        navigate("/set-password");
-      }
-    } catch (err) {
-      const message = err.response?.data?.message || "Invalid or expired OTP";
+      const response = await authApi.signup(formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      dispatch(
+        signupSuccess({
+          user: response.data.data.user,
+          token: response.data.data.accesstoken,
+        })
+      );
+
+      dispatch(resetSignup());
+      navigate("/");
+    } catch (error) {
+      const message = error.response?.data?.message || error.message;
       dispatch(signupFailure(message));
       setLocalError(message);
-    } finally {
-      setVerifyingOtp(false);
     }
   };
 
@@ -84,62 +89,82 @@ const SignupStep2 = () => {
         </p>
       }
     >
-      <form onSubmit={handleSubmit(handleVerifyOtp)}>
-        <div className="flex items-end gap-3 mb-4">
-          <div className="flex flex-col flex-[0.7]">
-            <label className="text-sm font-semibold mb-1">Email</label>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="border border-gray-300 text-white rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
-              {...register("email", {
-                required: "Email is required",
-                pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                  message: "Invalid email format",
-                },
-              })}
-            />
-            {errors.email && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.email.message}
-              </p>
-            )}
-          </div>
-
-          <div className="flex-[0.3] flex items-end">
-            <Button
-              type="button"
-              text={sendingOtp ? "Sending..." : "Send OTP"}
-              onClick={handleSendOtp}
-              disabled={sendingOtp}
-              className="w-full"
-            />
-          </div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {/* Email */}
+        <div className="mb-4">
+          <label className="text-sm font-semibold mb-1 block">Email</label>
+          <InputField
+            type="email"
+            placeholder="Enter your email"
+            className="border border-gray-300 text-white rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value:
+                  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                message: "Invalid email format",
+              },
+            })}
+          />
+          {errors.email && (
+            <p className="text-red-500 text-sm mt-1">
+              {errors.email.message}
+            </p>
+          )}
         </div>
 
-        <InputField
-          label="Enter OTP"
-          type="text"
-          placeholder="Enter 6-digit OTP"
-          value={enteredOtp}
-          onChange={(e) => setEnteredOtp(e.target.value)}
-          className="mt-4"
-          required
+        {/* Password */}
+        <div className="mb-4">
+          <InputField
+            label="Password"
+            type="password"
+            placeholder="Enter Password"
+            {...register("password", {
+              required: "Password is required",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters",
+              },
+            })}
+          />
+          {errors.password && (
+            <p className="text-red-500 text-sm">{errors.password.message}</p>
+          )}
+        </div>
+
+        {/* Confirm Password */}
+        <div className="mb-4">
+          <InputField
+            label="Confirm Password"
+            type="password"
+            placeholder="Confirm Password"
+            {...register("confirmPassword", {
+              validate: (value) =>
+                value === getValues("password") ||
+                "Passwords do not match",
+            })}
+          />
+          {errors.confirmPassword && (
+            <p className="text-red-500 text-sm">
+              {errors.confirmPassword.message}
+            </p>
+          )}
+        </div>
+
+        {/* Button */}
+        <Button
+          type="submit"
+          text={loading || isSubmitting ? "Creating Account..." : "Sign Up"}
+          loading={loading || isSubmitting}
+          disabled={loading || isSubmitting}
         />
 
+        {/* Error message */}
         {(localError || globalError) && (
-          <p className="text-red-500 text-sm mt-2">
+          <p className="text-red-500 text-sm mt-3">
             {localError || globalError}
           </p>
         )}
-
-        <Button
-          type="submit"
-          text={verifyingOtp ? "Verifying..." : "Verify OTP"}
-          className="w-full mt-4"
-          disabled={verifyingOtp}
-        />
       </form>
     </FormContainer>
   );

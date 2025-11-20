@@ -11,9 +11,26 @@ import InputField from "../../../components/inputfiled";
 
 function CustomizeChannel() {
   const { data } = useSelector((state) => state.user);
-  const [enteredOtp, setEnteredOtp] = useState("");
-  const [isOtpVerified, setIsOtpVerified] = useState(false); // ✅ new state
   const [originalEmail, setOriginalEmail] = useState("");
+const [emailVerified, setEmailVerified] = useState(false);
+const [tempEmail, setTempEmail] = useState("");
+const [emailStepCompleted, setEmailStepCompleted] = useState(false);
+const [emailChanged, setEmailChanged] = useState(false);
+
+const verifyEmail = async () => {
+  try {
+    const res = await authApi.checkEmail({ email: tempEmail });
+
+    if (res.data.success) {
+      setEmailVerified(true);
+      setValue("email", "");  
+    }
+  } catch (err) {
+    setError("email", {
+      message: err.response?.data?.message || "Email not found"
+    });
+  }
+};
 
   const {
     handleSubmit,
@@ -35,19 +52,17 @@ function CustomizeChannel() {
       description: "",
     },
   });
-  useEffect(() => {
-    if (enteredOtp) setServerError(null);
-  }, [enteredOtp]);
-  useEffect(() => {
-    if (data) {
-      setValue("fullname", data.fullname || "");
-      setValue("username", data.username || "");
-      // setValue("email", data.email || "");
-      setValue("password", data.password || "");
-      setValue("description", data.description || "");
-      setOriginalEmail(data.email || "");
-    }
-  }, [data, setValue]);
+useEffect(() => {
+  if (data) {
+    setValue("fullname", data.fullname || "");
+    setValue("username", data.username || "");
+    // setValue("email", data.email || "");
+    setValue("email", "");   // new email box empty
+    setValue("password", data.password || "");
+    setValue("description", data.description || "");
+    setOriginalEmail(data.email || "");
+  }
+}, [data, setValue]);
 
   const navigate = useNavigate();
 
@@ -63,66 +78,22 @@ function CustomizeChannel() {
   const newPassword = watch("newPassword");
   const description = watch("description");
 
-  const [otpSent, setOtpSent] = useState(false);
-  const nothingChanged =
-    !banner &&
-    !avatar &&
-    fullname === data.fullname &&
-    description === (data.description || "") &&
-    email === originalEmail &&
-    !password &&
-    !otpSent;
+const nothingChanged =
+  !banner &&
+  !avatar &&
+  fullname === (data?.fullname || "") &&
+  description === (data?.description || "") &&
+  email === originalEmail &&
+  !password;
+
 
   const isPublishDisabled = nothingChanged || isloading;
-
-  const handlesendotp = async () => {
-    if (!originalEmail) {
-      return setServerError("Current email not found.");
-    }
-    try {
-      const res = await OtpApi.sendChangeEmailOtp();
-      setOtpSent(true);
-      console.log("OTP sent", res);
-    } catch (error) {
-      const message = error.response?.data?.message || "Failed to send OTP";
-      setServerError(message);
-    }
-  };
-
-  const handleVerifyOtp = async () => {
-    try {
-      const res = await OtpApi.verifyOtp({
-        email: originalEmail,
-        otp: enteredOtp,
-      });
-      setIsOtpVerified(true);
-      setServerError(null);
-      clearErrors("api");
-      console.log("OTP verified:", res.data);
-    } catch (error) {
-      const message = error.response?.data?.message || "Invalid or expired OTP";
-      setServerError(message);
-      setIsOtpVerified(false);
-    }
-  };
 
   const onSubmit = async (data) => {
     try {
       setLoading(true);
       setServerError(null);
       clearErrors();
-      if (email !== originalEmail && !isOtpVerified) {
-        setServerError(
-          "Please verify OTP from your current email before updating to a new one."
-        );
-        setLoading(false);
-        return;
-      }
-      if (!isOtpVerified && otpSent) {
-        setServerError("Please verify your OTP before publishing.");
-        setLoading(false);
-        return;
-      }
 
       let avatarResponse = null;
       let bannerResponse = null;
@@ -150,7 +121,7 @@ function CustomizeChannel() {
         passwordResponse = await authApi.changepassword(passwordData);
       }
 
-      if (data.fullname || data.username || (isOtpVerified && data.email)) {
+      if (data.fullname || data.username || data.email) {
         const accountData = {
           fullname: data.fullname,
           username: data.username,
@@ -175,7 +146,6 @@ function CustomizeChannel() {
       console.log("✅ password Response:", passwordResponse?.data);
       console.log("✅ description Response:", descriptionresponse?.data);
 
-      //  success message or redirect
       navigate("/profile");
     } catch (error) {
       console.error("❌ Upload error:", error);
@@ -288,60 +258,79 @@ function CustomizeChannel() {
   errors={errors}
 />
 
+{!emailVerified && !emailStepCompleted && (
+  <div>
+    <Inputfields
+      label="Enter Current Email"
+      register={register("currentEmail", {
+        required: "Email is required",
+        onChange: (e) => setTempEmail(e.target.value)
+      })}
+      errors={errors}
+    />
 
-        <Inputfields
-          label="email"
-          description="you can't directly change the email id first you need to verify yourself"
-          register={register("email", {
-            required: "Email is required",
-            pattern: {
-              value: /^\S+@\S+$/i,
-              message: "Enter a valid email",
-            },
-          })}
-          showOtpButton={true}
-          onSendOtp={handlesendotp}
-          isSendingOtp={isloading}
-          errors={errors}
-        />
-        {serverError && (
-          <p className="text-red-500 text-sm font-medium mt-4">{serverError}</p>
-        )}
-        {errors.api && (
-          <p className="text-red-500 text-sm font-medium">
-            {errors.api.message}
-          </p>
-        )}
-        {otpSent && (
-          <p className="text-green-600 text-sm ">OTP sent successfully!</p>
-        )}
+    <button
+      type="button"
+      onClick={verifyEmail}
+      className="bg-blue-600 text-white px-4 py-2 rounded"
+    >
+      Verify Email
+    </button>
+  </div>
+)}
+
+{emailVerified && !emailStepCompleted && (
+  <div>
+    <Inputfields
+      label="New Email"
+      register={register("email", {
+        required: "New email is required",
+        onChange: () => setEmailChanged(true)
+      })}
+      errors={errors}
+    />
+
+    <button
+      type="button"
+      onClick={() => {
+        setEmailVerified(false);
+        setEmailStepCompleted(true);   // 👈 lock this step
+        setEmailChanged(false);        // reset
+      }}
+      className="bg-green-600 text-white px-4 py-2 rounded"
+    >
+      OK
+    </button>
+  </div>
+)}
+{emailStepCompleted && (
+  <div>
+    <Inputfields
+      label="Email"
+      register={register("email", {
+        onChange: () => setEmailChanged(true)  // If user changes → show verify again
+      })}
+      errors={errors}
+    />
+
+    {emailChanged && (
+      <button
+        type="button"
+        onClick={() => {
+          setEmailStepCompleted(false); // back to current email step
+          setEmailVerified(false);
+        }}
+        className="bg-blue-600 text-white px-4 py-2 rounded mt-2"
+      >
+        Verify Again
+      </button>
+    )}
+  </div>
+)}
+
+
+
         <div className="flex items-center">
-          {otpSent && (
-            <div className="flex items-center mt-4">
-              <div className="w-1/2">
-                <InputField
-                  label="Enter OTP"
-                  type="text"
-                  placeholder="Enter 6-digit OTP"
-                  value={enteredOtp}
-                  onChange={(e) => setEnteredOtp(e.target.value)}
-                  required
-                />
-              </div>
-
-              {isOtpVerified ? (
-                <CheckCircle className="text-green-500 w-6 h-6 mt-6 ml-2" />
-              ) : (
-                <button
-                  onClick={handleVerifyOtp}
-                  disabled={!enteredOtp}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-md mt-2 ml-2 hover:bg-blue-700"
-                >
-                  Verify
-                </button>
-              )}
-            </div>
-          )}
         </div>
         <Inputfields
           label="Current Password"
