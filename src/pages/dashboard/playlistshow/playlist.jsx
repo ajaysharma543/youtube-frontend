@@ -127,7 +127,7 @@ function Playlist({ data }) {
               )}
               {playlist.videos && playlist.videos.length > 0 && (
                 <span className="absolute bottom-1 right-1 bg-black bg-opacity-70 text-white text-xs px-1 rounded">
-                  {playlist.videos.length} videos
+                  {playlist.videos.length} vid
                 </span>
               )}
             </div>

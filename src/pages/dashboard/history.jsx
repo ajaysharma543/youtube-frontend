@@ -103,58 +103,64 @@ function History() {
 
                     <div className="flex flex-col gap-6 w-full">
                       {videos.map((video) => (
-                        <div
-                          key={video._id}
-                          onClick={() => handleVideoClick(video._id)}
-                          className="bg-black flex overflow-visible cursor-pointer transition-all rounded-2xl hover:bg-black relative"
-                        >
-                          {/* Thumbnail */}
-                          <div className="relative w-52 aspect-video rounded-2xl overflow-hidden">
-                            <img
-                              src={video.thumbnail.url}
-                              alt={video.title}
-                              className="w-full h-full object-cover"
-                            />
-                            <div className="absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs px-2 py-1 rounded">
-                              {formatDuration(video.duration)}
-                            </div>
-                          </div>
+                     <div
+  key={video._id}
+  onClick={() => handleVideoClick(video._id)}
+  className="bg-black flex gap-4 p-3 rounded-xl  transition cursor-pointer relative"
+>
+  {/* Thumbnail */}
+  <div className="relative min-w-44 max-w-44 h-28 rounded-xl overflow-hidden bg-neutral-800">
+    <img
+      src={video.thumbnail.url}
+      alt={video.title}
+      className="w-full h-full object-cover"
+    />
 
-                          {/* Video info */}
-                          <div className="p-4 flex flex-col gap-2 w-full">
-                            <h3 className="text-white font-semibold text-lg truncate">
-                              {video.title}
-                            </h3>
+    <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-0.5 rounded">
+      {formatDuration(video.duration)}
+    </div>
+  </div>
 
-                            <div className="flex gap-2 text-gray-300 text-sm">
-                              <p>{video.owner?.fullname}</p>
-                              <span>·</span>
-                              <p>{video.views} views</p>
-                            </div>
+  {/* Right Side Content */}
+  <div className="flex flex-col justify-between w-full">
 
-                            {video.description && (
-                              <p className="text-gray-400 text-sm mt-1">
-                                {truncateDescription(video.description, 100)}
-                              </p>
-                            )}
-                          </div>
+    {/* Title */}
+    <h3 className="text-white font-semibold text-base leading-tight line-clamp-2">
+      {video.title}
+    </h3>
 
-                          {/* 3 Dots Menu */}
-                          <div
-                            onClick={(e) => e.stopPropagation()}
-                            className="absolute top-2 right-2 z-50"
-                          >
-                            <Playlist video={video}>
-                              <button
-                                onClick={() => removeFromHistory(video._id)}
-                                className=" w-full flex text-left justify-center px-4 py-2 hover:bg-gray-700 text-white"
-                              >
-                                <Delete />
-                                Remove
-                              </button>
-                            </Playlist>
-                          </div>
-                        </div>
+    {/* Owner + Views */}
+    <div className="text-gray-300 text-sm flex gap-1 pt-1">
+      <p className="truncate">{video.owner?.fullname}</p>
+      <span>·</span>
+      <p>{video.views} views</p>
+    </div>
+
+    {/* Description */}
+    {video.description && (
+      <p className="text-gray-400 text-xs mt-2 line-clamp-2 leading-snug">
+        {video.description}
+      </p>
+    )}
+  </div>
+
+  {/* 3 Dots Menu */}
+  <div
+    onClick={(e) => e.stopPropagation()}
+    className="absolute top-2 right-2 z-50"
+  >
+    <Playlist video={video}>
+      <button
+        onClick={() => removeFromHistory(video._id)}
+        className="w-full flex gap-2 items-center px-4 py-2 hover:bg-gray-700 text-white"
+      >
+        <Delete />
+        Remove
+      </button>
+    </Playlist>
+  </div>
+</div>
+
                       ))}
                     </div>
                   </div>

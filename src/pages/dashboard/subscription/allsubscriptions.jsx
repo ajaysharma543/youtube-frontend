@@ -84,10 +84,10 @@ function Allsubscriptions() {
           <div className="border-b border-gray-500">
             <div
               key={video._id}
-              className="relative cursor-pointer pb-8 w-[70%]  overflow-hidden shadow-md hover:shadow-lg transition-shadow"
-              onClick={() => navigate(`/video/${video._id}`)}
+              className="relative cursor-pointer pb-8 w-[80%]  overflow-hidden shadow-md hover:shadow-lg transition-shadow"
+             
             >
-              <div className="flex items-center gap-3 p-3">
+              <div className="flex items-center gap-3 p-3" onClick={() => navigate(`/c/${video.owner.username}`)}>
                 <img
                   src={video.owner.avatar?.url || "/default-avatar.png"}
                   alt={video.owner.fullname}
@@ -98,7 +98,7 @@ function Allsubscriptions() {
                 </span>
               </div>
 
-              <div className="flex gap-4 ">
+              <div className="flex gap-4"  onClick={() => navigate(`/video/${video._id}`)}>
                 <div className=" w-63 relative">
                   <img
                     src={video.thumbnail.url || "/default-thumbnail.jpg"}
@@ -124,7 +124,7 @@ function Allsubscriptions() {
                   </p>
                 </div>
               </div>
-              <div className="absolute top-17 right-10 z-50">
+              <div className="absolute top-13 right-0 z-50">
                 <Playlist video={video} />
               </div>
             </div>

@@ -7,12 +7,13 @@ import {
   toggleSubscriptionFailure,
 } from "../../../redux/features/subscription";
 import subscriberApi from "../../../api/subscribers";
+import { useNavigate } from "react-router-dom";
 
 function Subscriptondash() {
   const { data: user } = useSelector((state) => state.user);
   const [subs, setSubs] = useState([]);
-  const [expanded, setExpanded] = useState({});
-
+  // const [expanded, setExpanded] = useState({});
+const navigate = useNavigate()
   const dispatch = useDispatch();
   useEffect(() => {
     const getsubs = async () => {
@@ -23,6 +24,7 @@ function Subscriptondash() {
       console.log("Subscribed Channels:", res.data.data.mysubscribedchannels);
 
       setSubs(res.data.data.mysubscribedchannels || []);
+      // console.log(res.data.data.mysubscribedchannels || []);
     };
 
     getsubs();
@@ -56,7 +58,8 @@ function Subscriptondash() {
         {subs.map((ch) => (
        <div
   key={ch._id}
-  className="flex w-[80%] items-start gap-4 bg-black p-4 rounded-xl shadow"
+  onClick={() => navigate(`/c/${ch.username}`)}
+  className="flex w-[80%] items-start cursor-pointer gap-4 bg-black p-4 rounded-xl shadow"
 >
   <img
     src={ch.avatar?.url || "/default-avatar.png"}

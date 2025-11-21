@@ -6,7 +6,9 @@ import { useNavigate } from "react-router-dom";
 
 function Showallvideos({ userId, limit, sortBy, sortType }) {
   const [videos, setVideos] = useState([]);
+  const [loading, setLoading] = useState(true); // ✅ Loading state
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchUserVideos = async () => {
       try {
@@ -16,10 +18,12 @@ function Showallvideos({ userId, limit, sortBy, sortType }) {
           sortBy,
           sortType,
         });
+
         setVideos(res.data.data.docs || []);
-        console.log(res.data.data);
       } catch (err) {
         console.log("Error:", err);
+      } finally {
+        setLoading(false); // ⬅️ Stop loading
       }
     };
     fetchUserVideos();
@@ -68,39 +72,57 @@ function Showallvideos({ userId, limit, sortBy, sortType }) {
   };
 
   return (
-    <div className="grid grid-cols-4 gap-2 mt-4">
-      {displayedVideos.map((video) => (
-        <div
-          key={video._id}
-          onClick={() => handleVideoClick(video._id)}
-          className="bg-[#0f0f0f] cursor-pointer rounded-xl p-1 hover:bg-[#181818] transition-all relative"
-        >
-          <div className="relative">
-            <img
-              src={video?.thumbnail?.url || "/default-thumb.jpg"}
-              className="w-full h-32 object-cover rounded-lg"
-            />
+    <div className="mt-4">
+      {/* ✅ Loading */}
+      {loading && (
+        <p className="text-gray-400 text-center text-lg py-10">
+          Loading videos...
+        </p>
+      )}
 
-            <span className="absolute bottom-1 right-1 bg-black bg-opacity-80 text-white text-xs px-2 py-1 rounded">
-              {formatDuration(video.duration)}
-            </span>
-          </div>
+      {/* ✅ No videos */}
+      {!loading && displayedVideos.length === 0 && (
+        <p className="text-gray-400 text-center text-lg py-10">
+          No uploaded videos
+        </p>
+      )}
 
-          <div className="mt-3 px-1">
-            <h3 className="text-white font-semibold  text-md truncate">
-              {video.title}
-            </h3>
+      {/* ✅ Show videos */}
+      {!loading && displayedVideos.length > 0 && (
+        <div className="grid grid-cols-4 gap-2">
+          {displayedVideos.map((video) => (
+            <div
+              key={video._id}
+              onClick={() => handleVideoClick(video._id)}
+              className="bg-[#0f0f0f] cursor-pointer rounded-xl p-1 hover:bg-[#181818] transition-all relative"
+            >
+              <div className="relative">
+                <img
+                  src={video?.thumbnail?.url || "/default-thumb.jpg"}
+                  className="w-full h-32 object-cover rounded-lg"
+                />
+                <span className="absolute bottom-1 right-1 bg-black bg-opacity-80 text-white text-xs px-2 py-1 rounded">
+                  {formatDuration(video.duration)}
+                </span>
+              </div>
 
-            <p className="text-gray-400 text-xs mt-1">
-              {video.views} views · {getTimeAgo(video.createdAt)}
-            </p>
-          </div>
+              <div className="mt-3 px-1">
+                <h3 className="text-white font-semibold text-md truncate">
+                  {video.title}
+                </h3>
 
-          <div className="absolute bottom-2 right-2 text-sm">
-            <Playlist video={video} />
-          </div>
+                <p className="text-gray-400 text-xs mt-1">
+                  {video.views} views · {getTimeAgo(video.createdAt)}
+                </p>
+              </div>
+
+              <div className="absolute bottom-2 right-2 text-sm">
+                <Playlist video={video} />
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+      )}
     </div>
   );
 }

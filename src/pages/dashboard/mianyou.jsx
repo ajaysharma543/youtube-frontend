@@ -65,7 +65,8 @@ function Mianyou() {
     }
     return "just now";
   };
-  const latestFour = list.slice(-4).reverse();
+const latestFour = Array.isArray(list) ? list.slice(-4).reverse() : [];
+// console.log("LIST VALUE:", list);
 
   const [liked, setLiked] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -81,7 +82,7 @@ function Mianyou() {
           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
         );
         setLiked(likedVideos);
-        console.log(likedVideos);
+        // console.log(likedVideos);
       } catch (err) {
         console.error("Error fetching liked videos:", err);
       } finally {
@@ -98,7 +99,7 @@ function Mianyou() {
   const removelike = async (videoId) => {
     try {
       const res = await likeApi.toggleVideoLike(videoId);
-      console.log(res.data.data);
+      // console.log(res.data.data);
 
       setLiked((prev) => prev.filter((v) => v._id !== videoId));
     } catch (err) {
@@ -111,14 +112,11 @@ function Mianyou() {
     return (
       <p className="text-white text-center py-4">Loading liked videos...</p>
     );
-  if (!liked.length)
-    return <p className="text-white text-center py-4">No liked videos yet!</p>;
-
   return (
     <div>
       <div
         className="flex items-center gap-4 mb-6  pb-4 cursor-pointer"
-        onClick={() => navigate("/profile")}
+       onClick={() => navigate(`/c/${user.username}`)}
       >
         <img
           src={user?.avatar?.url || "/default-avatar.png"}
@@ -137,18 +135,18 @@ function Mianyou() {
           </div>
         </div>
       </div>
-      <div className="flex justify-between mt-10 mb-4">
+      <div className="flex justify-between mt-10 cursor-pointer mb-4"onClick={() => navigate("/history")}>
         <h1 className="text-white text-xl font-semibold mb-4">Watch History</h1>
         <button
           className="hover:bg-gray-700 px-7 py-2 rounded-2xl"
-          onClick={() => navigate("/history")}
+          
         >
           see all
         </button>
       </div>
       <div className="grid grid-cols-4">
         {history.map((v) => (
-          <div key={v._id} className="cursor-pointer relative">
+          <div key={v._id} className="cursor-pointer relative w-[97%]" onClick={() => handleVideoClick(v._id)}>
             <div className="relative w-[94%]">
               <img
                 src={v.thumbnail?.url}
@@ -201,11 +199,11 @@ function Mianyou() {
         ))}
       </div>
 
-      <div className="flex justify-between mt-10 mb-4">
+      <div className="flex justify-between mt-10 mb-4 cursor-pointer" onClick={() => navigate("/playlist")}>
         <h1 className="text-white text-xl font-semibold">Your Playlists</h1>
         <button
           className="hover:bg-gray-700 px-7  rounded-2xl"
-          onClick={() => navigate("/playlist")}
+          
         >
           see all
         </button>
@@ -215,11 +213,11 @@ function Mianyou() {
           <Playlists key={p._id} data={p} />
         ))}
       </div>
-      <div className="flex justify-between mt-10 mb-4">
+      <div className="flex justify-between mt-10 mb-4 cursor-pointer" onClick={() => navigate("/liked")}>
         <h1 className="text-white text-xl font-semibold">Liked Videos</h1>
         <button
           className="hover:bg-gray-700 px-7  rounded-2xl"
-          onClick={() => navigate("/liked")}
+          
         >
           see all
         </button>
@@ -229,15 +227,20 @@ function Mianyou() {
           <div
             key={video._id}
             onClick={() => handleVideoClick(video._id)}
-            className="bg-neutral-900 rounded-xl shadow-lg hover:scale-105 transform transition-all cursor-pointer overflow-hidden"
+className=" rounded-xl shadow-lg hover:scale-105 transform transition-all cursor-pointer overflow-visible"
           >
             {/* Thumbnail */}
-            <div className="w-full h-48 bg-black overflow-hidden">
+            <div className="w-full relative h-48 bg-black overflow-hidden">
               <img
                 src={video.thumbnail?.url || "/default-thumbnail.jpg"}
                 alt={video.title}
                 className="w-full h-full object-cover"
               />
+              {typeof video.duration === "number" && (
+                <span className="absolute bottom-0 right-0 bg-black bg-opacity-80 text-xs px-2 py-0.5 rounded">
+                  {formatDuration(video.duration)}
+                </span>
+              )}
             </div>
 
             {/* Details */}
@@ -251,14 +254,10 @@ function Mianyou() {
                 {new Date(video.createdAt).toLocaleDateString()}
               </p>
 
-              {typeof video.duration === "number" && (
-                <span className="absolute top-2 right-2 bg-black bg-opacity-80 text-xs px-2 py-0.5 rounded">
-                  {formatDuration(video.duration)}
-                </span>
-              )}
+              
 
               {/* 3-DOTS MENU */}
-              <div className="absolute bottom-3 right-3 z-50">
+              <div className="absolute bottom-3 right-0 z-50">
                 <Playlist video={video}>
                   <button
                     onClick={(e) => {
@@ -277,11 +276,11 @@ function Mianyou() {
         ))}
       </div>
 
-      <div className="flex justify-between mt-10 mb-4">
+      <div className="flex justify-between mt-10 mb-4 cursor-pointer" onClick={() => navigate("/watchlater")}>
         <h1 className="text-white text-xl font-semibold ">Watch Later</h1>
         <button
           className="hover:bg-gray-700 px-7  rounded-2xl"
-          onClick={() => navigate("/watchlater")}
+         
         >
           see all
         </button>

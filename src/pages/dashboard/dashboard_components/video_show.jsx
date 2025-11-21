@@ -79,7 +79,7 @@ const VideoCard = ({ video }) => {
 
         <div
           onClick={handleClick}
-          className="relative pb-4 bg-black rounded-2xl hover:bg-[#5d5151] transition-all duration-700 ease-in-out"
+          className="relative pb-4 bg-black rounded-2xl hover:bg-[#252525] transition-all duration-700 ease-in-out"
         >
           <img
             src={video.thumbnail.url}

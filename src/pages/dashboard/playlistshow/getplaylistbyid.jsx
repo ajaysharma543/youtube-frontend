@@ -86,9 +86,9 @@ function PlaylistVideos() {
                 </p>
               </div>
 
-              <div className="absolute bottom-3 right-3">
+              <div className="absolute bottom-0 right-0 ">
                 <button
-                  className="p-2 rounded-full bg-[#2b2b2b] hover:bg-[#3b3b3b] text-white"
+                  className="p-2 rounded-full cursor-pointer  text-white"
                   onClick={(e) => {
                     e.stopPropagation();
                     setMenuOpen(menuOpen === video._id ? null : video._id);

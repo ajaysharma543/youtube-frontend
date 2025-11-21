@@ -34,7 +34,7 @@ function Mainvideo_page() {
         const res = await VideoApi.getVideoById(videoId);
         setcommentVideoId(res.data.data._id);
         setVideo(res.data.data);
-        // console.log(res.data.data);
+        console.log(res.data.data);
       } catch (err) {
         console.error("Error fetching video:", err);
         setError("You must be logged in to view this video.");
@@ -138,7 +138,7 @@ function Mainvideo_page() {
         <h1 className="text-white text-2xl font-bold mb-3">{video.title}</h1>
 
         <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 cursor-pointer"onClick={() => navigate(`/c/${video.owner.username}`)}>
             <img
               src={video.owner?.avatar?.url || "/default-avatar.png"}
               alt={video.owner?.fullname || "User"}
