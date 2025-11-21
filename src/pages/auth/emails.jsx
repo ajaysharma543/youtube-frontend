@@ -32,17 +32,11 @@ const SignupStep2 = () => {
     getValues,
   } = useForm({ mode: "onBlur" });
 
-  // Clear previous errors on mount
   useEffect(() => {
     dispatch(signupFailure(null));
   }, [dispatch]);
 
-  // Prevent direct access to Step2
-  useEffect(() => {
-    if (!fullname || !username || !avatar) {
-      navigate("/signup");
-    }
-  }, [fullname, username, avatar, navigate]);
+ 
 
 const onSubmit = async (data) => {
   dispatch(signupStart());
@@ -61,10 +55,8 @@ const onSubmit = async (data) => {
       headers: { "Content-Type": "multipart/form-data" },
     });
 
-    // 🚀 FIRST redirect to dashboard immediately
     navigate("/");
 
-    // 🟢 Update Redux AFTER redirect to avoid UI flashing
     dispatch(
       signupSuccess({
         user: response.data.data.user,
@@ -170,6 +162,11 @@ const onSubmit = async (data) => {
           </p>
         )}
       </form>
+      {loading && (
+  <div className="fixed inset-0 backdrop-blur-sm bg-black/40 flex items-center justify-center">
+    <div className="text-white text-xl">Creating Account...</div>
+  </div>
+)}
     </FormContainer>
   );
 };

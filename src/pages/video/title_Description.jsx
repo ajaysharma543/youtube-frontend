@@ -214,6 +214,11 @@ function VideoDetails() {
           </button>
         </div>
       </form>
+       {loading && (
+  <div className="fixed inset-0 backdrop-blur-sm bg-black/40 flex items-center justify-center">
+    <div className="text-white text-xl">uplaoding Video...</div>
+  </div>
+)}
     </div>
   );
 }

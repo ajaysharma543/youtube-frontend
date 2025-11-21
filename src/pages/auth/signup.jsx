@@ -18,7 +18,6 @@ function SignupStep1() {
 
   const { user, token } = useSelector((state) => state.auth);
 
-  // 🚀 If already logged in → redirect immediately
   useEffect(() => {
     if (user || token) {
       navigate("/");
