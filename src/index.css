@@ -1,4 +1,7 @@
 @import "tailwindcss";
+
+/* your custom styles below */
+
 /* hide scrollbar (WebKit, Firefox, Edge/IE) */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
