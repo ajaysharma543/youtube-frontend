@@ -84,7 +84,7 @@ function ShowAllVideos() {
           </div>
         ) : (
           <div className="space-y-4">
-            <div className="grid grid-cols-[50px_120px_1fr_100px_140px_120px_100px] text-gray-400 text-sm font-semibold border-b border-gray-700 pb-2">
+<div className="grid grid-cols-[50px_120px_500px_100px_140px_120px_100px] text-gray-400 text-sm font-semibold border-b border-gray-700 pb-2">
               <span></span>
               <span>Thumbnail</span>
               <span>Title & Description</span>
@@ -97,7 +97,7 @@ function ShowAllVideos() {
             {videos.map((v) => (
               <div
                 key={v._id}
-                className="grid grid-cols-[50px_120px_1fr_100px_140px_120px_100px] items-center bg-[#181818] hover:bg-[#202020] transition rounded-lg p-2"
+                className="grid grid-cols-[50px_120px_500px_100px_140px_120px_100px] items-center bg-[#181818] hover:bg-[#202020] transition rounded-lg p-2"
               >
                 <div className="flex justify-center">
                   <input type="checkbox" className="w-4 h-4 accent-red-600" />
@@ -118,7 +118,7 @@ function ShowAllVideos() {
                   <h3 className="text-white font-semibold truncate">
                     {v.title}
                   </h3>
-                <p className="text-gray-400 text-sm line-clamp-2">
+                 <p className="text-gray-400 text-sm line-clamp-2">
   {v.description || "No description available"}
 </p>
 
