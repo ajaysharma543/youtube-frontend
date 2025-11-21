@@ -11,6 +11,8 @@ import subscriberApi from "../../../api/subscribers";
 function Subscriptondash() {
   const { data: user } = useSelector((state) => state.user);
   const [subs, setSubs] = useState([]);
+  const [expanded, setExpanded] = useState({});
+
   const dispatch = useDispatch();
   useEffect(() => {
     const getsubs = async () => {
@@ -52,40 +54,46 @@ function Subscriptondash() {
       <h1 className="text-2xl font-bold mb-4">All Subscriptions</h1>
       <div className="flex justify-center items-center flex-col">
         {subs.map((ch) => (
-          <div
-            key={ch._id}
-            className="flex w-[80%] justify-center gap-2 bg-black p-4 rounded-xl shadow"
-          >
-            <img
-              src={ch.avatar?.url || "/default-avatar.png"}
-              alt="avatar"
-              className="w-30 h-30 rounded-full object-cover"
-            />
+       <div
+  key={ch._id}
+  className="flex w-[80%] items-start gap-4 bg-black p-4 rounded-xl shadow"
+>
+  <img
+    src={ch.avatar?.url || "/default-avatar.png"}
+    alt="avatar"
+    className="w-30 h-30 rounded-full object-cover flex-shrink-0"
+  />
 
-            <div className="flex flex-col">
-              <h2 className="text-lg font-semibold">{ch.fullname}</h2>
-              <div className="text-center flex ">
-                <p className="text-gray-400 text-sm">@{ch.username} :</p>
-                <p className="text-gray-400 pl-2 text-sm">
-                  {ch.totalsubscriber || 0}
-                </p>
-                <span className="text-gray-400 pl-2 text-sm">Subscribers</span>
-              </div>
-              <div className="text-sm text-gray-400">{ch.description}</div>
-            </div>
+  {/* Text Block */}
+  <div className="flex flex-col w-[50%] min-w-[250px]">
+    <h2 className="text-lg font-semibold">{ch.fullname}</h2>
 
-            <div className="flex-1"></div>
+    <div className="flex items-center gap-1 text-sm text-gray-400">
+      <p>@{ch.username} :</p>
+      <p>{ch.totalsubscriber || 0}</p>
+      <span>Subscribers</span>
+    </div>
 
-            <div onClick={() => handleSubscriber(ch._id)}>
-              <span
-                className={`px-8 py-2 rounded-3xl cursor-pointer text-lg font-semibold ${
-                  ch.issubscribed ? "bg-gray-600" : "bg-white"
-                }`}
-              >
-                {ch.issubscribed ? "Subscribed" : "Subscribe"}
-              </span>
-            </div>
-          </div>
+    <p className="text-sm text-gray-400 line-clamp-2 overflow-hidden text-ellipsis">
+      {ch.description}
+    </p>
+  </div>
+
+  {/* Spacer */}
+  <div className="flex-1"></div>
+
+  {/* Subscribe Button */}
+  <div onClick={() => handleSubscriber(ch._id)}>
+    <span
+      className={`px-8 py-2 rounded-3xl cursor-pointer text-lg font-semibold ${
+        ch.issubscribed ? "bg-gray-600" : "bg-white"
+      }`}
+    >
+      {ch.issubscribed ? "Subscribed" : "Subscribe"}
+    </span>
+  </div>
+</div>
+
         ))}
       </div>
     </div>

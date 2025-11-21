@@ -16,6 +16,7 @@ const [emailVerified, setEmailVerified] = useState(false);
 const [tempEmail, setTempEmail] = useState("");
 const [emailStepCompleted, setEmailStepCompleted] = useState(false);
 const [emailChanged, setEmailChanged] = useState(false);
+const [showEmailChange, setShowEmailChange] = useState(false);
 
 const verifyEmail = async () => {
   try {
@@ -72,7 +73,8 @@ useEffect(() => {
   const banner = watch("banner");
   const avatar = watch("avatar");
   const fullname = watch("fullname");
-  const email = watch("email");
+  const username = watch("username");
+  // const email = watch("email");
   const password = watch("password");
   const oldPassword = watch("oldPassword");
   const newPassword = watch("newPassword");
@@ -82,10 +84,10 @@ const nothingChanged =
   !banner &&
   !avatar &&
   fullname === (data?.fullname || "") &&
+  username === (data?.username || "")&&
   description === (data?.description || "") &&
-  email === originalEmail &&
+  !emailChanged &&            // ✅ email changed only when user edited it
   !password;
-
 
   const isPublishDisabled = nothingChanged || isloading;
 
@@ -121,14 +123,20 @@ const nothingChanged =
         passwordResponse = await authApi.changepassword(passwordData);
       }
 
-      if (data.fullname || data.username || data.email) {
-        const accountData = {
-          fullname: data.fullname,
-          username: data.username,
-          email: data.email,
-        };
-        nameResponse = await authApi.userdetails(accountData);
-      }
+    if (emailChanged) {
+    // email is changed → only then send email update API
+    nameResponse = await authApi.userdetails({
+      fullname: data.fullname,
+      username: data.username,
+      email: data.email
+    });
+} else {
+    // email unchanged → don't send email
+    nameResponse = await authApi.userdetails({
+      fullname: data.fullname,
+      username: data.username
+    });
+}
 
       if (data.description) {
         const descriptiondata = new FormData();
@@ -257,78 +265,90 @@ const nothingChanged =
   register={register("description")}
   errors={errors}
 />
+<button
+  type="button"
+  onClick={() => setShowEmailChange(true)}
+  className="text-blue-500 underline"
+>
+  Change Email
+</button>
+{showEmailChange && (
+  <>
+    {!emailVerified && !emailStepCompleted && (
+      <div>
+        <Inputfields
+          label="Enter Current Email"
+          register={register("currentEmail", {
+            required: "Email is required",
+            onChange: (e) => setTempEmail(e.target.value)
+          })}
+          errors={errors}
+        />
 
-{!emailVerified && !emailStepCompleted && (
-  <div>
-    <Inputfields
-      label="Enter Current Email"
-      register={register("currentEmail", {
-        required: "Email is required",
-        onChange: (e) => setTempEmail(e.target.value)
-      })}
-      errors={errors}
-    />
-
-    <button
-      type="button"
-      onClick={verifyEmail}
-      className="bg-blue-600 text-white px-4 py-2 rounded"
-    >
-      Verify Email
-    </button>
-  </div>
-)}
-
-{emailVerified && !emailStepCompleted && (
-  <div>
-    <Inputfields
-      label="New Email"
-      register={register("email", {
-        required: "New email is required",
-        onChange: () => setEmailChanged(true)
-      })}
-      errors={errors}
-    />
-
-    <button
-      type="button"
-      onClick={() => {
-        setEmailVerified(false);
-        setEmailStepCompleted(true);   // 👈 lock this step
-        setEmailChanged(false);        // reset
-      }}
-      className="bg-green-600 text-white px-4 py-2 rounded"
-    >
-      OK
-    </button>
-  </div>
-)}
-{emailStepCompleted && (
-  <div>
-    <Inputfields
-      label="Email"
-      register={register("email", {
-        onChange: () => setEmailChanged(true)  // If user changes → show verify again
-      })}
-      errors={errors}
-    />
-
-    {emailChanged && (
-      <button
-        type="button"
-        onClick={() => {
-          setEmailStepCompleted(false); // back to current email step
-          setEmailVerified(false);
-        }}
-        className="bg-blue-600 text-white px-4 py-2 rounded mt-2"
-      >
-        Verify Again
-      </button>
+        <button
+          type="button"
+          onClick={verifyEmail}
+          className="bg-blue-600 text-white px-4 py-2 rounded"
+        >
+          Verify Email
+        </button>
+      </div>
     )}
-  </div>
+
+    {emailVerified && !emailStepCompleted && (
+      <div>
+        <Inputfields
+          label="New Email"
+          register={register("email", {
+            required: "New email is required",
+            onChange: (e) => {
+              if (e.target.value !== originalEmail) setEmailChanged(true);
+              else setEmailChanged(false);
+            }
+          })}
+          errors={errors}
+        />
+
+        <button
+          type="button"
+          onClick={() => {
+            setEmailVerified(false);
+            setEmailStepCompleted(true);
+            // setEmailChanged(false);
+          }}
+          className="bg-green-600 text-white px-4 py-2 rounded"
+        >
+          OK
+        </button>
+      </div>
+    )}
+
+    {emailStepCompleted && (
+      <div>
+        <Inputfields
+          label="Email"
+          register={register("email", {
+            onChange: () => setEmailChanged(true)
+          })}
+          errors={errors}
+        />
+
+        {emailChanged && (
+          <button
+            type="button"
+            onClick={() => {
+              setEmailStepCompleted(false);
+              setEmailVerified(false);
+            }}
+            className="bg-blue-600 text-white px-4 py-2 rounded mt-2"
+          >
+            Verify Again
+          </button>
+        )}
+      </div>
+    )}
+  </>
 )}
-
-
 
         <div className="flex items-center">
         </div>
