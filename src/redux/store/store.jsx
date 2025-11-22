@@ -8,10 +8,12 @@ import subscriberReducer from "../features/subscription";
 import likeReducer from "../features/likes";
 import dislikeReducer from "../features/disliked";
 import playlistReducer from "../features/playlist";
+import searchReducer from "../features/searchslice";
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
+    search: searchReducer,
     signup: signupReducer,
     video: videoReducer,
     user: userReducer,

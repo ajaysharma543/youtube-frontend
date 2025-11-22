@@ -52,54 +52,63 @@ const navigate = useNavigate()
   };
 
   return (
-    <div className="p-4 ">
-      <h1 className="text-2xl font-bold mb-4">All Subscriptions</h1>
-      <div className="flex justify-center items-center flex-col">
-        {subs.map((ch) => (
-       <div
-  key={ch._id}
-  onClick={() => navigate(`/c/${ch.username}`)}
-  className="flex w-[80%] items-start cursor-pointer gap-4 bg-black p-4 rounded-xl shadow"
->
-  <img
-    src={ch.avatar?.url || "/default-avatar.png"}
-    alt="avatar"
-    className="w-30 h-30 rounded-full object-cover flex-shrink-0"
-  />
+ <div className="p-4">
+  <h1 className="text-2xl font-bold mb-4">All Subscriptions</h1>
 
-  {/* Text Block */}
-  <div className="flex flex-col w-[50%] min-w-[250px]">
-    <h2 className="text-lg font-semibold">{ch.fullname}</h2>
+  <div className="flex justify-center items-center flex-col w-full">
+    {/* If no subscriptions */}
+    {subs.length === 0 ? (
+      <p className="text-gray-400 text-lg mt-10">No subscriptions found.</p>
+    ) : (
+      subs.map((ch) => (
+        <div
+          key={ch._id}
+          className="flex w-[80%] items-start cursor-pointer gap-4 bg-black p-4 rounded-xl shadow"
+        >
+          <div
+            className="flex gap-4"
+            onClick={() => navigate(`/c/${ch.username}`)}
+          >
+            <img
+              src={ch.avatar?.url || "/default-avatar.png"}
+              alt="avatar"
+              className="w-30 h-30 rounded-full object-cover flex-shrink-0"
+            />
 
-    <div className="flex items-center gap-1 text-sm text-gray-400">
-      <p>@{ch.username} :</p>
-      <p>{ch.totalsubscriber || 0}</p>
-      <span>Subscribers</span>
-    </div>
+            <div className="flex flex-col w-[50%] min-w-[250px]">
+              <h2 className="text-lg font-semibold">{ch.fullname}</h2>
 
-    <p className="text-sm text-gray-400 line-clamp-2 overflow-hidden text-ellipsis">
-      {ch.description}
-    </p>
-  </div>
+              <div className="flex items-center gap-1 text-sm text-gray-400">
+                <p>@{ch.username} :</p>
+                <p>{ch.totalsubscriber || 0}</p>
+                <span>Subscribers</span>
+              </div>
 
-  {/* Spacer */}
-  <div className="flex-1"></div>
+              <p className="text-sm text-gray-400 line-clamp-2 overflow-hidden text-ellipsis">
+                {ch.description}
+              </p>
+            </div>
+          </div>
 
-  {/* Subscribe Button */}
-  <div onClick={() => handleSubscriber(ch._id)}>
-    <span
-      className={`px-8 py-2 rounded-3xl cursor-pointer text-lg font-semibold ${
-        ch.issubscribed ? "bg-gray-600" : "bg-white"
-      }`}
-    >
-      {ch.issubscribed ? "Subscribed" : "Subscribe"}
-    </span>
+          <div className="flex-1"></div>
+
+          <div onClick={() => handleSubscriber(ch._id)}>
+            <span
+              className={`px-8 py-2 rounded-3xl cursor-pointer text-lg font-semibold ${
+                ch.issubscribed
+                  ? "bg-gray-600 text-white"
+                  : "bg-white text-black"
+              }`}
+            >
+              {ch.issubscribed ? "Subscribed" : "Subscribe"}
+            </span>
+          </div>
+        </div>
+      ))
+    )}
   </div>
 </div>
 
-        ))}
-      </div>
-    </div>
   );
 }
 

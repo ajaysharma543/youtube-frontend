@@ -44,14 +44,7 @@ function Subscriber({ video }) {
 
   return (
     <>
-      <div className="flex flex-col">
-        <h2 className="text-white font-semibold">
-          {video.owner?.fullname || "Unknown"}
-        </h2>
-        <p className="text-gray-400 text-sm">
-          {video.owner?.subscriberscount || 0} subscribers
-        </p>
-      </div>
+   
 
       {!isOwner && (
         <button

@@ -138,15 +138,33 @@ function Mainvideo_page() {
         <h1 className="text-white text-2xl font-bold mb-3">{video.title}</h1>
 
         <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-3 cursor-pointer"onClick={() => navigate(`/c/${video.owner.username}`)}>
-            <img
-              src={video.owner?.avatar?.url || "/default-avatar.png"}
-              alt={video.owner?.fullname || "User"}
-              className="w-12 h-12 rounded-full"
-            />
+       <div className="flex items-center gap-3 cursor-pointer">
+  <div
+    className="flex justify-center"
+    onClick={() => navigate(`/c/${video.owner.username}`)}
+  >
+    <img
+      src={video.owner?.avatar?.url || "/default-avatar.png"}
+      alt={video.owner?.fullname || "User"}
+      className="w-12 h-12 rounded-full object-cover"
+    />
+  </div>
 
-            <Subscriber video={video} />
-          </div>
+  <div
+    className="flex flex-col"
+    onClick={() => navigate(`/c/${video.owner.username}`)}
+  >
+    <h2 className="text-white font-semibold">
+      {video.owner?.fullname || "Unknown"}
+    </h2>
+    <p className="text-gray-400 text-sm">
+      {video.owner?.subscriberscount || 0} subscribers
+    </p>
+  </div>
+
+  <Subscriber video={video} />
+</div>
+
 
           <div className="flex items-end justify-around space-x-3">
             <div className="flex items-center bg-[#222222] px-2 rounded-4xl overflow-hidden">

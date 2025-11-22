@@ -84,7 +84,7 @@ function Allsubscriptions() {
           <div className="border-b border-gray-500">
             <div
               key={video._id}
-              className="relative cursor-pointer pb-8 w-[80%]  overflow-hidden shadow-md hover:shadow-lg transition-shadow"
+              className="relative cursor-pointer pb-16 w-[80%]  overflow-hidden shadow-md hover:shadow-lg transition-shadow"
              
             >
               <div className="flex items-center gap-3 p-3" onClick={() => navigate(`/c/${video.owner.username}`)}>
@@ -124,7 +124,7 @@ function Allsubscriptions() {
                   </p>
                 </div>
               </div>
-              <div className="absolute top-13 right-0 z-50">
+              <div className="absolute top-7 right-0 z-50">
                 <Playlist video={video} />
               </div>
             </div>
