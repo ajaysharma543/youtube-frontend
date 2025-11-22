@@ -147,7 +147,7 @@ function Dashboard() {
   };
 
   return (
-    <div className="p-6 min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white">
       {channelUser && (
         <div className="mb-8">
           <div className="rounded-xl p-6 flex items-center justify-between">
@@ -252,7 +252,7 @@ function Dashboard() {
           {displayedVideos.length === 0 ? (
             <p>No Video Found</p>
           ) : (
-            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3  gap-4">
               {displayedVideos.map((item) => (
                 <VideoCard key={item._id} video={item} />
               ))}

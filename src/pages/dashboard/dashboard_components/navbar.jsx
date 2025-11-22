@@ -36,14 +36,19 @@ function Navbar({ onToggleSidebar, onToggleMobile }) {
   return (
     <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between bg-black px-6 py-3 shadow-lg">
       <div className="flex items-center gap-3 cursor-pointer">
-        <Menu
-          className="text-white mr-3 w-7 h-7"
-          onClick={() => {
-            if (window.innerWidth < 768) onToggleMobile();
-            else onToggleSidebar();
-          }}
-        />
-
+    <Menu
+  className={`
+    text-white mr-3 w-7 h-7
+    ${window.innerWidth <= 1310 && window.innerWidth > 768 ? "hidden" : "block"}
+  `}
+  onClick={() => {
+    if (window.innerWidth <= 768) {
+      onToggleMobile();   // Mobile drawer
+    } else {
+      onToggleSidebar();  // Desktop toggle
+    }
+  }}
+/>
         <Youtube className="text-red-600 w-8 h-8" />
         <h1 className="text-2xl font-bold text-white tracking-wide">
           Tube<span className="text-red-600">Hub</span>

@@ -6,6 +6,16 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+@media (max-width: 1309px) {
+  .desktop-menu {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .desktop-menu {
+    display: block;
+  }
+}
 .scrollbar-hide {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
