@@ -225,14 +225,13 @@ const allowedTabletItems = ["Home", "Subscriptions", "Settings", "You"];
       className="fixed inset-0 bg-trasnparent bg-opacity-50 md:hidden z-40"
     />
   )}
-<div className="sm:hidden fixed bottom-0 left-0 w-full bg-black z-999 opacity-100 text-white border-t border-gray-800 z-50 flex justify-between px-6 py-3">
+<div className="hidden max-sm:flex fixed bottom-0 left-0 w-full bg-black text-white border-t border-gray-800 z-50 justify-between px-6 py-3">
   {navItems
     .filter(item => allowedTabletItems.includes(item.name))
     .map(item => (
       <NavLink
         key={item.name}
         to={item.path}
-        onClick={() => setMobileOpen(false)}
         className={({ isActive }) =>
           `flex flex-col items-center text-xs pl-3 pr-3 ${
             isActive ? "text-white" : "text-gray-400"
