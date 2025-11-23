@@ -7,21 +7,25 @@ const DashboardLayout = ({ children }) => {
   const [collapse, setCollapse] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
+const [isTablet, setIsTablet] = useState(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 1310 && window.innerWidth >= 768) {
-        setIsCollapsed(true); 
-      } else {
-        setIsCollapsed(collapse); 
-      }
-    };
+useEffect(() => {
+  const handleResize = () => {
+    if (window.innerWidth <= 1310 && window.innerWidth >= 768) {
+      setIsCollapsed(true);  // force collapsed width
+      setIsTablet(true);     // but show names
+    } else {
+      setIsTablet(false);
+      setIsCollapsed(collapse); // desktop behaves normal
+    }
+  };
 
-    handleResize();
-    window.addEventListener("resize", handleResize);
+  handleResize();
+  window.addEventListener("resize", handleResize);
+  return () => window.removeEventListener("resize", handleResize);
+}, [collapse]);
 
-    return () => window.removeEventListener("resize", handleResize);
-  }, [collapse]);
+
 
   return (
     <div className="flex flex-col flex-wrap mt-15 min-h-screen bg-black text-white">
@@ -29,6 +33,7 @@ const DashboardLayout = ({ children }) => {
       <Navbar
         onToggleSidebar={() => setCollapse(prev => !prev)}
         onToggleMobile={() => setMobileOpen(prev => !prev)}
+        
       />
 
       <div className="flex flex-1">
@@ -37,6 +42,7 @@ const DashboardLayout = ({ children }) => {
           collapse={isCollapsed}
           mobileOpen={mobileOpen}
           setMobileOpen={setMobileOpen}
+          isTablet={isTablet}
         />
 
         <main

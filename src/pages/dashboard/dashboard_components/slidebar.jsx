@@ -15,7 +15,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import authApi from "../../../api/userapi";
 
-const Sidebar = ({ collapse,setMobileOpen,mobileOpen }) => {
+const Sidebar = ({ collapse,setMobileOpen,mobileOpen,isTablet }) => {
   const { data: user } = useSelector((state) => state.user);
   const [subscriptions, setSubscriptions] = useState([]);
 
@@ -42,36 +42,51 @@ const Sidebar = ({ collapse,setMobileOpen,mobileOpen }) => {
   { name: "Settings", icon: <Settings className="w-5 h-5" />, path: "/settings" },
 ];
 
+const allowedTabletItems = ["Home", "Subscriptions", "Settings", "You"];
 
   return (
     <>
       <aside>
       <div
     className={`hidden md:flex flex-col fixed 
-      ${collapse ? "w-20" : "w-64"}
-      h-screen bg-black text-white p-6 
+      ${collapse ? "w-30 p-2" : "w-64 p-6"}
+      h-screen bg-black text-white  
       transition-all duration-300 overflow-y-auto scrollbar-hide z-50
     `}
   >
       <nav className="flex flex-col gap-1 text-white pb-13">
-          {navItems.map((item) => (
+          {navItems
+            .filter(item => {
+    if (isTablet) {
+      return allowedTabletItems.includes(item.name);
+    }
+    return true; 
+  }).map((item) => (
             <React.Fragment key={item.name}>
               <NavLink
-                to={item.path}
-                className={({ isActive }) =>
-                  `flex items-center justify-start text-md px-2 py-1.5 rounded-2xl transition-all duration-200 ${
-                    isActive
-                      ? "bg-[#1c1c1c] text-white shadow-md"
-                      : "hover:text-white hover:bg-[#1c1c1c]"
-                  }`
-                }
-              >
-                <div className="flex items-center p-1 gap-2">
-                  {item.icon}
-                 {(!collapse || mobileOpen) && <span className="whitespace-nowrap">{item.name}</span>}
+  to={item.path}
+  className={({ isActive }) =>
+    `flex items-center justify-start text-md px-2 py-1.5 rounded-2xl transition-all duration-200 ${
+      isActive
+        ? (isTablet ? "bg-transparent" : "bg-[#1c1c1c] text-white shadow-md")
+        : "hover:text-white hover:bg-[#1c1c1c]"
+    }`
+  }
+>
+   <div
+  className={`flex p-1 gap-2 w-full
+    ${isTablet 
+      ? "flex-col items-center justify-center text-center text-md mb-2 mt-1" 
+      : "flex-row items-center"
+    }`
+  }
+>
+  {item.icon}
 
-                </div>
-
+  {(isTablet || !collapse || mobileOpen) && (
+    <span className="whitespace-nowrap text-center">{item.name}</span>
+  )}
+</div>
                 {!collapse && item.name === "Subscription" && (
                   <ChevronRight className="w-4 h-4 ml-2 text-gray-400" />
                 )}
@@ -89,6 +104,7 @@ const Sidebar = ({ collapse,setMobileOpen,mobileOpen }) => {
                       <Link
                         key={sub._id}
                         to={`/c/${sub.username}`}
+                        
                         className="flex items-center gap-3 w-full px-3 py-2
                     rounded-xl transition-all duration-200 text-white shadow-md hover:bg-gray-800"
                       >
@@ -109,7 +125,10 @@ const Sidebar = ({ collapse,setMobileOpen,mobileOpen }) => {
                 )}
 
               {item.name === "Subscriptions" && (
-                <div className="border-b border-gray-700 my-4"></div>
+                <div className={` ${isTablet 
+      ? "border-none" 
+      : "border-b border-gray-700 my-4"
+    }`}></div>
               )}
               {item.name === "Liked-videos" && (
                 <div className="border-b border-gray-700 my-4"></div>
@@ -135,6 +154,7 @@ const Sidebar = ({ collapse,setMobileOpen,mobileOpen }) => {
             <React.Fragment key={item.name}>
               <NavLink
                 to={item.path}
+                onClick={() => setMobileOpen(false)}
                 className={({ isActive }) =>
                   `flex items-center justify-start text-md px-2 py-1.5 rounded-2xl transition-all duration-200 ${
                     isActive
@@ -145,7 +165,10 @@ const Sidebar = ({ collapse,setMobileOpen,mobileOpen }) => {
               >
                 <div className="flex items-center p-1 gap-2">
                   {item.icon}
-                 {(!collapse || mobileOpen) && <span className="whitespace-nowrap">{item.name}</span>}
+               {(isTablet || !collapse || mobileOpen) && (
+  <span className="whitespace-nowrap">{item.name}</span>
+)}
+
 
                 </div>
 
@@ -165,6 +188,7 @@ const Sidebar = ({ collapse,setMobileOpen,mobileOpen }) => {
                     {subscriptions.map((sub) => (
                       <Link
                         key={sub._id}
+                        onClick={() => setMobileOpen(false)}
                         to={`/c/${sub.username}`}
                         className="flex items-center gap-3 w-full px-3 py-2
                     rounded-xl transition-all duration-200 text-white shadow-md hover:bg-gray-800"
@@ -201,22 +225,26 @@ const Sidebar = ({ collapse,setMobileOpen,mobileOpen }) => {
       className="fixed inset-0 bg-trasnparent bg-opacity-50 md:hidden z-40"
     />
   )}
-  <div className="sm:hidden fixed bottom-0 left-0 w-full bg-black text-white border-t border-gray-800 z-50 flex justify-between px-6 py-3">
-      {navItems.map((item) => (
-        <NavLink
-          key={item.name}
-          to={item.path}
-          className={({ isActive }) =>
-            `flex flex-col items-center text-xs ${
-              isActive ? "text-white" : "text-gray-400"
-            }`
-          }
-        >
-          {item.icon}
-          <span className="text-[10px] mt-1">{item.name}</span>
-        </NavLink>
-      ))}
-    </div>
+<div className="sm:hidden fixed bottom-0 left-0 w-full bg-black z-999 opacity-100 text-white border-t border-gray-800 z-50 flex justify-between px-6 py-3">
+  {navItems
+    .filter(item => allowedTabletItems.includes(item.name))
+    .map(item => (
+      <NavLink
+        key={item.name}
+        to={item.path}
+        onClick={() => setMobileOpen(false)}
+        className={({ isActive }) =>
+          `flex flex-col items-center text-xs pl-3 pr-3 ${
+            isActive ? "text-white" : "text-gray-400"
+          }`
+        }
+      >
+        {item.icon}
+        <span className="text-[10px] mt-1">{item.name}</span>
+      </NavLink>
+    ))}
+</div>
+
       </aside>
 
     </>
