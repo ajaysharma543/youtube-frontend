@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Menu, PartyPopperIcon, Search, Youtube } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchCurrentUser } from "../../../redux/features/userdetailsslice";
-import { setSearchQuery } from "../../../redux/features/fetchvideoslice";
+import { fetchCurrentUser } from "../../redux/features/userdetailsslice";
+import { setSearchQuery } from "../../redux/features/fetchvideoslice";
 
-function Navbar({ onToggleSidebar, onToggleMobile }) {
+function Navbar({ setCollapse}) {
   const [showDropdown, setShowDropdown] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,23 +31,22 @@ function Navbar({ onToggleSidebar, onToggleMobile }) {
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between bg-gradient-to-r from-black via-gray-900 to-black px-6 py-3 shadow-lg border-b border-gray-800">
-      <div className="flex items-center gap-3 cursor-pointer">
+      <div className="relative flex items-center gap-3">
+
         <Menu
-          className="text-white mr-3 w-7 h-7"
-          onClick={() => {
-            if (window.innerWidth < 768) onToggleMobile();
-            else onToggleSidebar();
-          }}
+          className="text-white w-7 h-7 cursor-pointer absolute left-0 top-1/2 -translate-y-1/2 z-50"
+          onClick={() => setCollapse((prev) => !prev)}
         />
 
-        <Youtube className="text-red-600 w-8 h-8" />
-        <h1 className="text-2xl font-bold text-white tracking-wide">
-          Tube<span className="text-red-600">Hub</span>
-        </h1>
-        <PartyPopperIcon className="text-yellow-400 w-5 h-5 animate-bounce" />
+        {/* LOGO */}
+        <div className="flex items-center gap-3 pl-12">
+          <Youtube className="text-red-600 w-8 h-8" />
+          <h1 className="text-2xl font-bold text-white tracking-wide">
+            Tube<span className="text-red-600">Hub</span>
+          </h1>
+          <PartyPopperIcon className="text-yellow-400 w-5 h-5 animate-bounce" />
+        </div>
       </div>
-
-      {/* Search bar */}
       <div className="relative w-72 hidden md:block">
         <Search className="absolute right-3 top-2.5 text-gray-400 w-5 h-5" />
         <input

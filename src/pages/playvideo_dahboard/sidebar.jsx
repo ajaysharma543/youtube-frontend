@@ -15,7 +15,7 @@ import {
   Video,
   Watch,
 } from "lucide-react";
-const Sidebar = ({ sidebarOpen, mobileOpen, setMobileOpen }) => {
+const Sidebar = ( { sidebarOpen, setSidebarOpen  }) => {
   const { data: user } = useSelector((state) => state.user);
   const [subscriptions, setSubscriptions] = useState([]);
 
@@ -85,19 +85,19 @@ const Sidebar = ({ sidebarOpen, mobileOpen, setMobileOpen }) => {
 
   return (
     <>
-      <aside
-        className={`hidden md:flex flex-col fixed top-0 left-0 h-full z-40 
-  border-r border-black bg-black text-white transition-transform duration-300
-  w-64 p-6 overflow-y-auto scrollbar-hide
-  ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
-      >
+  <aside
+        className={`
+          fixed top-0 left-0 h-full z-40 border-r border-black bg-black text-white
+          transition-transform duration-300 overflow-y-auto scrollbar-hide
+          w-64 p-6
+          ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
+        `}>
         <button
-          onClick={() => setMobileOpen(false)}
+          onClick={() => setSidebarOpen(false)}
           className="absolute top-4 right-4 md:hidden"
         >
           <X className="w-6 h-6 text-white" />
         </button>
-
         <nav className="flex flex-col gap-6 text-gray-400 mt-20">
           {navItems.map((item) => (
             <React.Fragment key={item.name}>
@@ -160,24 +160,10 @@ const Sidebar = ({ sidebarOpen, mobileOpen, setMobileOpen }) => {
         </nav>
       </aside>
 
-      <div
-        className={`fixed top-0 left-0 h-full w-64 bg-gradient-to-b from-black via-gray-900 to-black text-white p-6 z-50 transition-transform duration-300 
-        ${mobileOpen ? "translate-x-0" : "-translate-x-full"} md:hidden`}
-      >
-        <button
-          onClick={() => setMobileOpen(false)}
-          className="absolute top-4 right-4"
-        >
-          <X className="w-6 h-6 text-white" />
-        </button>
-
-        <nav className="flex flex-col gap-6 text-gray-400 mt-20"></nav>
-      </div>
-
-      {mobileOpen && (
+     {sidebarOpen && (
         <div
-          onClick={() => setMobileOpen(false)}
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden"
         ></div>
       )}
     </>

@@ -102,8 +102,8 @@ function Mainvideo_page() {
   return (
     <div
       className="
-      flex flex-col lg:flex-row justify-center gap-6 p-1 w-full 
-bg-[linear-gradient(to_right,#1f1f1f,#000000)]"
+      flex flex-col lg:flex-row justify-center gap-6 w-full 
+bg-[linear-gradient(to_right,#1f1f1f,#000000)] p-0"
     >
       <div className="w-full lg:w-[60%] rounded-2xl bg-[linear-gradient(to_right,#1f1f1f,#000000)] ">
         <div className="rounded-2xl">
@@ -214,7 +214,7 @@ bg-[linear-gradient(to_right,#1f1f1f,#000000)]"
       </div>
 
       {/* LARGE SCREENS — VideoDetails on right */}
-      <div className="w-full lg:w-[30%] flex-col  gap-4 hidden lg:flex order-3">
+      <div className="w-full lg:w-[30%] flex-col   hidden lg:flex order-3">
         <VideoDetails
           currentVideoId={currentVideoId}
           currentUserId={user?._id}

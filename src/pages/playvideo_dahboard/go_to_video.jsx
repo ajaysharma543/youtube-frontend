@@ -38,7 +38,7 @@ const VideoDetails = ({ currentVideoId, currentUserId, onVideoSelect }) => {
 
   return (
     <>
-      <div className="p-0 lg:p-5   text-white">
+      <div className="p-0 lg:p-5 max-md:p-0  text-white">
         {Array.isArray(video) && video.length === 0 ? (
           <p>No Video Found</p>
         ) : (

@@ -90,6 +90,8 @@ const VideoCard = ({ video, onSelect }) => {
     w-full
     h-30
     max-sm:h-70
+    max-md:h-50
+    max-lg:h-50
     object-cover
     rounded-2xl
     [@media(min-width:1014px)]:w-40
