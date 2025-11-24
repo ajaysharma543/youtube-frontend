@@ -70,24 +70,32 @@ const VideoCard = ({ video, onSelect }) => {
 
       <div className="relative group w-[full] lg:w-[400px] ">
         <div
-          className="cursor-pointer bg-black rounded-2xl overflow-hidden"
+          className="cursor-pointer rounded-2xl overflow-hidden"
           onClick={() => onSelect(video._id)}
         >
           <div
             className="
-  flex flex-col 
+  flex flex-col
   [@media(min-width:1014px)]:flex-row 
   gap-3 
   p-3
 "
           >
             {" "}
-            <div className="relative flex-shrink-0">
-              <img
-                src={video.thumbnail.url}
-                alt={video.title}
-                className="w-40 h-28 object-cover rounded-2xl"
-              />
+            <div className="relative  flex   flex-shrink-0">
+            <img
+  src={video.thumbnail.url}
+  alt={video.title}
+  className="
+    w-full
+    h-30
+    max-sm:h-70
+    object-cover
+    rounded-2xl
+    [@media(min-width:1014px)]:w-40
+  "
+/>
+
               <div className="absolute bottom-1 right-1 bg-black bg-opacity-80 text-white text-xs px-2 py-1 rounded">
                 {formatDuration(video.duration)}
               </div>
@@ -117,7 +125,7 @@ const VideoCard = ({ video, onSelect }) => {
           </div>
         </div>
 
-        <div className="absolute top-2 right-2 z-50">
+        <div className="absolute bottom-5 right-2 z-50 [@media(min-width:1014px)]:top-2  ">
           <Playlist video={video} />
         </div>
       </div>
