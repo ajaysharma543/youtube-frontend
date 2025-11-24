@@ -38,16 +38,16 @@ const VideoDetails = ({ currentVideoId, currentUserId, onVideoSelect }) => {
 
   return (
     <>
-      <div className="p-6 min-h-screen bg-black text-white">
+      <div className="p-6  min-h-screen bg-black text-white">
         {Array.isArray(video) && video.length === 0 ? (
           <p>No Video Found</p>
         ) : (
-          <div className="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-1">
+          <div className="grid w-full sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-1 gap-1">
             {video.map((item) => (
               <VideoCard
                 key={item._id}
                 video={item}
-                onSelect={() => onVideoSelect(item._id)} // call function passed from parent
+                onSelect={() => onVideoSelect(item._id)}
               />
             ))}
           </div>

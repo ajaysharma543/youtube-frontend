@@ -44,8 +44,6 @@ function Subscriber({ video }) {
 
   return (
     <>
-   
-
       {!isOwner && (
         <button
           onClick={handleSubscriber}

@@ -79,12 +79,12 @@ const VideoCard = ({ video }) => {
 
         <div
           onClick={handleClick}
-          className="relative pb-4 bg-black rounded-2xl transition-all duration-700 ease-in-out"
+          className="relative pb-4 p-0 bg-black rounded-2xl transition-all duration-700 ease-in-out"
         >
           <img
             src={video.thumbnail.url}
             alt={video.title}
-            className="w-full h-48 object-cover rounded-t-2xl"
+            className="w-full h-62 sm:h-65 md:h-68 lg:h-68 xl:h-60 2xl:h-76 object-cover rounded-t-2xl"
           />
           <div className="p-3">
             <h3 className="text-white font-semibold text-lg truncate">

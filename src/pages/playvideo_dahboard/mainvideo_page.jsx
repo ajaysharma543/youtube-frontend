@@ -100,11 +100,17 @@ function Mainvideo_page() {
   if (!video) return null;
 
   return (
-    <div className="flex justify-center  p-6">
-      <div className="w-[60%]">
+    <div
+      className="
+      flex flex-col lg:flex-row justify-center gap-6 p-4 w-full 
+      bg-[linear-gradient(to_right,#000,#1a1a1a,#000)]
+    "
+    >
+      {/* MAIN VIDEO + COMMENTS */}
+      <div className="w-full lg:w-[60%] ">
+        {/* VIDEO PLAYER */}
         <div className="bg-black p-5 border-2 border-gray-800 rounded-2xl mb-4">
           <div className="relative w-full max-w-4xl mx-auto group">
-            {/* ✅ Loader during buffering */}
             {videoLoading && (
               <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-60 z-10 rounded-lg">
                 <div className="w-12 h-12 border-4 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
@@ -124,47 +130,48 @@ function Mainvideo_page() {
             />
 
             <style>{`
-              video::-webkit-media-controls {
-                opacity: 0;
-                transition: opacity 0.3s;
-              }
-              .group:hover video::-webkit-media-controls {
-                opacity: 1;
-              }
-            `}</style>
+            video::-webkit-media-controls {
+              opacity: 0;
+              transition: opacity 0.3s;
+            }
+            .group:hover video::-webkit-media-controls {
+              opacity: 1;
+            }
+          `}</style>
           </div>
         </div>
 
+        {/* TITLE */}
         <h1 className="text-white text-2xl font-bold mb-3">{video.title}</h1>
 
+        {/* OWNER + SUBSCRIBE + LIKE + DOWNLOAD */}
         <div className="flex items-center justify-between mb-4">
-       <div className="flex items-center gap-3 cursor-pointer">
-  <div
-    className="flex justify-center"
-    onClick={() => navigate(`/c/${video.owner.username}`)}
-  >
-    <img
-      src={video.owner?.avatar?.url || "/default-avatar.png"}
-      alt={video.owner?.fullname || "User"}
-      className="w-12 h-12 rounded-full object-cover"
-    />
-  </div>
+          <div className="flex items-center gap-3 cursor-pointer">
+            <div
+              className="flex justify-center"
+              onClick={() => navigate(`/c/${video.owner.username}`)}
+            >
+              <img
+                src={video.owner?.avatar?.url || "/default-avatar.png"}
+                alt={video.owner?.fullname || "User"}
+                className="w-12 h-12 rounded-full object-cover"
+              />
+            </div>
 
-  <div
-    className="flex flex-col"
-    onClick={() => navigate(`/c/${video.owner.username}`)}
-  >
-    <h2 className="text-white font-semibold">
-      {video.owner?.fullname || "Unknown"}
-    </h2>
-    <p className="text-gray-400 text-sm">
-      {video.owner?.subscriberscount || 0} subscribers
-    </p>
-  </div>
+            <div
+              className="flex flex-col"
+              onClick={() => navigate(`/c/${video.owner.username}`)}
+            >
+              <h2 className="text-white font-semibold">
+                {video.owner?.fullname || "Unknown"}
+              </h2>
+              <p className="text-gray-400 text-sm">
+                {video.owner?.subscriberscount || 0} subscribers
+              </p>
+            </div>
 
-  <Subscriber video={video} />
-</div>
-
+            <Subscriber video={video} />
+          </div>
 
           <div className="flex items-end justify-around space-x-3">
             <div className="flex items-center bg-[#222222] px-2 rounded-4xl overflow-hidden">
@@ -181,26 +188,39 @@ function Mainvideo_page() {
             <Playlist video={video} />
           </div>
         </div>
-        <div className="w-full bg-[#222222] rounded-3xl p-4 hover:bg-[#6e2424] pt-2 text-white">
+
+        {/* DESCRIPTION */}
+        <div className="w-full bg-[#222222] rounded-3xl p-4 pt-2 text-white">
           <div className="flex gap-4 text-sm text-gray-400 mb-2">
             <span>{video.views} views</span>
             <span>{uploadTime}</span>
           </div>
-          <h1 className="text-base  whitespace-pre-line">{displayText}</h1>
+
+          <h1 className="text-base whitespace-pre-line">{displayText}</h1>
+
           {isLong && (
             <button
               onClick={() => setShowFull(!showFull)}
-              className="mt-2 text-white  cursor-pointer hover:underline text-sm"
+              className="mt-2 text-white hover:underline text-sm"
             >
               {showFull ? "Show less" : "Show more"}
             </button>
           )}
         </div>
 
+        {/* SMALL SCREENS — VideoDetails first */}
+        <div className="w-full flex flex-col gap-4 lg:hidden">
+          <VideoDetails
+            currentVideoId={currentVideoId}
+            currentUserId={user?._id}
+            onVideoSelect={handleVideoSelect}
+          />
+        </div>
         <Comments video={video} commentVideoId={commentVideoId} />
       </div>
 
-      <div className="w-[30%] flex flex-col gap-4">
+      {/* LARGE SCREENS — VideoDetails on right */}
+      <div className="w-full lg:w-[30%] flex-col gap-4 hidden lg:flex order-3">
         <VideoDetails
           currentVideoId={currentVideoId}
           currentUserId={user?._id}

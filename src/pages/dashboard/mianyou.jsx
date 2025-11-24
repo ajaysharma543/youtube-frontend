@@ -65,8 +65,8 @@ function Mianyou() {
     }
     return "just now";
   };
-const latestFour = Array.isArray(list) ? list.slice(-4).reverse() : [];
-// console.log("LIST VALUE:", list);
+  const latestFour = Array.isArray(list) ? list.slice(-4).reverse() : [];
+  // console.log("LIST VALUE:", list);
 
   const [liked, setLiked] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -116,7 +116,7 @@ const latestFour = Array.isArray(list) ? list.slice(-4).reverse() : [];
     <div>
       <div
         className="flex items-center gap-4 mb-6  pb-4 cursor-pointer"
-       onClick={() => navigate(`/c/${user.username}`)}
+        onClick={() => navigate(`/c/${user.username}`)}
       >
         <img
           src={user?.avatar?.url || "/default-avatar.png"}
@@ -135,18 +135,22 @@ const latestFour = Array.isArray(list) ? list.slice(-4).reverse() : [];
           </div>
         </div>
       </div>
-      <div className="flex justify-between mt-10 cursor-pointer mb-4"onClick={() => navigate("/history")}>
+      <div
+        className="flex justify-between mt-10 cursor-pointer mb-4"
+        onClick={() => navigate("/history")}
+      >
         <h1 className="text-white text-xl font-semibold mb-4">Watch History</h1>
-        <button
-          className="hover:bg-gray-700 px-7 py-2 rounded-2xl"
-          
-        >
+        <button className="hover:bg-gray-700 px-7 py-2 rounded-2xl">
           see all
         </button>
       </div>
       <div className="grid grid-cols-4">
         {history.map((v) => (
-          <div key={v._id} className="cursor-pointer relative w-[97%]" onClick={() => handleVideoClick(v._id)}>
+          <div
+            key={v._id}
+            className="cursor-pointer relative w-[97%]"
+            onClick={() => handleVideoClick(v._id)}
+          >
             <div className="relative w-[94%]">
               <img
                 src={v.thumbnail?.url}
@@ -199,35 +203,31 @@ const latestFour = Array.isArray(list) ? list.slice(-4).reverse() : [];
         ))}
       </div>
 
-      <div className="flex justify-between mt-10 mb-4 cursor-pointer" onClick={() => navigate("/playlist")}>
+      <div
+        className="flex justify-between mt-10 mb-4 cursor-pointer"
+        onClick={() => navigate("/playlist")}
+      >
         <h1 className="text-white text-xl font-semibold">Your Playlists</h1>
-        <button
-          className="hover:bg-gray-700 px-7  rounded-2xl"
-          
-        >
-          see all
-        </button>
+        <button className="hover:bg-gray-700 px-7  rounded-2xl">see all</button>
       </div>
       <div className="grid grid-cols-4 gap-4">
         {latestFour.map((p) => (
           <Playlists key={p._id} data={p} />
         ))}
       </div>
-      <div className="flex justify-between mt-10 mb-4 cursor-pointer" onClick={() => navigate("/liked")}>
+      <div
+        className="flex justify-between mt-10 mb-4 cursor-pointer"
+        onClick={() => navigate("/liked")}
+      >
         <h1 className="text-white text-xl font-semibold">Liked Videos</h1>
-        <button
-          className="hover:bg-gray-700 px-7  rounded-2xl"
-          
-        >
-          see all
-        </button>
+        <button className="hover:bg-gray-700 px-7  rounded-2xl">see all</button>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {latestlikes.map((video) => (
           <div
             key={video._id}
             onClick={() => handleVideoClick(video._id)}
-className=" rounded-xl shadow-lg hover:scale-105 transform transition-all cursor-pointer overflow-visible"
+            className=" rounded-xl shadow-lg hover:scale-105 transform transition-all cursor-pointer overflow-visible"
           >
             {/* Thumbnail */}
             <div className="w-full relative h-48 bg-black overflow-hidden">
@@ -254,8 +254,6 @@ className=" rounded-xl shadow-lg hover:scale-105 transform transition-all cursor
                 {new Date(video.createdAt).toLocaleDateString()}
               </p>
 
-              
-
               {/* 3-DOTS MENU */}
               <div className="absolute bottom-3 right-0 z-50">
                 <Playlist video={video}>
@@ -276,14 +274,12 @@ className=" rounded-xl shadow-lg hover:scale-105 transform transition-all cursor
         ))}
       </div>
 
-      <div className="flex justify-between mt-10 mb-4 cursor-pointer" onClick={() => navigate("/watchlater")}>
+      <div
+        className="flex justify-between mt-10 mb-4 cursor-pointer"
+        onClick={() => navigate("/watchlater")}
+      >
         <h1 className="text-white text-xl font-semibold ">Watch Later</h1>
-        <button
-          className="hover:bg-gray-700 px-7  rounded-2xl"
-         
-        >
-          see all
-        </button>
+        <button className="hover:bg-gray-700 px-7  rounded-2xl">see all</button>
       </div>
       <div className="p-0">
         <Watchlater />

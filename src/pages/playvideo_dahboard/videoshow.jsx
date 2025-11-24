@@ -68,12 +68,20 @@ const VideoCard = ({ video, onSelect }) => {
         </div>
       )}
 
-      <div className="relative group w-[400px]">
+      <div className="relative group w-[full] lg:w-[400px] ">
         <div
           className="cursor-pointer bg-black rounded-2xl overflow-hidden"
           onClick={() => onSelect(video._id)}
         >
-          <div className="flex gap-3 p-3">
+          <div
+            className="
+  flex flex-col 
+  [@media(min-width:1014px)]:flex-row 
+  gap-3 
+  p-3
+"
+          >
+            {" "}
             <div className="relative flex-shrink-0">
               <img
                 src={video.thumbnail.url}
@@ -84,7 +92,6 @@ const VideoCard = ({ video, onSelect }) => {
                 {formatDuration(video.duration)}
               </div>
             </div>
-
             <div className="flex flex-col justify-between flex-1 min-w-0">
               <h3 className="text-white font-semibold text-md break-words leading-snug line-clamp-2">
                 {video.title}

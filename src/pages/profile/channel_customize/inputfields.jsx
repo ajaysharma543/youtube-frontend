@@ -25,7 +25,6 @@ function Inputfields({
             errors[name] ? "border-red-500" : "border-gray-300"
           }`}
         />
-
       </div>
     </div>
   );

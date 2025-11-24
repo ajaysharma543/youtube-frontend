@@ -64,9 +64,9 @@ function Dashboard() {
             : allVideos;
 
         setVideo(filteredVideos);
-        console.log(filteredVideos);
+        // console.log(filteredVideos);
       } catch (error) {
-        console.log("video not showing", error.response?.data || error.message);
+        // console.log("video not showing", error.response?.data || error.message);
       } finally {
         setLoading(false);
       }
@@ -132,7 +132,7 @@ function Dashboard() {
     try {
       const res = await subscriberApi.subscribe(channelId);
       const subscribed = res.data?.data?.subscribe;
-      console.log("Subscription response:", subscribed);
+      // console.log("Subscription response:", subscribed);
 
       setChannelUser((prev) => ({
         ...prev,
@@ -141,13 +141,13 @@ function Dashboard() {
 
       dispatch(setSubscriptionState(subscribed));
     } catch (error) {
-      console.log("Subscription failed:", error);
+      // console.log("Subscription failed:", error);
       dispatch(toggleSubscriptionFailure());
     }
   };
 
   return (
-    <div className="p-5 min-h-screen bg-black text-white">
+    <div className="p-0 xs:p-4  min-h-screen bg-black text-white">
       {channelUser && (
         <div className="mb-8">
           <div className="rounded-xl p-6 flex items-center justify-between">
@@ -252,12 +252,11 @@ function Dashboard() {
           {displayedVideos.length === 0 ? (
             <p>No Video Found</p>
           ) : (
-       <div className="grid max-[570px]:grid-cols-1 sm:grid-cols-2 max-[960px]:grid-cols-2 lg:grid-cols-3 gap-4">
-  {displayedVideos.map((item) => (
-    <VideoCard key={item._id} video={item} />
-  ))}
-</div>
-
+            <div className="grid max-[570px]:grid-cols-1 sm:grid-cols-2 max-[960px]:grid-cols-2 lg:grid-cols-3 gap-4">
+              {displayedVideos.map((item) => (
+                <VideoCard key={item._id} video={item} />
+              ))}
+            </div>
           )}
         </>
       )}

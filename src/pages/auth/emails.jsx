@@ -36,42 +36,39 @@ const SignupStep2 = () => {
     dispatch(signupFailure(null));
   }, [dispatch]);
 
- 
+  const onSubmit = async (data) => {
+    dispatch(signupStart());
+    setLocalError("");
 
-const onSubmit = async (data) => {
-  dispatch(signupStart());
-  setLocalError("");
+    try {
+      const formData = new FormData();
+      formData.append("fullname", fullname);
+      formData.append("username", username);
+      formData.append("avatar", avatar);
+      if (coverImage) formData.append("coverImage", coverImage);
+      formData.append("email", data.email);
+      formData.append("password", data.password);
 
-  try {
-    const formData = new FormData();
-    formData.append("fullname", fullname);
-    formData.append("username", username);
-    formData.append("avatar", avatar);
-    if (coverImage) formData.append("coverImage", coverImage);
-    formData.append("email", data.email);
-    formData.append("password", data.password);
+      const response = await authApi.signup(formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
-    const response = await authApi.signup(formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+      navigate("/");
 
-    navigate("/");
+      dispatch(
+        signupSuccess({
+          user: response.data.data.user,
+          token: response.data.data.accesstoken,
+        })
+      );
 
-    dispatch(
-      signupSuccess({
-        user: response.data.data.user,
-        token: response.data.data.accesstoken,
-      })
-    );
-
-    dispatch(resetSignup());
-  } catch (error) {
-    const message = error.response?.data?.message || error.message;
-    dispatch(signupFailure(message));
-    setLocalError(message);
-  }
-};
-
+      dispatch(resetSignup());
+    } catch (error) {
+      const message = error.response?.data?.message || error.message;
+      dispatch(signupFailure(message));
+      setLocalError(message);
+    }
+  };
 
   return (
     <FormContainer
@@ -96,16 +93,13 @@ const onSubmit = async (data) => {
             {...register("email", {
               required: "Email is required",
               pattern: {
-                value:
-                  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                 message: "Invalid email format",
               },
             })}
           />
           {errors.email && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.email.message}
-            </p>
+            <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
           )}
         </div>
 
@@ -136,8 +130,7 @@ const onSubmit = async (data) => {
             placeholder="Confirm Password"
             {...register("confirmPassword", {
               validate: (value) =>
-                value === getValues("password") ||
-                "Passwords do not match",
+                value === getValues("password") || "Passwords do not match",
             })}
           />
           {errors.confirmPassword && (
@@ -163,10 +156,10 @@ const onSubmit = async (data) => {
         )}
       </form>
       {loading && (
-  <div className="fixed inset-0 backdrop-blur-sm bg-black/40 flex items-center justify-center">
-    <div className="text-white text-xl">Creating Account...</div>
-  </div>
-)}
+        <div className="fixed inset-0 backdrop-blur-sm bg-black/40 flex items-center justify-center">
+          <div className="text-white text-xl">Creating Account...</div>
+        </div>
+      )}
     </FormContainer>
   );
 };

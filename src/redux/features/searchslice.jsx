@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   query: "",
-  allVideos: [],       
+  allVideos: [],
 };
 
 const searchSlice = createSlice({
@@ -25,4 +25,3 @@ export const { setSearchQuery, clearSearchQuery, setAllVideos } =
   searchSlice.actions;
 
 export default searchSlice.reducer;
-

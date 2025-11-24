@@ -84,7 +84,7 @@ function ShowAllVideos() {
           </div>
         ) : (
           <div className="space-y-4">
-<div className="grid grid-cols-[50px_120px_540px_100px_140px_120px_100px] text-gray-400 text-sm font-semibold border-b border-gray-700 pb-2">
+            <div className="grid grid-cols-[50px_120px_540px_100px_140px_120px_100px] text-gray-400 text-sm font-semibold border-b border-gray-700 pb-2">
               <span></span>
               <span>Thumbnail</span>
               <span>Title & Description</span>
@@ -118,10 +118,9 @@ function ShowAllVideos() {
                   <h3 className="text-white font-semibold truncate">
                     {v.title}
                   </h3>
-                 <p className="text-gray-400 text-sm line-clamp-2">
-  {v.description || "No description available"}
-</p>
-
+                  <p className="text-gray-400 text-sm line-clamp-2">
+                    {v.description || "No description available"}
+                  </p>
                 </div>
 
                 <div className="flex justify-center">

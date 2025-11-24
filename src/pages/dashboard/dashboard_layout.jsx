@@ -7,37 +7,36 @@ const DashboardLayout = ({ children }) => {
   const [collapse, setCollapse] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
-const [isTablet, setIsTablet] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
 
-useEffect(() => {
-  const handleResize = () => {
-    if (window.innerWidth <= 1310 && window.innerWidth >= 768) {
-      setIsCollapsed(true);  // force collapsed width
-      setIsTablet(true);     // but show names
-    } else {
-      setIsTablet(false);
-      setIsCollapsed(collapse); // desktop behaves normal
-    }
-  };
+      if (width <= 1310 && width >= 768) {
+        // Tablet mode
+        setIsTablet(true);
+        setIsCollapsed(true); // Force collapsed layout
+      } else {
+        // Desktop mode
+        setIsTablet(false);
+        setIsCollapsed(collapse); // Use normal collapse value
+      }
+    };
 
-  handleResize();
-  window.addEventListener("resize", handleResize);
-  return () => window.removeEventListener("resize", handleResize);
-}, [collapse]);
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
-
+    return () => window.removeEventListener("resize", handleResize);
+  }, [collapse]);
 
   return (
     <div className="flex flex-col flex-wrap mt-15 min-h-screen bg-black text-white">
-
       <Navbar
-        onToggleSidebar={() => setCollapse(prev => !prev)}
-        onToggleMobile={() => setMobileOpen(prev => !prev)}
-        
+        onToggleSidebar={() => setCollapse((prev) => !prev)}
+        onToggleMobile={() => setMobileOpen((prev) => !prev)}
       />
 
       <div className="flex flex-1">
-
         <Sidebar
           collapse={isCollapsed}
           mobileOpen={mobileOpen}
@@ -49,16 +48,14 @@ useEffect(() => {
           className={`
             flex-1 overflow-y-auto p-6 transition-all duration-300
             ml-0
-            ${isCollapsed ? "md:ml-20" : "md:ml-64"}
+            ${isCollapsed ? "md:ml-20" : "md:ml-60"}
           `}
         >
           {children}
         </main>
-
       </div>
     </div>
   );
 };
-
 
 export default DashboardLayout;

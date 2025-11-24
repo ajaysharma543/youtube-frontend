@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";   // ✔ added
+import { useDispatch, useSelector } from "react-redux"; // ✔ added
 import { useForm } from "react-hook-form";
 import { setBasicInfo } from "../../redux/features/singupslice";
 import InputField from "../../components/inputfiled";

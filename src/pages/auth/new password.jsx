@@ -22,7 +22,7 @@ function NewPassword() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    dispatch(loginFailure(null)); 
+    dispatch(loginFailure(null));
   }, [dispatch]);
   const onSubmit = async (data) => {
     try {

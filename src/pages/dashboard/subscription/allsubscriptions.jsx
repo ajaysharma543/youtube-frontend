@@ -85,9 +85,11 @@ function Allsubscriptions() {
             <div
               key={video._id}
               className="relative cursor-pointer pb-16 w-[80%]  overflow-hidden shadow-md hover:shadow-lg transition-shadow"
-             
             >
-              <div className="flex items-center gap-3 p-3" onClick={() => navigate(`/c/${video.owner.username}`)}>
+              <div
+                className="flex items-center gap-3 p-3"
+                onClick={() => navigate(`/c/${video.owner.username}`)}
+              >
                 <img
                   src={video.owner.avatar?.url || "/default-avatar.png"}
                   alt={video.owner.fullname}
@@ -98,7 +100,10 @@ function Allsubscriptions() {
                 </span>
               </div>
 
-              <div className="flex gap-4"  onClick={() => navigate(`/video/${video._id}`)}>
+              <div
+                className="flex gap-4"
+                onClick={() => navigate(`/video/${video._id}`)}
+              >
                 <div className=" w-63 relative">
                   <img
                     src={video.thumbnail.url || "/default-thumbnail.jpg"}

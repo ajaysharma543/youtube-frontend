@@ -8,7 +8,11 @@ import authApi from "../../api/userapi";
 import InputField from "../../components/inputfiled";
 
 function ResetPassword() {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -16,11 +20,10 @@ function ResetPassword() {
     dispatch(loginStart());
 
     try {
-      const res = await authApi.checkEmail({ email }); 
+      const res = await authApi.checkEmail({ email });
       console.log(res.data);
 
       navigate("/login/newpassword", { state: { email } });
-
     } catch (error) {
       const msg = error.response?.data?.message || "User not found";
       dispatch(loginFailure(msg));
@@ -30,7 +33,6 @@ function ResetPassword() {
   return (
     <FormContainer title="Reset Password">
       <form onSubmit={handleSubmit(onSubmit)}>
-        
         <label className="text-white">Email</label>
         <InputField
           type="email"

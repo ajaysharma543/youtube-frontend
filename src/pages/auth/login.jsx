@@ -32,7 +32,7 @@ function Login() {
       console.log("✅ User logged in:", response.data);
 
       const current = await authApi.getcurrentuser();
-        navigate("/");
+      navigate("/");
 
       if (current) {
         dispatch(
