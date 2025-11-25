@@ -150,40 +150,65 @@ function Dashboard() {
     <div className="p-0 xs:p-4  min-h-screen bg-black text-white">
       {channelUser && (
         <div className="mb-8">
-          <div className="rounded-xl p-6 flex items-center justify-between">
-            <div className="w-2/5 flex justify-center">
-              <img
-                src={channelUser.avatar?.url}
-                className="w-28 h-28 rounded-full object-cover"
-              />
-            </div>
+     <div
+  className="
+    rounded-xl p-6 
+    flex items-center justify-between
+    max-[639px]:flex-row max-[639px]:gap-4 max-[639px]:items-start
+  "
+>
+  {/* --- IMAGE --- */}
+  <div className="w-2/5 max-[639px]:w-[25%]">
+    <img
+      src={channelUser.avatar?.url}
+      className="
+        w-28 h-28 rounded-full object-cover
+        max-[639px]:w-14 max-[639px]:h-14
+      "
+    />
+  </div>
 
-            <div className="w-2/5">
-              <h2 className="text-2xl font-bold">{channelUser.fullname}</h2>
-              <div className="flex">
-                <p className="text-gray-400 pr-2">@{channelUser.username}</p>
-                <p className="text-gray-400 pr-2">
-                  {channelUser.totalsubscriber} subscribers
-                </p>
-              </div>
-              <p className="text-gray-400 pr-2">{channelUser.description} </p>
-            </div>
+  {/* --- NAME + USERNAME + SUBSCRIBERS --- */}
+  <div
+    className="
+      w-2/5 flex flex-col
+      max-[639px]:w-[full]
+      max-[639px]:text-sm max-[639px]:leading-tight
+    "
+  >
+    <h2 className="text-2xl font-bold max-[639px]:text-base">
+      {channelUser.fullname}
+    </h2>
 
-            <div
-              className="w-1/5 flex justify-end"
-              onClick={() => handleSubscriber(channelUser._id)}
-            >
-              <span
-                className={`px-8 py-2 rounded-3xl cursor-pointer text-black text-lg font-semibold ${
-                  channelUser.issubscribed
-                    ? "bg-gray-600 text-white"
-                    : "bg-white text-black"
-                }`}
-              >
-                {channelUser.issubscribed ? "Subscribed" : "Subscribe"}
-              </span>
-            </div>
-          </div>
+    <div className="flex text-gray-400 max-[639px]:flex-col max-[639px]:gap-0">
+      <p className="pr-2 max-[639px]:pr-0">@{channelUser.username}</p>
+      <p className="pr-2 max-[639px]:pr-0">
+        {channelUser.totalsubscriber} subscribers
+      </p>
+    </div>
+  </div>
+
+  <div
+    className="
+      w-1/5 flex justify-end
+      max-[639px]:w-[20%] max-[639px]:justify-center
+    "
+    onClick={() => handleSubscriber(channelUser._id)}
+  >
+    <span
+      className={`
+        px-8 py-2 rounded-3xl cursor-pointer text-lg font-semibold
+        ${channelUser.issubscribed
+          ? "bg-gray-600 text-white"
+          : "bg-white text-black"
+        }
+        max-[639px]:px-3 max-[639px]:py-1 max-[639px]:text-xs
+      `}
+    >
+      {channelUser.issubscribed ? "Subscribed" : "Subscribe"}
+    </span>
+  </div>
+</div>
 
           <div className="mt-6">
             {channelVideos.length === 0 ? (
@@ -191,57 +216,79 @@ function Dashboard() {
                 This user has not uploaded any videos yet.
               </p>
             ) : (
-              <div className="flex flex-col gap-6">
-                {channelVideos.map((item) => (
-                  <div
-                    key={item._id}
-                    className="flex relative w-full gap-4 p-4 rounded-xl"
-                  >
-                    <div className="w-[40%] relative">
-                      <img
-                        src={item.thumbnail?.url}
-                        className="w-full h-55 object-cover rounded-lg"
-                      />
-                      <span className="absolute bottom-2 right-2 bg-black bg-opacity-80 text-xs px-2 py-0.5 rounded">
-                        {formatDuration(item.duration)}
-                      </span>
-                    </div>
+         <div className="flex flex-col gap-6">
+  {channelVideos.map((item) => (
+    <div
+      key={item._id}
+      className="
+        flex relative w-full gap-4 p-4 rounded-xl 
+        max-[639px]:flex-col
+      "
+    >
+      {/* Thumbnail */}
+      <div className="w-[40%] relative max-[639px]:w-full">
+        <img
+          src={item.thumbnail?.url}
+          className="w-full h-55 object-cover rounded-lg"
+        />
+        <span className="absolute bottom-2 right-2 bg-black bg-opacity-80 text-xs px-2 py-0.5 rounded">
+          {formatDuration(item.duration)}
+        </span>
+      </div>
 
-                    <div className="w-[60%] flex flex-col gap-1">
-                      <h2 className="text-lg font-semibold line-clamp-2 pb-2 leading-tight">
-                        {item.title}
-                      </h2>
+      {/* Right Section */}
+      <div className="w-[60%] flex flex-col gap-1 max-[639px]:w-full">
 
-                      <div className="flex items-center gap-3 text-sm text-gray-300">
-                        <h3>{item.views} views</h3>
-                        <h3>{getTimeAgo(item.createdAt)}</h3>
-                      </div>
+        {/* Title */}
+        <h2 className="text-lg font-semibold line-clamp-2 pb-2 leading-tight max-[639px]:text-sm">
+          {item.title}
+        </h2>
 
-                      <div className="flex items-center gap-2 pt-3">
-                        <img
-                          src={channelUser.avatar?.url}
-                          className="w-6 h-6 rounded-full object-cover"
-                        />
+        {/* FLEX ROW showing Views + Time + Avatar + Fullname on mobile */}
+        <div
+          className="
+            flex items-center gap-3 text-sm text-gray-300 
+            max-[639px]:flex max-[639px]:items-center max-[639px]:justify-start
+          "
+        >
+          {/* LEFT SIDE: Views + Time */}
+          <div className="flex items-center gap-3 max-[639px]:text-xs">
+            <h3>{item.views} views</h3>
+            <h3>{getTimeAgo(item.createdAt)}</h3>
+          </div>
 
-                        <h3 className="font-semibold text-sm">
-                          {channelUser.fullname}
-                        </h3>
-                      </div>
+          {/* RIGHT SIDE: Avatar + Fullname */}
+          <div className="flex items-center gap-2 max-[639px]:text-xs">
+            <img
+              src={channelUser.avatar?.url}
+              className="w-6 h-6 rounded-full object-cover max-[639px]:w-4 max-[639px]:h-4"
+            />
+            <h3 className="font-semibold text-sm max-[639px]:text-xs">
+              {channelUser.fullname}
+            </h3>
+          </div>
+        </div>
 
-                      <p className="text-gray-400 text-sm line-clamp-2 pt-3">
-                        {item.description}
-                      </p>
-                    </div>
+        {/* Description (hidden on mobile) */}
+        <p className="text-gray-400 text-sm line-clamp-2 pt-3 max-[639px]:hidden">
+          {item.description}
+        </p>
+      </div>
 
-                    <div
-                      onClick={(e) => e.stopPropagation()}
-                      className="absolute top-2 right-2 z-50"
-                    >
-                      <Playlist video={item} />
-                    </div>
-                  </div>
-                ))}
-              </div>
+      {/* Playlist Button */}
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="
+          absolute top-2 right-2 z-50 
+          max-[639px]:top-auto max-[639px]:right-2 max-[639px]:bottom-2
+        "
+      >
+        <Playlist video={item} />
+      </div>
+    </div>
+  ))}
+</div>
+
             )}
           </div>
         </div>

@@ -1,25 +1,47 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./dashboard_components/navbar";
 import LogoutButton from "../auth/logout";
-// import { Link } from "react-router-dom";
 import Sidebar from "./dashboard_components/slidebar";
+
 const DashboardLayout = ({ children }) => {
   const [collapse, setCollapse] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
+
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
 
-      if (width <= 1310 && width >= 768) {
-        // Tablet mode
-        setIsTablet(true);
-        setIsCollapsed(true); // Force collapsed layout
-      } else {
-        // Desktop mode
+      // 🔥 NEW: treat 639 and below as pure mobile
+      if (width <= 639) {
         setIsTablet(false);
-        setIsCollapsed(collapse); // Use normal collapse value
+        setIsCollapsed(false);
+        setMobileOpen(false);
+        return;
+      }
+
+      // mobile <768
+      if (width < 768) {
+        setIsTablet(false);
+        setIsCollapsed(false);
+        return;
+      }
+
+      // auto close mobile sidebar when >=768
+      if (width >= 768) {
+        setMobileOpen(false);
+      }
+
+      // Tablet mode: 768 → 1310
+      if (width <= 1310 && width >= 768) {
+        setIsTablet(true);
+        setIsCollapsed(true);
+      } 
+      // Desktop mode: 1311+
+      else {
+        setIsTablet(false);
+        setIsCollapsed(collapse);
       }
     };
 

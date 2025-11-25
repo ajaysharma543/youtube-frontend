@@ -76,7 +76,7 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
     },
   ];
 
-  const allowedTabletItems = ["Home", "Subscriptions", "Settings", "You"];
+  const allowedTabletItems = ["Home", "Subscription", "Settings", "You"];
 
   return (
     <>
@@ -91,16 +91,9 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
           <nav className="flex flex-col gap-1 text-white pb-13">
             {navItems
               .filter((item) => {
-                // 1️⃣ MOBILE — show all
                 if (mobileOpen) return true;
-
-                // 2️⃣ TABLET — show ONLY allowed items
                 if (isTablet) return allowedTabletItems.includes(item.name);
-
-                // 3️⃣ DESKTOP collapsed — show ONLY allowed items
                 if (collapse) return allowedTabletItems.includes(item.name);
-
-                // 4️⃣ DESKTOP expanded — show ALL items
                 return true;
               })
               .map((item) => (
@@ -191,12 +184,12 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
               ))}
           </nav>
         </div>
-        <div
-          className={`md:hidden fixed top-0 left-0 h-full w-60 bg-black text-white p-6 
-      transition-transform duration-300 z-50
-      ${mobileOpen ? "translate-x-0" : "-translate-x-full"}
-    `}
-        >
+      <div
+  className={`md:hidden fixed top-0 left-0 h-full w-60 bg-black  text-white p-6 
+    transition-transform duration-300 overflow-y-auto scrollbar-hide z-999
+    ${mobileOpen ? "translate-x-0" : "-translate-x-full"}
+`}
+>
           <button
             onClick={() => setMobileOpen(false)}
             className="text-white text-xl mb-6"
@@ -280,7 +273,7 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
         {mobileOpen && (
           <div
             onClick={() => setMobileOpen(false)}
-            className="fixed inset-0 bg-trasnparent bg-opacity-50 md:hidden z-40"
+            className="fixed inset-0 bg-transparent bg-opacity-50 md:hidden z-40"
           />
         )}
         <div className="hidden max-sm:flex fixed bottom-0 left-0 w-full bg-black text-white border-t border-gray-800 z-50 justify-between px-6 py-3">
