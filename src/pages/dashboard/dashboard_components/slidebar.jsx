@@ -7,6 +7,7 @@ import {
   PlayCircleIcon,
   Settings,
   ThumbsUp,
+  Upload,
   User,
   Users,
   Video,
@@ -49,6 +50,11 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
       icon: <PlayCircleIcon className="w-5 h-5" />,
       path: "/Playlist",
     },
+     {
+      name: "test",
+      icon: <PlayCircleIcon className="w-5 h-5" />,
+      path: "/test",
+    },
     {
       name: "your videos",
       icon: <Video className="w-5 h-5" />,
@@ -65,6 +71,11 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
       path: "/liked",
     },
     {
+      name: "create",
+      icon: <Upload className="w-5 h-5" />,
+      path: "/upload",
+    },
+    {
       name: "Subscription",
       icon: <Users className="w-5 h-5" />,
       path: "/Subscription",
@@ -77,6 +88,7 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
   ];
 
   const allowedTabletItems = ["Home", "Subscription", "Settings", "You"];
+  const allowedmobileitems = ["Home", "Subscription", "create", "Settings", "You"];
 
   return (
     <>
@@ -90,12 +102,14 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
         >
           <nav className="flex flex-col gap-1 text-white pb-13">
             {navItems
-              .filter((item) => {
-                if (mobileOpen) return true;
-                if (isTablet) return allowedTabletItems.includes(item.name);
-                if (collapse) return allowedTabletItems.includes(item.name);
-                return true;
-              })
+             .filter((item) => {
+  if (item.name === "create") return false; // ⛔ Hide in main sidebar
+
+  if (mobileOpen) return true;
+  if (isTablet) return allowedTabletItems.includes(item.name);
+  if (collapse) return allowedTabletItems.includes(item.name);
+  return true;
+})
               .map((item) => (
                 <React.Fragment key={item.name}>
                   <NavLink
@@ -278,7 +292,7 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
         )}
         <div className="hidden max-sm:flex fixed bottom-0 left-0 w-full bg-black text-white border-t border-gray-800 z-50 justify-between px-6 py-3">
           {navItems
-            .filter((item) => allowedTabletItems.includes(item.name))
+            .filter((item) => allowedmobileitems.includes(item.name))
             .map((item) => (
               <NavLink
                 key={item.name}

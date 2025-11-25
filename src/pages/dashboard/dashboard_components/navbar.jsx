@@ -104,40 +104,49 @@ useEffect(() => {
             className="w-full border border-gray-700 text-white placeholder-gray-500 rounded-full pl-5 pr-10 py-2 outline-none focus:ring-2 focus:ring-white transition"
           />
         </div>
+<div className="flex">
+  
+     {/* CREATE button - hide on <= 569px */}
+<div className="relative max-[569px]:hidden">
+  <button
+    onClick={() => setShowDropdown((prev) => !prev)}
+    className="bg-gray-900 mr-5 hover:bg-red-700 text-white font-semibold px-5 py-2 rounded-full transition-all duration-200 shadow-md"
+  >
+    Create +
+  </button>
 
-      <div className="flex items-center gap-4 relative max-[569px]:hidden">
-       <button
-            onClick={() => setShowDropdown((prev) => !prev)}
-            className="bg-gray-900 hover:bg-red-700 text-white font-semibold px-5 py-2 rounded-full transition-all duration-200 shadow-md"
-          >
-            Create +
-          </button>
+  {showDropdown && (
+    <div className="absolute right-0 top-12 w-44 bg-gray-900 border border-gray-700 rounded-xl shadow-lg overflow-hidden z-50">
+      <button
+        onClick={handleUploadClick}
+        className="block w-full text-left px-5 py-3 text-white hover:bg-red-700 transition"
+      >
+        Upload Video
+      </button>
+    </div>
+  )}
+</div>
 
-          {showDropdown && (
-            <div className="absolute right-0 top-12 w-44 bg-gray-900 border border-gray-700 rounded-xl shadow-lg overflow-hidden animate-fadeIn z-50">
-              <button
-                onClick={handleUploadClick}
-                className="block w-full text-left px-5 py-3 text-white hover:bg-red-700 transition"
-              >
-                Upload Video
-              </button>
-            </div>
-          )}
-      <div
-            onClick={() => navigate("/profile")}
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-red-600 text-white font-bold text-lg cursor-pointer hover:bg-red-700 transition overflow-hidden"
-          >
-            {data?.avatar?.url ? (
-              <img
-                src={data.avatar.url}
-                alt="Profile"
-                className="w-full h-full object-cover rounded-full"
-              />
-            ) : (
-              <span>{data?.fullname ? data.fullname.charAt(0).toUpperCase() : "?"}</span>
-            )}
-          </div>
-      </div>
+<div
+  onClick={() => navigate("/profile")}
+  className="w-10 h-10 flex items-center justify-end rounded-full bg-red-600 
+             text-white font-bold text-lg cursor-pointer hover:bg-red-700 transition 
+             overflow-hidden"
+>
+  {data?.avatar?.url ? (
+    <img
+      src={data.avatar.url}
+      alt="Profile"
+      className="w-full h-full object-cover rounded-full"
+    />
+  ) : (
+    <span>
+      {data?.fullname ? data.fullname.charAt(0).toUpperCase() : "?"}
+    </span>
+  )}
+</div>
+
+</div>
         <Search
           className="text-white w-7 h-7 cursor-pointer md:hidden"
           onClick={() => setMobileSearchOpen(true)}

@@ -30,6 +30,7 @@ import ChannelPage from "./pages/dashboard/channelshow";
 import Allsubscriptions from "./pages/dashboard/subscription/allsubscriptions";
 import Mianyou from "./pages/dashboard/mianyou";
 import Seting from "./pages/dashboard/seting";
+import Subscriptionphone from "./pages/dashboard/subscription/subscriptionphone";
 function App() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -162,6 +163,14 @@ function App() {
         element={
           <DashboardLayout>
             <Allsubscriptions />
+          </DashboardLayout>
+        }
+      />
+       <Route
+        path="/test"
+        element={
+          <DashboardLayout>
+            <Subscriptionphone />
           </DashboardLayout>
         }
       />
