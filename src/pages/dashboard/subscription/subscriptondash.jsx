@@ -54,8 +54,8 @@ function Subscriptondash() {
   };
 
 return (
-  <div className="p-4">
-    <h1 className="text-2xl font-bold mb-4">All Subscriptions</h1>
+  <div className="p-4 bg-black">
+    <h1 className="text-2xl font-bold mb-4 max-[640px]:hidden">All Subscriptions</h1>
 
     <div className="flex justify-center items-center sm:flex-col flex-row w-full">
 
@@ -65,10 +65,9 @@ return (
         subs.map((ch) => (
           <div
             key={ch._id}
-            className="w-full flex sm:w-[80%] bg-black p-4 rounded-xl shadow"
+            className="w-full flex sm:w-[80%]  p-4 rounded-xl shadow"
           >
            
-            {/* DESKTOP / TABLET */}
             <div className="hidden sm:flex w-full items-start cursor-pointer gap-4">
               <div
                 className="flex gap-4"
@@ -111,7 +110,7 @@ return (
         ))
       )}
     </div>
-  <div className="sm:hidden">
+  <div className="sm:hidden bg-black">
       <Subscriptionphone/>
   </div>
   </div>

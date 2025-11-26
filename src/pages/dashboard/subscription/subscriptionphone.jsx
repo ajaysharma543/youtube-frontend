@@ -28,28 +28,27 @@ function Subscriptionphone() {
 
        <div className="flex flex-col w-full">
 
-  {/* TOP — IMAGE ROW */}
-  <div className="flex gap-4 overflow-x-auto pb-4 w-full pl-5 sm:flex-row flex-nowrap">
-    {subs.map((ch) => (
-      <div
-        key={ch._id}
-        className={`flex flex-col mt-5 p-3 items-center ${
-          selectedUser?._id === ch._id
-            ? "bg-[#393232e2] scale-105"
-            : "opacity-80 hover:opacity-100"
-        }`}
-      >
-        <img
-          src={ch.avatar?.url || "/default-avatar.png"}
-          alt="avatar"
-          className="w-20 h-20 rounded-full object-cover cursor-pointer transition-all"
-          onClick={() => setSelectedUser(ch)}
-        />
-
-        <p className="text-white mt-2">{ch.username}</p>
-      </div>
-    ))}
-  </div>
+{/* TOP — IMAGE ROW */}
+<div className="flex gap-4 pb-4 w-full pl-5 overflow-x-auto scroll-smooth sm:flex-row flex-nowrap">
+  {subs.map((ch) => (
+    <div
+      key={ch._id}
+      className={`flex flex-col mt-5 p-3 items-center min-w-[80px] ${
+        selectedUser?._id === ch._id
+          ? "bg-[#393232e2] scale-105"
+          : "opacity-80 hover:opacity-100"
+      }`}
+    >
+      <img
+        src={ch.avatar?.url || "/default-avatar.png"}
+        alt="avatar"
+        className="w-20 h-20 rounded-full object-cover cursor-pointer transition-all"
+        onClick={() => setSelectedUser(ch)}
+      />
+      <p className="text-white mt-2 text-center text-sm">{ch.username}</p>
+    </div>
+  ))}
+</div>
 
   {selectedUser && (
       <div className="p-4 rounded-xl flex justify-end items-center">
