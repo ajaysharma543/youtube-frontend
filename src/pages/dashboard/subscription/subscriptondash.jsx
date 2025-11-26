@@ -9,6 +9,7 @@ import {
 import subscriberApi from "../../../api/subscribers";
 import { useNavigate } from "react-router-dom";
 import Allsubscriptions from "./allsubscriptions";
+import Subscriptionphone from "./subscriptionphone";
 
 function Subscriptondash() {
   const { data: user } = useSelector((state) => state.user);
@@ -58,7 +59,6 @@ return (
 
     <div className="flex justify-center items-center sm:flex-col flex-row w-full">
 
-      {/* SHOW NO SUBSCRIPTION */}
       {subs.length === 0 ? (
         <p className="text-gray-400 text-lg mt-10">No subscriptions found.</p>
       ) : (
@@ -67,16 +67,7 @@ return (
             key={ch._id}
             className="w-full flex sm:w-[80%] bg-black p-4 rounded-xl shadow"
           >
-            {/* MOBILE IMAGE SCROLL */}
-            <div className="flex-row sm:hidden flex-nowrap gap-3 justify-start overflow-x-auto py-2">
-              <img
-                src={ch.avatar?.url || "/default-avatar.png"}
-                alt="avatar"
-                className="w-20 h-20 rounded-full object-cover"
-                onClick={() => navigate(`/c/${ch.username}`)}
-              />
-            </div>
-
+           
             {/* DESKTOP / TABLET */}
             <div className="hidden sm:flex w-full items-start cursor-pointer gap-4">
               <div
@@ -121,7 +112,7 @@ return (
       )}
     </div>
   <div className="sm:hidden">
-      <Allsubscriptions/>
+      <Subscriptionphone/>
   </div>
   </div>
 );

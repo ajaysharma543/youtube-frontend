@@ -89,7 +89,7 @@ function Showallvideos({ userId, limit, sortBy, sortType }) {
 
       {/* ✅ Show videos */}
       {!loading && displayedVideos.length > 0 && (
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-4 max-[640px]:grid-cols-1 gap-2">
           {displayedVideos.map((video) => (
             <div
               key={video._id}
@@ -99,7 +99,7 @@ function Showallvideos({ userId, limit, sortBy, sortType }) {
               <div className="relative">
                 <img
                   src={video?.thumbnail?.url || "/default-thumb.jpg"}
-                  className="w-full h-32 object-cover rounded-lg"
+                  className="w-full h-50 object-cover rounded-lg"
                 />
                 <span className="absolute bottom-1 right-1 bg-black bg-opacity-80 text-white text-xs px-2 py-1 rounded">
                   {formatDuration(video.duration)}
