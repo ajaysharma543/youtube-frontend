@@ -50,7 +50,7 @@ function ChannelPage() {
   return (
     <div className="max-w-6xl mx-auto p-4 space-y-6">
       {channel.coverImage?.url && (
-        <div className="w-full h-56 overflow-hidden rounded-xl shadow-lg">
+        <div className="w-full h-56 max-[640px]:hidden overflow-hidden rounded-xl shadow-lg">
           <img
             src={channel.coverImage.url}
             className="w-full h-full object-cover"
@@ -80,7 +80,6 @@ function ChannelPage() {
             </span>
           </div>
 
-          {/* Description - 2 Lines Only */}
           <div className="text-sm text-gray-400 line-clamp-2 max-w-md">
             {channel.description}
           </div>

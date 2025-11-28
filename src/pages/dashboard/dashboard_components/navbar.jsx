@@ -104,7 +104,7 @@ useEffect(() => {
             className="w-full border border-gray-700 text-white placeholder-gray-500 rounded-full pl-5 pr-10 py-2 outline-none focus:ring-2 focus:ring-white transition"
           />
         </div>
-<div className="flex">
+<div className="flex items-center justify-between ">
   
      {/* CREATE button - hide on <= 569px */}
 <div className="relative max-[569px]:hidden">
@@ -130,7 +130,7 @@ useEffect(() => {
 <div
   onClick={() => navigate("/profile")}
   className="w-10 h-10 flex items-center justify-end rounded-full bg-red-600 
-             text-white font-bold text-lg cursor-pointer hover:bg-red-700 transition 
+             text-white font-bold text-lg cursor-pointer hover:bg-red-700 max-[640px]:mr-4 transition 
              overflow-hidden"
 >
   {data?.avatar?.url ? (
@@ -145,12 +145,12 @@ useEffect(() => {
     </span>
   )}
 </div>
-
-</div>
-        <Search
+   <Search
           className="text-white w-7 h-7 cursor-pointer md:hidden"
           onClick={() => setMobileSearchOpen(true)}
         />
+</div>
+     
     </header>
      {mobileSearchOpen && (
         <div className="fixed top-0 left-0 w-full h-16 bg-black flex items-center justify-between px-4 z-50">

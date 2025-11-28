@@ -24,12 +24,12 @@ function Subscriptionphone() {
 
   return (
     <>
-      <div className="flex flex-col items-end w-full">
+      <div className="flex flex-col items-end  bg-black w-full">
 
        <div className="flex flex-col w-full">
 
 {/* TOP — IMAGE ROW */}
-<div className="flex gap-4 pb-4 w-full pl-5 overflow-x-auto scroll-smooth sm:flex-row flex-nowrap">
+<div className="flex gap-4 pb-4 w-full pl-5 bg-black overflow-x-auto scroll-smooth sm:flex-row flex-nowrap">
   {subs.map((ch) => (
     <div
       key={ch._id}

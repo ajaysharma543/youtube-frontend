@@ -90,7 +90,7 @@ function VideoDetails() {
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-black to-gray-800 text-white p-8">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="h-[600px] max-w-6xl w-full flex flex-col border-2 border-gray-600 rounded-3xl overflow-hidden shadow-lg"
+        className="h-[600px] max-w-6xl w-full flex scroll-smooth flex-col border-2 border-gray-600 rounded-3xl overflow-hidden shadow-lg"
       >
         {/* HEADER */}
         <div className="h-[12%] w-full border-b border-gray-500 flex items-center justify-between px-6 bg-black/40">
@@ -104,10 +104,8 @@ function VideoDetails() {
           </button>
         </div>
 
-        {/* BODY */}
-        <div className="h-[80%] flex">
-          {/* LEFT SIDE — FORM */}
-          <div className="w-1/2 h-full border-r border-gray-600 p-6 flex flex-col">
+<div className="flex-1 overflow-y-auto pr-2 scrollbar-hide ">
+<div className="sm:w-1/2 w-full h-full sm:border-r border-gray-600 p-6 flex flex-col">
             <label className="text-2xl font-semibold mb-4">
               Video Information
             </label>
@@ -183,7 +181,7 @@ function VideoDetails() {
           </div>
 
           {/* RIGHT SIDE — VIDEO PREVIEW */}
-          <div className="w-1/2 h-full flex items-center justify-center p-6">
+<div className="sm:w-1/2 w-full h-[300px] sm:h-full flex items-center justify-center p-6 sm:mt-0 mt-4">
             {videourl ? (
               <video
                 src={videourl}

@@ -93,7 +93,7 @@ function Playlist({ data }) {
 
   return (
     <div
-      className="flex flex-row flex-wrap gap-4 cursor-pointer py-2"
+      className="flex flex-row flex-wrap gap-4 cursor-pointer py-2 "
       ref={dropdownRef}
     >
       {playlistsToShow.map((playlist) => {
@@ -104,7 +104,7 @@ function Playlist({ data }) {
         return (
           <div
             key={playlist._id}
-            className="flex flex-col items-start gap-2 bg-black rounded-2xl relative w-72"
+            className="flex flex-col  items-start gap-2 bg-black rounded-2xl relative w-72 max-[640px]:w-full"
           >
             {/* Thumbnail */}
             <div
