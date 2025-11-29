@@ -10,10 +10,10 @@ function Inputfields({
   placeholder,
 }) {
   return (
-    <div className="w-[60%] mb-6">
+    <div className="w-[60%] mb-6 max-[640px]:w-full">
       <h1 className="text-lg font-semibold mb-1 capitalize">{label}</h1>
       {description && (
-        <p className="text-sm text-gray-600 mb-2">{description}</p>
+        <p className="text-sm text-gray-600 mb-2 max-[640px]:text-white">{description}</p>
       )}
 
       <div className="flex gap-2">

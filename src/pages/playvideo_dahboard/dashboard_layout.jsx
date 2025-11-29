@@ -13,7 +13,7 @@ const VideoDashboardLayout = ({ children }) => {
       <div className="flex flex-1">
         <Sidebar sidebarOpen={collapse} setSidebarOpen={setCollapse} />
 
-        <main className="flex-1 overflow-y-auto p-6 max-md:p-1 max-md:pt-20 ">
+        <main className="flex-1 overflow-y-auto p-6 max-sm:pt-14 pt-15 max-md:p-1 max-md:pt-20 ">
           {children}
         </main>
       </div>

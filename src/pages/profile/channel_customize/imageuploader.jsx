@@ -31,14 +31,14 @@ const ImageUploader = ({
   };
 
   return (
-    <div className="w-[60%] rounded-xl p-6 flex flex-col gap-6 bg-transparent">
+    <div className="w-[60%] max-[640px]:w-full  max-[640px]:p-2 rounded-xl p-6 flex flex-col gap-6 ">
       <div>
         <h1 className="text-xl font-semibold">{title}</h1>
         <p className="text-gray-400 text-base">{description}</p>
       </div>
 
-      <div className="flex items-center gap-6">
-        <div className="w-[90%] h-[180px] rounded-xl bg-gray-800 flex items-center justify-center overflow-hidden">
+      <div className="flex items-center gap-6 ">
+        <div className="w-[90%]  h-[180px] rounded-xl bg-gray-800 flex items-center justify-center overflow-hidden">
           {preview ? (
             <img
               src={preview}

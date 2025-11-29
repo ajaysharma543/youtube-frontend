@@ -84,7 +84,7 @@ const VideoCard = ({ video }) => {
           <img
             src={video.thumbnail.url}
             alt={video.title}
-            className="w-full h-62 sm:h-65 md:h-68 lg:h-68 xl:h-60 2xl:h-76 object-cover rounded-t-2xl"
+            className="w-full h-55 sm:h-65 md:h-68 lg:h-50 xl:h-60 2xl:h-76 object-cover rounded-t-2xl"
           />
           <div className="p-3">
             <h3 className="text-white font-semibold text-lg truncate">

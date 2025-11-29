@@ -1,57 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { ArrowLeft, Menu, PartyPopperIcon, Search, Youtube } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchCurrentUser } from "../../../redux/features/userdetailsslice";
 import { setSearchQuery } from "../../../redux/features/fetchvideoslice";
 
-function Navbar({ onToggleSidebar, onToggleMobile }) {
+function Navbar({ onToggleSidebar }) {
   const [showDropdown, setShowDropdown] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { data } = useSelector((state) => state.user);
   const [searchValue, setSearchValue] = useState("");
 const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
-  const [isMobile639, setIsMobile639] = useState(false);
-const [isTabletRange, setIsTabletRange] = useState(false);
-  useEffect(() => {
-    dispatch(fetchCurrentUser());
-  }, [dispatch]);
 
-  // useEffect(() => {
-  //   const handler = setTimeout(() => {
-  //     dispatch(setSearchQuery(searchValue));
-  //   }, 500);
-  //   return () => clearTimeout(handler);
-  // }, [searchValue, data, dispatch]);
-
-  const handleSearch = () => {
-    dispatch(setSearchQuery(searchValue));
-  };
-  useEffect(() => {
-  const handleResize = () => {
-    if (window.innerWidth >= 569) {
-      setMobileSearchOpen(false);
-    }
-  };
-
-
-
-  window.addEventListener("resize", handleResize);
-  return () => window.removeEventListener("resize", handleResize);
-}, []);
-useEffect(() => {
-  const handleResize = () => {
-    const w = window.innerWidth;
-
-    setIsMobile639(w <= 639);
-    setIsTabletRange(w <= 1310 && w > 768);
-  };
-
-  handleResize();
-  window.addEventListener("resize", handleResize);
-  return () => window.removeEventListener("resize", handleResize);
-}, []);
 
   const handleUploadClick = () => {
     setShowDropdown(false);
@@ -69,17 +29,10 @@ useEffect(() => {
       <div className="flex items-center gap-3 cursor-pointer">
     <Menu
   className={`
-    text-white mr-3 w-7 h-7
-    ${isMobile639 ? "hidden" : ""} 
-    ${isTabletRange ? "hidden" : "block"}
+    text-white mr-3 w-7 h-7 max-[640px]:hidden
   `}
   onClick={() => {
-    if (isMobile639) return; // no menu on mobile
-    if (window.innerWidth <= 768) {
-      onToggleMobile();
-    } else {
       onToggleSidebar();
-    }
   }}
 />
 
@@ -91,14 +44,13 @@ useEffect(() => {
       </div>
  <div className="relative w-150 hidden md:block">
           <Search
-            onClick={handleSearch}
             className="absolute right-0 top-1/2 bg-[#252525] rounded-r-full -translate-y-1/2 text-gray-400 w-16 h-10 cursor-pointer"
           />
 
           <input
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+            onKeyDown={(e) => e.key === "Enter"}
             type="search"
             placeholder="Search videos..."
             className="w-full border border-gray-700 text-white placeholder-gray-500 rounded-full pl-5 pr-10 py-2 outline-none focus:ring-2 focus:ring-white transition"
@@ -169,17 +121,15 @@ onClick={() => {
           <input
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+            onKeyDown={(e) => e.key === "Enter" }
             autoFocus
             type="search"
             placeholder="Search videos..."
             className="flex-1 mx-3 border border-gray-700 bg-black text-white placeholder-gray-500 rounded-full px-4 py-2 outline-none"
           />
 
-          {/* SEARCH ICON */}
           <Search
             className="text-white w-7 h-7 cursor-pointer"
-            onClick={handleSearch}
           />
         </div>
       )}

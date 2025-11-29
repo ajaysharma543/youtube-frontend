@@ -168,15 +168,14 @@ function CustomizeChannel() {
   };
 
   return (
-    <div className="min-h-screen mt-10 bg-black text-white flex flex-col">
-      {/* Header */}
-      <div className="h-[30%] flex items-center justify-between px-10 pb-4 border-b border-gray-800">
-        <h1 className="text-3xl font-bold">Customize Channel</h1>
+    <div className="min-h-screen mt-10 bg-black  text-white flex flex-col">
+      <div className="h-[30%] max-[640px]:flex-col max-[640px]:text-md max-[640px]:items-center max-[640px]:justify-start flex items-center justify-between px-10 pb-4 border-b border-gray-800">
+        <h1 className="text-3xl max-[640px]:text-md max-[640px]:pb-5 font-bold">Customize Channel</h1>
         <div className="flex gap-4">
           <button
             type="button"
             onClick={() => navigate("/profile")}
-            className="bg-gray-800 hover:bg-gray-700 px-5 py-2 rounded-full font-semibold"
+            className="bg-gray-800 hover:bg-gray-700 px-5 py-2 max-[640px]:px-3 max-[640px]:py-1 rounded-full font-semibold"
           >
             View Your Channel
           </button>
@@ -206,7 +205,7 @@ function CustomizeChannel() {
       <form
         id="channelForm"
         onSubmit={handleSubmit(onSubmit)}
-        className="flex-1 p-10 flex flex-col gap-10"
+        className="flex-1 p-10 max-[640px]:p-3 max-[640px]:pb-20 flex flex-col gap-10"
       >
         <Controller
           name="banner"

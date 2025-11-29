@@ -38,7 +38,6 @@ function Navbar({ setCollapse}) {
           onClick={() => setCollapse((prev) => !prev)}
         />
 
-        {/* LOGO */}
         <div className="flex items-center gap-3 pl-12">
           <Youtube className="text-red-600 w-8 h-8" />
           <h1 className="text-2xl font-bold text-white tracking-wide">
@@ -61,7 +60,7 @@ function Navbar({ setCollapse}) {
       <div className="flex items-center gap-4 relative">
         <button
           onClick={() => setShowDropdown((prev) => !prev)}
-          className="bg-gray-900 hover:bg-red-700 text-white font-semibold px-5 py-2 rounded-full transition-all duration-200 shadow-md"
+          className="bg-gray-900 max-[640px]:hidden hover:bg-red-700 text-white font-semibold px-5 py-2 rounded-full transition-all duration-200 shadow-md"
         >
           Create +
         </button>
