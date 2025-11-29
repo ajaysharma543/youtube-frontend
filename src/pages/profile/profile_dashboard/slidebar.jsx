@@ -18,11 +18,8 @@ const Sidebar = ({ collapsed }) => {
 
   return (
     <div
-      className={`
-        bg-black text-white flex flex-col  transition-all duration-300
-        ${collapsed ? "w-16" : "w-64"} 
-        hidden sm:flex
-      `}
+      className={`bg-black text-white flex flex-col transition-all duration-300
+        ${collapsed ? "w-16" : "w-64"} hidden sm:flex`}
     >
       {!collapsed && (
         <div className="flex flex-col items-center my-8">
@@ -34,10 +31,7 @@ const Sidebar = ({ collapsed }) => {
         </div>
       )}
 
-      <nav className={`flex  flex-col gap-3 mt-6 px-2 ${collapsed ? "items-center justify-center" : "" }`}>
-        {collapsed &&   <div className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-3xl">
-            {data.fullname.charAt(0)}
-          </div>}
+      <nav className={`flex flex-col gap-3 mt-6 px-2 ${collapsed ? "items-center" : ""}`}>
         {navItems.map(({ to, label, icon }) => (
           <NavLink
             key={to}
@@ -49,32 +43,11 @@ const Sidebar = ({ collapsed }) => {
             `
             }
           >
-            <div className="flex items-center justify-center w-8 h-8">
-              {icon}
-            </div>
-
+            <div className="w-8 h-8 flex items-center justify-center">{icon}</div>
             {!collapsed && <span className="text-lg">{label}</span>}
           </NavLink>
         ))}
       </nav>
-
-     <div className="hidden max-sm:flex fixed bottom-0 left-0 w-full bg-black text-white border-t border-gray-800 z-50 justify-between px-6 py-3">
-               {navItems
-                 .map((item) => (
-                   <NavLink
-                     key={item.name}
-                     to={item.path}
-                     className={({ isActive }) =>
-                       `flex flex-col items-center text-xs pl-3 pr-3 ${
-                         isActive ? "text-white" : "text-gray-400"
-                       }`
-                     }
-                   >
-                     {item.icon}
-                     <span className="text-[10px] mt-1">{item.name}</span>
-                   </NavLink>
-                 ))}
-             </div>
     </div>
   );
 };
