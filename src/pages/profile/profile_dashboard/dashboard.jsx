@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sidebar, { MobileNav } from "./slidebar";
+import Sidebar from "./slidebar";
 import Navbar from "./navbar";
 
 const ProfileDashboardLayout = ({ children }) => {
@@ -30,7 +30,6 @@ const ProfileDashboardLayout = ({ children }) => {
         </main>
       </div>
 
-      <MobileNav />
     </div>
   );
 };
