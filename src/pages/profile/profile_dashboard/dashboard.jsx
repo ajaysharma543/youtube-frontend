@@ -29,7 +29,7 @@ const ProfileDashboardLayout = ({ children }) => {
         <div
           className={`
             hidden sm:block border-r border-gray-800 bg-black
-            transition-all duration-300
+            transition-all duration-300 mt-5
             ${collapsed ? "w-16" : "w-64"}
           `}
         >

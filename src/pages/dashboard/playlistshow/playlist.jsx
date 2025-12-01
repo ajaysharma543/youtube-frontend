@@ -57,7 +57,7 @@ function Playlist({ data }) {
 
   const deleteplaylist = async (playlistId) => {
     const res = await playlistApi.deleteToPlaylist({ playlistId });
-    console.log(res);
+    // console.log(res);
     dispatch(getUserPlaylists(user._id));
   };
 
@@ -76,12 +76,12 @@ function Playlist({ data }) {
         { playlistId: editingPlaylist._id },
         formdata
       );
-      console.log(res);
+      // console.log(res);
       dispatch(getUserPlaylists(user._id));
       setEditingPlaylist(null);
     } catch (error) {
       setPlaylistError(error.message);
-      console.log();
+      // console.log();
     } finally {
       setPlaylistLoading(false);
     }

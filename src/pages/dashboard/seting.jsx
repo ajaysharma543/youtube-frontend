@@ -5,7 +5,7 @@ import LogoutButton from "../auth/logout";
 function Seting() {
   const dispatch = useDispatch();
   const { data: user } = useSelector((state) => state.user);
-  console.log(user);
+  // console.log(user);
 
   return (
     <div className=" bg-black text-white p-6 flex justify-center">

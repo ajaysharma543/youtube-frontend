@@ -5,11 +5,11 @@ function Deletecomment({ comment, setComments }) {
   const handleDelete = async () => {
     try {
       const res = await commentApi.deletecomment(comment._id);
-      console.log("Deleted:", res.data);
+      // console.log("Deleted:", res.data);
 
       setComments((prev) => prev.filter((c) => c._id !== comment._id));
     } catch (error) {
-      console.error("Error deleting comment:", error);
+      // console.error("Error deleting comment:", error);
     }
   };
 

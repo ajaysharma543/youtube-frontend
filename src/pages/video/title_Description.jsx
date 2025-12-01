@@ -71,7 +71,7 @@ function VideoDetails() {
       const videoId = response.data.data._id;
 
       navigate(`/publish/${videoId}`);
-      console.log("✅ Upload Success:", response);
+      // console.log("✅ Upload Success:", response);
     } catch (error) {
       const message = error.response?.data?.message || error.message;
       setLocalError(message);

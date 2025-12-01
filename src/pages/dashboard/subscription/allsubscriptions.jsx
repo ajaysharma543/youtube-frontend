@@ -11,7 +11,7 @@ function Allsubscriptions() {
       try {
         const res = await VideoApi.getchanneldetails();
         setSubscriptions(res.data.data);
-        console.log(res.data.data);
+        // console.log(res.data.data);
       } catch (err) {
         console.error(err);
       }

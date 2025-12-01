@@ -63,10 +63,10 @@ function Playlist({ video, children }) {
     setLoading(true);
     try {
       const res = await WatchApi.addToWatchLater(video._id);
-      console.log("res", res.data.data);
+      // console.log("res", res.data.data);
     } catch (error) {
       setLoading(false);
-      console.log(error);
+      // console.log(error);
     } finally {
       setLoading(false);
     }

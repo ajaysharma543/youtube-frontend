@@ -32,14 +32,14 @@ function ChannelPage() {
   const handleSubscriber = async (channelId) => {
     try {
       const res = await subscriberApi.subscribe(channelId);
-      console.log(res.data.data);
+      // console.log(res.data.data);
 
       setChannel((prev) => ({
         ...prev,
         issubscribed: !prev.issubscribed,
       }));
     } catch (err) {
-      console.log("Subscription error:", err);
+      // console.log("Subscription error:", err);
     }
   };
 

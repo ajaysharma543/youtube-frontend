@@ -26,10 +26,10 @@ function PublishPage() {
 
       if (publish === "public") {
         const response = await VideoApi.publishvideo(videoId);
-        console.log("✅ Video published:", response.data);
+        // console.log("✅ Video published:", response.data);
         navigate("/");
       } else {
-        console.log("Video set as private, skipping publish API.");
+        // console.log("Video set as private, skipping publish API.");
         navigate("/");
       }
     } catch (error) {

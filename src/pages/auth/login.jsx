@@ -29,7 +29,7 @@ function Login() {
 
     try {
       const response = await authApi.login(data);
-      console.log("✅ User logged in:", response.data);
+      // console.log("✅ User logged in:", response.data);
 
       const current = await authApi.getcurrentuser();
       navigate("/");

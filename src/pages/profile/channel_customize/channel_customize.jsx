@@ -148,11 +148,11 @@ function CustomizeChannel() {
         }
       }
 
-      console.log("✅ Avatar Response:", avatarResponse?.data);
-      console.log("✅ Banner Response:", bannerResponse?.data);
-      console.log("✅ Name Response:", nameResponse?.data);
-      console.log("✅ password Response:", passwordResponse?.data);
-      console.log("✅ description Response:", descriptionresponse?.data);
+      // console.log("✅ Avatar Response:", avatarResponse?.data);
+      // console.log("✅ Banner Response:", bannerResponse?.data);
+      // console.log("✅ Name Response:", nameResponse?.data);
+      // console.log("✅ password Response:", passwordResponse?.data);
+      // console.log("✅ description Response:", descriptionresponse?.data);
 
       navigate("/profile");
     } catch (error) {

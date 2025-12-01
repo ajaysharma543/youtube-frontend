@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchUserVideos } from "../../../redux/features/fetchvideoslice";
 import VideoApi from "../../../api/videoapi";
+import Smallcontent from "./smallcontent";
 
 const timeAgo = (dateString) => {
   const date = new Date(dateString);
@@ -61,7 +62,8 @@ function ShowAllVideos() {
   };
 
   return (
-<div className="flex flex-col min-h-screen bg-black text-white">
+<>
+<div className="flex flex-col min-h-screen max-[640px]:hidden bg-black text-white">
 
   {/* TOP HEADER */}
   <header className="py-4 px-4 border-b border-gray-800">
@@ -174,7 +176,6 @@ function ShowAllVideos() {
       </div>
     )}
 
-    {/* UPLOAD BUTTON */}
     <div className="flex justify-end mt-6 sm:justify-end justify-center">
       <button
         onClick={handleUploadClick}
@@ -187,7 +188,10 @@ function ShowAllVideos() {
   </main>
 </div>
 
-
+<div className="sm:hidden">
+  <Smallcontent />
+</div>
+</>
 
   );
 }

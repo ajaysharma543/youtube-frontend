@@ -60,12 +60,12 @@ export const addVideoToPlaylist =
       dispatch(setPlaylistLoading(true));
       const res = await playlistApi.addVideoToPlaylist({ playlistId, videoId });
       const updatedPlaylist = res.data.data;
-      console.log("play", updatedPlaylist);
+      // console.log("play", updatedPlaylist);
       const { list } = getState().playlist;
       const updatedList = list.map((p) =>
         p._id === updatedPlaylist._id ? updatedPlaylist : p
       );
-      console.log("playlist", updatedList);
+      // console.log("playlist", updatedList);
       dispatch(setPlaylistState(updatedList));
       return updatedList;
     } catch (error) {

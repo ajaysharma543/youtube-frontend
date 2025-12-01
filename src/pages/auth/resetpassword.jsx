@@ -21,7 +21,7 @@ function ResetPassword() {
 
     try {
       const res = await authApi.checkEmail({ email });
-      console.log(res.data);
+      // console.log(res.data);
 
       navigate("/login/newpassword", { state: { email } });
     } catch (error) {

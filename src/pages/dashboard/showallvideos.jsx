@@ -21,7 +21,7 @@ function Showallvideos({ userId, limit, sortBy, sortType }) {
 
         setVideos(res.data.data.docs || []);
       } catch (err) {
-        console.log("Error:", err);
+        // console.log("Error:", err);
       } finally {
         setLoading(false); // ⬅️ Stop loading
       }

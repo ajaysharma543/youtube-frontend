@@ -23,7 +23,7 @@ function Likecomment({ commentId }) {
         setIsDisliked(dislikeRes.data.data.isDisliked);
         setDislikeCount(dislikeRes.data.data.dislikeCount);
       } catch (error) {
-        console.error("Error fetching comment reactions:", error);
+        // console.error("Error fetching comment reactions:", error);
       }
     };
 

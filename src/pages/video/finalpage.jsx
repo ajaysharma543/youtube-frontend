@@ -39,7 +39,7 @@ function Finalpage() {
 
       const response = await VideoApi.uploadvideo(formData);
 
-      console.log("✅ Upload Success:", response);
+      // console.log("✅ Upload Success:", response);
       dispatch(clearVideo());
       navigate("/");
     } catch (err) {

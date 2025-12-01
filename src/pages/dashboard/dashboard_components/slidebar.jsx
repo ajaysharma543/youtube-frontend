@@ -293,7 +293,7 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
                 key={item.name}
                 to={item.path}
                 className={({ isActive }) =>
-                  `flex flex-col items-center text-xs pl-3 pr-3 ${
+                  `flex flex-col items-center text-xs  ${
                     isActive ? "text-white" : "text-gray-400"
                   }`
                 }

@@ -12,9 +12,9 @@ function PlaylistVideos() {
   useEffect(() => {
     const fetchPlaylist = async () => {
       try {
-        console.log("Fetching playlist for ID:", playlistId);
+        // console.log("Fetching playlist for ID:", playlistId);
         const res = await playlistApi.getPlaylistById(playlistId);
-        console.log("Full API Response:", res);
+        // console.log("Full API Response:", res);
 
         const playlistData = res.data?.data?.[0];
         setPlaylist(playlistData || null);

@@ -17,7 +17,7 @@ function LogoutButton() {
 
     try {
       await authApi.logout();
-      console.log("✅ User logged out successfully");
+      // console.log("✅ User logged out successfully");
 
       dispatch(logout());
 

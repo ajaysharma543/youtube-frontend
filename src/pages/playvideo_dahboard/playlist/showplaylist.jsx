@@ -11,7 +11,7 @@ function Showplaylist({ video }) {
   const handleAddToPlaylist = async (playlistId) => {
     try {
       const res = await dispatch(addVideoToPlaylist(playlistId, video._id));
-      console.log(res);
+      // console.log(res);
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 3000);
     } catch (error) {

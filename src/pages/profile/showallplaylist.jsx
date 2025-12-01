@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import Playlist from "../dashboard/playlistshow/playlist";
 
 function Showallplaylist() {
-  const { list = [] } = useSelector((state) => state.playlist || {});
+  // const { list = [] } = useSelector((state) => state.playlist || {});
 
   useEffect(() => {
-    console.log(list);
+    // console.log(list);
   });
 
   return (

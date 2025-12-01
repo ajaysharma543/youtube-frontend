@@ -28,7 +28,7 @@ const CommentList = ({
       formData.append("content", data.comment);
 
       const res = await commentApi.editcomment(commentId, formData);
-      console.log("comment ", res.data.data);
+      // console.log("comment ", res.data.data);
       const updatedComment = res.data.data;
       setComments((prev) =>
         prev.map((comment) =>

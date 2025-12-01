@@ -34,7 +34,7 @@ function Subscriber({ video }) {
       const subscribed = await dispatch(toggleSubscriptions(video.owner._id));
       dispatch(setSubscriptionState(subscribed));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
 
       dispatch(toggleSubscriptionFailure());
     }
