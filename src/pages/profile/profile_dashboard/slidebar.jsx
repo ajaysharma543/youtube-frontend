@@ -18,7 +18,7 @@ const Sidebar = ({ collapsed }) => {
 
   return (
     <div
-      className={`bg-black text-white flex flex-col transition-all duration-300
+      className={`bg-black text-white  flex flex-col transition-all duration-300
         ${collapsed ? "w-16" : "w-64"} hidden sm:flex`}
     >
       {!collapsed && (

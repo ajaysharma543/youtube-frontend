@@ -169,43 +169,110 @@ function CustomizeChannel() {
 
   return (
     <div className="min-h-screen mt-10 bg-black  text-white flex flex-col">
-      <div className="h-[30%] max-[640px]:flex-col max-[640px]:text-md max-[640px]:items-center max-[640px]:justify-start flex items-center justify-between px-10 pb-4 border-b border-gray-800">
-        <h1 className="text-3xl max-[640px]:text-md max-[640px]:pb-5 font-bold">Customize Channel</h1>
-        <div className="flex gap-4">
-          <button
-            type="button"
-            onClick={() => navigate("/profile")}
-            className="bg-gray-800 hover:bg-gray-700 px-5 py-2 max-[640px]:px-3 max-[640px]:py-1 rounded-full font-semibold"
-          >
-            View Your Channel
-          </button>
-          <button
-            type="button"
-            className="bg-gray-700 hover:bg-gray-600 px-5 py-2 rounded-full font-semibold"
-          >
-            Cancel
-          </button>
+  <div
+  className="
+    h-[30%] 
+    flex items-center justify-between
+    px-10 pb-4 
+    border-b border-gray-800
 
-          <button
-            form="channelForm"
-            type="submit"
-            disabled={isPublishDisabled}
-            className={`px-5 py-2 rounded-full font-semibold flex items-center justify-center gap-2 transition-all ${
-              isPublishDisabled
-                ? "bg-gray-700 text-gray-400 cursor-not-allowed"
-                : "bg-red-600 hover:bg-red-700 cursor-pointer"
-            }`}
-          >
-            {isloading && <Loader2 className="animate-spin w-5 h-5" />}
-            {isloading ? "Publishing..." : "Publish"}
-          </button>
-        </div>
-      </div>
+    /* BELOW 640px */
+    max-[640px]:flex-col 
+    max-[640px]:items-start 
+    max-[640px]:justify-start 
+    max-[640px]:px-4 
+    max-[640px]:py-4
+  "
+>
+  {/* TITLE */}
+  <h1
+    className="
+      text-3xl font-bold
+      max-[640px]:text-xl 
+      max-[640px]:pb-4
+    "
+  >
+    Customize Channel
+  </h1>
+
+  {/* BUTTON ROW / COLUMN */}
+  <div
+    className="
+      flex gap-4 
+      items-center
+
+      /* BELOW 640px → Keep ROW but tighter spacing */
+      max-[640px]:gap-2 
+      max-[640px]:w-full
+      max-[640px]:justify-between
+
+      /* BELOW 400px → SWITCH TO COLUMN */
+      max-[400px]:flex-col 
+      max-[400px]:items-stretch
+      max-[400px]:gap-3
+    "
+  >
+    {/* BUTTON 1 */}
+    <button
+      type="button"
+      onClick={() => navigate('/profile')}
+      className="
+        bg-gray-800 hover:bg-gray-700 
+        px-5 py-2 rounded-full font-semibold
+
+        max-[640px]:px-3 max-[640px]:py-1 max-[640px]:text-sm
+        max-[400px]:w-full
+      "
+    >
+      View Your Channel
+    </button>
+
+    {/* BUTTON 2 */}
+  <div className="flex justify-end">
+      <button
+      type="button"
+      className="
+        bg-gray-700 hover:bg-gray-600 
+        px-5 py-2 rounded-full font-semibold mr-3
+
+        max-[640px]:px-3 max-[640px]:py-1 max-[640px]:text-sm
+        max-[400px]:w-full
+      "
+    >
+      Cancel
+    </button>
+
+    {/* BUTTON 3 */}
+    <button
+      form="channelForm"
+      type="submit"
+      disabled={isPublishDisabled}
+      className={`
+        px-5 py-2 rounded-full font-semibold 
+        flex items-center justify-center gap-2 transition-all
+
+        max-[640px]:px-3 max-[640px]:py-1 max-[640px]:text-sm
+        max-[400px]:w-full
+
+        ${
+          isPublishDisabled
+            ? "bg-gray-700 text-gray-400 cursor-not-allowed"
+            : "bg-red-600 hover:bg-red-700 cursor-pointer"
+        }
+      `}
+    >
+      {isloading && <Loader2 className="animate-spin w-5 h-5" />}
+      {isloading ? "Publishing..." : "Publish"}
+    </button>
+  </div>
+  </div>
+</div>
+
 
       <form
         id="channelForm"
         onSubmit={handleSubmit(onSubmit)}
-        className="flex-1 p-10 max-[640px]:p-3 max-[640px]:pb-20 flex flex-col gap-10"
+        className="flex-1 p-10 max-[640px]:p-3 max-[400px]:p-0 max-[640px]:pb-20 max-[400px]:pb-30 flex flex-col gap-10"
       >
         <Controller
           name="banner"

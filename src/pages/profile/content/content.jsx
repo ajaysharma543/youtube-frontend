@@ -61,123 +61,134 @@ function ShowAllVideos() {
   };
 
   return (
-    <div className="h-screen flex flex-col text-white bg-[#0f0f0f]">
-      {/* Top Header */}
-      <header className="h-[10%] flex flex-col justify-center items-start px-6">
-        <h1 className="text-3xl font-bold">Channel Content</h1>
-      </header>
+<div className="flex flex-col min-h-screen bg-black text-white">
 
-      {/* Sub-header */}
-      <header className="h-[5%] flex flex-col justify-center items-start border-b border-gray-700 px-6">
-        <h1 className="text-xl font-semibold">Videos</h1>
-      </header>
+  {/* TOP HEADER */}
+  <header className="py-4 px-4 border-b border-gray-800">
+    <h1 className="text-2xl font-bold">Channel Content</h1>
+  </header>
 
-      {/* Main Section */}
-      <main className="flex-1 overflow-y-auto px-6 py-4 space-y-3">
-        {loading ? (
-          <div className="text-gray-400 text-lg text-center mt-10">
-            Loading videos...
-          </div>
-        ) : videos.length === 0 ? (
-          <div className="text-gray-400 text-lg text-center mt-10">
-            No videos found.
-          </div>
-        ) : (
-          <div className="space-y-4">
-            <div className="grid grid-cols-[50px_120px_540px_100px_140px_120px_100px] text-gray-400 text-sm font-semibold border-b border-gray-700 pb-2">
-              <span></span>
-              <span>Thumbnail</span>
-              <span>Title & Description</span>
-              <span>Edit</span>
-              <span>Created At</span>
-              <span>Published</span>
-              <span>Delete</span>
+  {/* SUB HEADER */}
+  <header className="py-3 px-4 border-b border-gray-800 bg-[#111]">
+    <h2 className="text-lg font-semibold">Videos</h2>
+  </header>
+
+  {/* MAIN CONTENT */}
+  <main className="flex-1 overflow-y-auto px-3 py-4">
+
+    {loading ? (
+      <p className="text-center text-gray-400">Loading videos...</p>
+    ) : videos.length === 0 ? (
+      <p className="text-center text-gray-400">No videos found.</p>
+    ) : (
+      <div className="w-full overflow-x-auto custom-scroll pb-6">
+
+        {/* TABLE HEAD */}
+        <div
+          className="
+            grid min-w-[700px]
+            grid-cols-[40px_100px_1fr_70px_100px_90px_70px]
+            text-gray-400 text-sm font-semibold border-b border-gray-700 pb-2
+          "
+        >
+          <span></span>
+          <span>Thumbnail</span>
+          <span>Title</span>
+          <span>Edit</span>
+          <span>Created</span>
+          <span>Publish</span>
+          <span>Delete</span>
+        </div>
+
+        {/* TABLE ROWS */}
+        {videos.map((v) => (
+          <div
+            key={v._id}
+            className="
+              grid min-w-[700px]
+              grid-cols-[40px_100px_1fr_70px_100px_90px_70px]
+              bg-[#181818] hover:bg-[#202020] rounded-lg 
+              p-3 gap-3 items-center mt-2
+            "
+          >
+
+            {/* CHECKBOX */}
+            <div className="flex justify-center">
+              <input type="checkbox" className="w-4 h-4 accent-red-600" />
             </div>
 
-            {videos.map((v) => (
-              <div
-                key={v._id}
-                className="grid grid-cols-[50px_120px_500px_100px_140px_120px_100px] items-center bg-[#181818] hover:bg-[#202020] transition rounded-lg p-2"
-              >
-                <div className="flex justify-center">
-                  <input type="checkbox" className="w-4 h-4 accent-red-600" />
-                </div>
+            {/* THUMBNAIL */}
+            <img
+              src={v.thumbnail?.url}
+              className="w-20 h-14 object-cover rounded-md"
+              alt=""
+            />
 
-                <div className="relative group">
-                  <img
-                    src={v.thumbnail?.url}
-                    alt={v.title}
-                    className="w-24 h-16 object-cover rounded-md"
-                  />
-                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
-                    <Play className="w-5 h-5 text-white" />
-                  </div>
-                </div>
+            {/* TITLE */}
+            <div>
+              <h3 className="font-semibold">{v.title}</h3>
+              <p className="text-gray-400 text-xs line-clamp-2">
+                {v.description || "No description"}
+              </p>
+            </div>
 
-                <div>
-                  <h3 className="text-white font-semibold truncate">
-                    {v.title}
-                  </h3>
-                  <p className="text-gray-400 text-sm line-clamp-2">
-                    {v.description || "No description available"}
-                  </p>
-                </div>
+            {/* EDIT */}
+            <button
+              onClick={() => navigate(`/edit_video/${v._id}`)}
+              className="flex justify-center text-blue-400 hover:text-blue-300"
+            >
+              <Edit size={16} />
+            </button>
 
-                <div className="flex justify-center">
-                  <button
-                    onClick={() => navigate(`/edit_video/${v._id}`)}
-                    className="flex items-center gap-1 text-blue-400 hover:text-blue-300 transition"
-                  >
-                    <Edit size={18} /> Edit
-                  </button>
-                </div>
+            {/* CREATED AT */}
+            <div className="text-sm text-gray-300 text-center">
+              {timeAgo(v.createdAt)}
+            </div>
 
-                <div className="text-gray-300 text-sm text-center">
-                  {timeAgo(v.createdAt)}
-                </div>
+            {/* PUBLISH TOGGLE */}
+            <label className="flex justify-center cursor-pointer">
+              <input
+                type="checkbox"
+                checked={v.isPublished}
+                onChange={() => handleToggle(v._id)}
+                className="peer sr-only"
+              />
+              <div className="
+                w-11 h-6 bg-gray-600 rounded-full peer-checked:bg-green-500 relative
+                after:absolute after:left-[2px] after:top-[2px]
+                after:w-5 after:h-5 after:bg-white after:rounded-full 
+                after:transition-all peer-checked:after:translate-x-full
+              "></div>
+            </label>
 
-                <div className="flex justify-center">
-                  <label className="inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={v.isPublished}
-                      onChange={() => handleToggle(v._id)}
-                      className="sr-only peer"
-                    />
-                    <div
-                      className="relative w-11 h-6 bg-gray-600 rounded-full peer peer-checked:bg-green-500 
-                      after:content-[''] after:absolute after:top-[2px] after:left-[2px] 
-                      after:bg-white after:h-5 after:w-5 after:rounded-full after:transition-all 
-                      peer-checked:after:translate-x-full"
-                    ></div>
-                  </label>
-                </div>
+            {/* DELETE */}
+            <button
+              onClick={() => deletes(v._id)}
+              className="flex justify-center text-red-500 hover:text-red-400"
+            >
+              <Trash2 size={16} />
+            </button>
 
-                {/* Delete */}
-                <div
-                  className="flex justify-center cursor-pointer"
-                  onClick={() => deletes(v._id)}
-                >
-                  <button className="text-red-500 cursor-pointer hover:text-red-400 transition">
-                    <Trash2 size={18} />
-                  </button>
-                </div>
-              </div>
-            ))}
           </div>
-        )}
+        ))}
+      </div>
+    )}
 
-        <div className="flex justify-end mt-6">
-          <button
-            onClick={handleUploadClick}
-            className="flex items-center gap-2 bg-red-600 hover:bg-red-700 px-5 py-2 rounded-lg font-semibold transition"
-          >
-            <Upload size={18} />
-            Upload Video
-          </button>
-        </div>
-      </main>
+    {/* UPLOAD BUTTON */}
+    <div className="flex justify-end mt-6 sm:justify-end justify-center">
+      <button
+        onClick={handleUploadClick}
+        className="flex items-center gap-2 bg-red-600 hover:bg-red-700 px-5 py-2 rounded-lg font-semibold w-full sm:w-auto justify-center"
+      >
+        <Upload size={18} /> Upload Video
+      </button>
     </div>
+
+  </main>
+</div>
+
+
+
   );
 }
 

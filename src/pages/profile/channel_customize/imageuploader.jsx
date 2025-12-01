@@ -31,14 +31,14 @@ const ImageUploader = ({
   };
 
   return (
-    <div className="w-[60%] max-[640px]:w-full  max-[640px]:p-2 rounded-xl p-6 flex flex-col gap-6 ">
+    <div className="w-[60%] max-[640px]:w-full  max-[640px]:p-2 max-[400px]:p-0 rounded-xl p-6 flex flex-col gap-6 ">
       <div>
-        <h1 className="text-xl font-semibold">{title}</h1>
+        <h1 className="text-xl max-[400px]:text-sm font-semibold">{title}</h1>
         <p className="text-gray-400 text-base">{description}</p>
       </div>
 
       <div className="flex items-center gap-6 ">
-        <div className="w-[90%]  h-[180px] rounded-xl bg-gray-800 flex items-center justify-center overflow-hidden">
+        <div className="w-[90%]  max-[400px]:w-full  h-[180px] rounded-xl bg-gray-800 flex items-center justify-center overflow-hidden">
           {preview ? (
             <img
               src={preview}
@@ -53,15 +53,15 @@ const ImageUploader = ({
         <div className="flex flex-col justify-start gap-3">
           {recommendedSize && (
             <>
-              <p className="text-gray-400 text-base">{des}</p>
-              <p className="text-gray-400 text-base">
+              <p className="text-gray-400  max-[400px]:text-sm text-base">{des}</p>
+              <p className="text-gray-400 text-base  max-[400px]:text-sm">
                 Recommended size: {recommendedSize}.
               </p>
             </>
           )}
 
           {!preview ? (
-            <label className="bg-red-600 hover:bg-red-700 px-5 py-2 rounded-full cursor-pointer font-semibold w-fit">
+            <label className="bg-red-600 hover:bg-red-700 px-5 py-2  max-[400px]:text-sm rounded-full cursor-pointer font-semibold w-fit">
               Upload Image
               <input
                 type="file"

@@ -27,12 +27,11 @@ function Dashboard() {
   const latestVideo = publishedVideos.length ? publishedVideos[0] : null;
 
   return (
-    <div className="min-h-screen bg-black p-10">
+    <div className="min-h-screen p-10 max-[640px]:p-4 max-[640px]:pb-10 max-[640px]:pt-7 max-[400px]:pt-3 max-[400px]:p-0">
       <h1 className="text-3xl font-bold text-white mb-6">Channel Dashboard</h1>
 
-      <div className="flex gap-6 flex-col md:flex-row">
-        {/* Latest Video Section */}
-        <div className="flex-1 bg-[#1E1E1E] p-6 rounded-2xl shadow-lg border border-gray-800">
+      <div className="flex gap-6 flex-col md:flex-row ">
+        <div className="flex-1 bg-[#1E1E1E] p-6  rounded-2xl shadow-lg border border-gray-800">
           <h2 className="text-white font-semibold text-xl mb-4">
             Latest YouTube Short Performance
           </h2>

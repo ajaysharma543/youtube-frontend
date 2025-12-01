@@ -15,36 +15,43 @@ const ProfileDashboardLayout = ({ children }) => {
   ];
 
   return (
-    <div className="flex flex-col h-screen bg-black text-white overflow-hidden">
+    <div className="flex flex-col min-h-screen bg-black text-white">
 
-      <div className="px-6 py-3 border-b border-gray-800 bg-black z-50">
+      {/* TOP NAV */}
+      <div className="px-6 py-3 border-b border-gray-800 bg-black">
         <Navbar onToggleSidebar={() => setCollapsed(prev => !prev)} />
       </div>
 
-      <div className="flex flex-1 overflow-hidden scrollbar-hide">
+      {/* MAIN */}
+      <div className="flex flex-1">
 
+        {/* SIDEBAR (DESKTOP) */}
         <div
-          className={`border-r max-[640px]:hidden border-gray-800 pt-10 bg-black scrollbar-hide 
-           overflow-y-auto h-full transition-all duration-300
-           ${collapsed ? "w-16" : "w-64"}
+          className={`
+            hidden sm:block border-r border-gray-800 bg-black
+            transition-all duration-300
+            ${collapsed ? "w-16" : "w-64"}
           `}
         >
           <Sidebar collapsed={collapsed} />
         </div>
 
-        <main className="flex-1 overflow-y-auto p-6 dark-scrollbar">
+        {/* PAGE CONTENT */}
+        <main className="flex-1 min-h-[calc(100vh-120px)] pb-[60px] sm:pb-0 overflow-y-auto p-4 sm:p-6">
           {children}
         </main>
       </div>
 
-      {/* MOBILE BOTTOM NAV */}
-      <div className="sm:hidden fixed bottom-0 left-0 w-full bg-black border-t border-gray-800 px-4 py-2 flex justify-between z-50">
+      {/* MOBILE NAV */}
+      <div className="sm:hidden fixed bottom-0 left-0 w-full bg-black border-t border-gray-800 px-4 py-2 flex justify-between">
         {navItems.map((item) => (
           <NavLink
             key={item.to}
             to={item.to}
             className={({ isActive }) =>
-              `flex flex-col items-center text-xs ${isActive ? "text-white" : "text-gray-400"}`
+              `flex flex-col items-center text-xs ${
+                isActive ? "text-white" : "text-gray-400"
+              }`
             }
           >
             {item.icon}

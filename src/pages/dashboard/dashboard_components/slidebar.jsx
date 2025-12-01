@@ -50,11 +50,6 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
       icon: <PlayCircleIcon className="w-5 h-5" />,
       path: "/Playlist",
     },
-     {
-      name: "test",
-      icon: <PlayCircleIcon className="w-5 h-5" />,
-      path: "/test",
-    },
     {
       name: "your videos",
       icon: <Video className="w-5 h-5" />,

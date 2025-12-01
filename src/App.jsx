@@ -166,14 +166,7 @@ function App() {
           </DashboardLayout>
         }
       />
-       <Route
-        path="/test"
-        element={
-          <DashboardLayout>
-            <Subscriptionphone />
-          </DashboardLayout>
-        }
-      />
+      
       <Route
         path="/c/:username"
         element={

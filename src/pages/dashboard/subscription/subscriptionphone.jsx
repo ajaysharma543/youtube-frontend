@@ -24,35 +24,34 @@ function Subscriptionphone() {
 
   return (
     <>
-      <div className="flex flex-col items-end  bg-black w-full">
+    <div className="sm:hidden bg-black w-full px-4"> 
+  {/* MOBILE ONLY */}
 
-       <div className="flex flex-col w-full">
-
-{/* TOP — IMAGE ROW */}
-<div className="flex gap-4 pb-4 w-full pl-5 bg-black overflow-x-auto scroll-smooth sm:flex-row flex-nowrap">
-<div className="flex gap-4 pb-4 w-full pl-5 scroll-smooth sm:flex-row flex-nowrap">
-  {subs.map((ch) => (
-    <div
-      key={ch._id}
-      className={`flex flex-col mt-5 p-3 items-center min-w-[80px] ${
-        selectedUser?._id === ch._id
-          ? "bg-[#393232e2] scale-105"
-          : "opacity-80 hover:opacity-100"
-      }`}
-    >
-      <img
-        src={ch.avatar?.url || "/default-avatar.png"}
-        alt="avatar"
-        className="w-20 h-20 rounded-full object-cover cursor-pointer transition-all"
-        onClick={() => setSelectedUser(ch)}
-      />
-      <p className="text-white mt-2 text-center text-sm">{ch.username}</p>
+  {/* IMAGE SCROLL ROW */}
+  <div className="w-full mt-4">
+    <div className="flex gap-4 overflow-x-auto scroll-smooth pb-4">
+      {subs.map((ch) => (
+        <div
+          key={ch._id}
+          className={`flex flex-col items-center min-w-[80px] p-3 rounded-xl ${
+            selectedUser?._id === ch._id
+              ? "bg-[#393232e2] scale-105"
+              : "opacity-80 hover:opacity-100"
+          }`}
+        >
+          <img
+            src={ch.avatar?.url || "/default-avatar.png"}
+            alt="avatar"
+            className="w-20 h-20 rounded-full object-cover cursor-pointer transition-all"
+            onClick={() => setSelectedUser(ch)}
+          />
+        </div>
+      ))}
     </div>
-  ))}
-</div>
 
-  {selectedUser && (
-      <div className="p-4 rounded-xl flex justify-end items-center">
+    {/* VISIT CHANNEL BUTTON */}
+    {selectedUser && (
+      <div className="w-full flex justify-end mt-3">
         <button
           onClick={() => navigate(`/c/${selectedUser.username}`)}
           className="bg-blue-600 px-4 py-2 rounded-lg text-white hover:bg-blue-700"
@@ -60,28 +59,28 @@ function Subscriptionphone() {
           Visit Channel
         </button>
       </div>
+    )}
+  </div>
+
+  {/* VIDEOS WHEN USER SELECTED */}
+  {selectedUser && (
+    <div className="mt-4 w-full">
+      <Showallvideos
+        userId={selectedUser._id}
+        sortBy="createdAt"
+        sortType="desc"
+      />
+    </div>
+  )}
+
+  {/* IF NO USER SELECTED → SHOW ALL SUBSCRIPTIONS */}
+  {!selectedUser && (
+    <div className="mt-4">
+      <Allsubscriptions />
+    </div>
   )}
 </div>
 
-
-        {selectedUser && (
-          <div className="w-full">
-            <Showallvideos
-              userId={selectedUser._id}
-              sortBy="createdAt"
-              sortType="desc"
-            />
-          </div>
-        )}
-
-      </div>
-
-      {!selectedUser && (
-        <div className="sm:hidden">
-          <Allsubscriptions />
-        </div>
-      )}
-      </div>
     </>
   );
 }
