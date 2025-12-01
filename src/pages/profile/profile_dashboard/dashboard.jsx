@@ -10,21 +10,23 @@ const ProfileDashboardLayout = ({ children }) => {
   const navItems = [
     { to: "/dashboard", label: "Dashboard", icon: <Home size={22} /> },
     { to: "/content", label: "Content", icon: <Users size={22} /> },
-    { to: "/channel-customize", label: "Customize", icon: <PlayCircle size={22} /> },
+    {
+      to: "/channel-customize",
+      label: "Customize",
+      icon: <PlayCircle size={22} />,
+    },
     { to: "/settings", label: "Settings", icon: <Settings size={22} /> },
   ];
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white">
-
       {/* TOP NAV */}
       <div className="px-6 py-3 border-b border-gray-800 bg-black">
-        <Navbar onToggleSidebar={() => setCollapsed(prev => !prev)} />
+        <Navbar onToggleSidebar={() => setCollapsed((prev) => !prev)} />
       </div>
 
       {/* MAIN */}
       <div className="flex flex-1">
-
         {/* SIDEBAR (DESKTOP) */}
         <div
           className={`
@@ -59,7 +61,6 @@ const ProfileDashboardLayout = ({ children }) => {
           </NavLink>
         ))}
       </div>
-
     </div>
   );
 };

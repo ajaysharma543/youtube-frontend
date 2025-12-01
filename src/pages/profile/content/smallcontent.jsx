@@ -21,7 +21,8 @@ const timeAgo = (dateString) => {
 
   for (const [unit, value] of Object.entries(intervals)) {
     const interval = Math.floor(seconds / value);
-    if (interval >= 1) return `${interval} ${unit}${interval > 1 ? "s" : ""} ago`;
+    if (interval >= 1)
+      return `${interval} ${unit}${interval > 1 ? "s" : ""} ago`;
   }
 
   return "just now";
@@ -44,7 +45,6 @@ function Smallcontent() {
 
   return (
     <div className="p-4 bg-black text-white min-h-screen sm:hidden">
-
       <h2 className="text-xl font-bold mb-4">Your Videos</h2>
 
       {loading ? (
@@ -93,7 +93,8 @@ function Smallcontent() {
                     onChange={() => handleToggle(v._id)}
                     className="peer sr-only"
                   />
-                  <div className="w-10 h-5 bg-gray-600 rounded-full peer-checked:bg-green-500 relative
+                  <div
+                    className="w-10 h-5 bg-gray-600 rounded-full peer-checked:bg-green-500 relative
                     after:absolute after:left-[2px] after:top-[2px]
                     after:w-4 after:h-4 after:bg-white after:rounded-full 
                     peer-checked:after:translate-x-full after:transition-all"

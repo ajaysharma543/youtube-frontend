@@ -119,36 +119,36 @@ function Allsubscriptions() {
                   <h3 className="text-white mb-2 font-semibold text-2xl">
                     {video.title}
                   </h3>
-               <div className="flex flex-col w-[80%] justify-start items-start mb-3 text-gray-300 text-sm">
+                  <div className="flex flex-col w-[80%] justify-start items-start mb-3 text-gray-300 text-sm">
+                    <div className="flex items-center mb-1">
+                      <img
+                        src={video.owner.avatar?.url || "/default-avatar.png"}
+                        alt="avatar"
+                        className="w-10 h-10 rounded-full mr-3 object-cover"
+                      />
+                      <span>{video.owner.username}</span>
+                    </div>
 
-  <div className="flex items-center mb-1">
-    <img
-      src={video.owner.avatar?.url || "/default-avatar.png"}
-      alt="avatar"
-      className="w-10 h-10 rounded-full mr-3 object-cover"
-    />
-    <span>{video.owner.username}</span>
-  </div>
-
-  <div className="flex items-center ml-10">
-    <span className="pr-3">{video.views} views</span>
-    <span>{getTimeAgo(video.createdAt)}</span>
-  </div>
-
-</div>
+                    <div className="flex items-center ml-10">
+                      <span className="pr-3">{video.views} views</span>
+                      <span>{getTimeAgo(video.createdAt)}</span>
+                    </div>
+                  </div>
 
                   <p className="text-gray-400 text-sm w-full max-[640px]:hidden">
                     {truncateWords(video.description, 30)}
                   </p>
                 </div>
               </div>
-            <div className="absolute right-0 z-50 
+              <div
+                className="absolute right-0 z-50 
   top-7           
   max-[640px]:top-auto 
   max-[640px]:bottom-30
-">
-  <Playlist video={video} />
-</div>
+"
+              >
+                <Playlist video={video} />
+              </div>
             </div>
           </div>
         ))}

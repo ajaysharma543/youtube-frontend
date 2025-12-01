@@ -12,41 +12,41 @@ import { useNavigate } from "react-router-dom";
 function Mianyou() {
   const [history, setHistory] = useState([]);
   const { data: user } = useSelector((state) => state.user);
-const [itemsToShow, setItemsToShow] = useState(4);
+  const [itemsToShow, setItemsToShow] = useState(4);
 
-useEffect(() => {
-  const updateCount = () => {
-    if (window.innerWidth >= 1024) {
-      setItemsToShow(4); // lg and above
-    } else if (window.innerWidth >= 768) {
-      setItemsToShow(3); // md
-    } else {
-      setItemsToShow(2); // below md
-    }
-  };
+  useEffect(() => {
+    const updateCount = () => {
+      if (window.innerWidth >= 1024) {
+        setItemsToShow(4); // lg and above
+      } else if (window.innerWidth >= 768) {
+        setItemsToShow(3); // md
+      } else {
+        setItemsToShow(2); // below md
+      }
+    };
 
-  updateCount(); // set on load
-  window.addEventListener("resize", updateCount);
+    updateCount(); // set on load
+    window.addEventListener("resize", updateCount);
 
-  return () => window.removeEventListener("resize", updateCount);
-}, []);
+    return () => window.removeEventListener("resize", updateCount);
+  }, []);
 
-useEffect(() => {
-  const fetchHistory = async () => {
-    try {
-      const res = await authApi.getwatchhistory();
-      const limited = res.data.data
-        .slice(-itemsToShow) // responsive count
-        .reverse();
+  useEffect(() => {
+    const fetchHistory = async () => {
+      try {
+        const res = await authApi.getwatchhistory();
+        const limited = res.data.data
+          .slice(-itemsToShow) // responsive count
+          .reverse();
 
-      setHistory(limited);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+        setHistory(limited);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  fetchHistory();
-}, [itemsToShow]); 
+    fetchHistory();
+  }, [itemsToShow]);
 
   const { list = [] } = useSelector((state) => state.playlist || {});
   // const limitedPlaylist = list.slice(0,4);
@@ -88,7 +88,9 @@ useEffect(() => {
     }
     return "just now";
   };
-  const latestFour = Array.isArray(list) ? list.slice(-itemsToShow).reverse() : [];
+  const latestFour = Array.isArray(list)
+    ? list.slice(-itemsToShow).reverse()
+    : [];
   // console.log("LIST VALUE:", list);
 
   const [liked, setLiked] = useState([]);
@@ -167,7 +169,7 @@ useEffect(() => {
           see all
         </button>
       </div>
-<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {history.map((v) => (
           <div
             key={v._id}
@@ -233,7 +235,7 @@ useEffect(() => {
         <h1 className="text-white text-xl font-semibold">Your Playlists</h1>
         <button className="hover:bg-gray-700 px-7  rounded-2xl">see all</button>
       </div>
-<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {latestFour.map((p) => (
           <Playlists key={p._id} data={p} />
         ))}
@@ -245,7 +247,7 @@ useEffect(() => {
         <h1 className="text-white text-xl font-semibold">Liked Videos</h1>
         <button className="hover:bg-gray-700 px-7  rounded-2xl">see all</button>
       </div>
-<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {latestlikes.map((video) => (
           <div
             key={video._id}
@@ -305,7 +307,7 @@ useEffect(() => {
         <button className="hover:bg-gray-700 px-7  rounded-2xl">see all</button>
       </div>
       <div className="p-0">
-<Watchlater itemsToShow={itemsToShow} />
+        <Watchlater itemsToShow={itemsToShow} />
       </div>
     </div>
   );

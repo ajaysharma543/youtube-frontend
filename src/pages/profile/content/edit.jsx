@@ -110,96 +110,102 @@ function EditVideo() {
   }
 
   return (
-   <div className="flex h-screen bg-[#0f0f0f] text-white max-sm:flex-col">
+    <div className="flex h-screen bg-[#0f0f0f] text-white max-sm:flex-col">
+      {/* LEFT SIDE */}
+      <div className="w-1/2 max-sm:w-full p-8 flex flex-col gap-6 border-r border-gray-800">
+        <h2 className="text-3xl font-bold mb-2">Edit Video</h2>
 
-  {/* LEFT SIDE */}
-  <div className="w-1/2 max-sm:w-full p-8 flex flex-col gap-6 border-r border-gray-800">
-    <h2 className="text-3xl font-bold mb-2">Edit Video</h2>
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
+          {/* Thumbnail */}
+          <div>
+            <label className="block text-sm text-gray-400 mb-2">
+              Thumbnail
+            </label>
+            <div className="relative">
+              {preview ? (
+                <img
+                  src={preview}
+                  alt="Thumbnail Preview"
+                  className="w-full h-64 object-cover rounded-lg border border-gray-700"
+                />
+              ) : (
+                <div className="w-full h-64 rounded-lg bg-[#1a1a1a] flex items-center justify-center text-gray-400 border border-gray-700">
+                  No thumbnail selected
+                </div>
+              )}
 
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
-
-      {/* Thumbnail */}
-      <div>
-        <label className="block text-sm text-gray-400 mb-2">Thumbnail</label>
-        <div className="relative">
-          {preview ? (
-            <img
-              src={preview}
-              alt="Thumbnail Preview"
-              className="w-full h-64 object-cover rounded-lg border border-gray-700"
-            />
-          ) : (
-            <div className="w-full h-64 rounded-lg bg-[#1a1a1a] flex items-center justify-center text-gray-400 border border-gray-700">
-              No thumbnail selected
+              <input
+                type="file"
+                accept="image/*"
+                {...register("thumbnail")}
+                onChange={handleThumbnailChange}
+                className="absolute inset-0 opacity-0 cursor-pointer"
+                title="Upload new thumbnail"
+              />
             </div>
-          )}
 
-          <input
-            type="file"
-            accept="image/*"
-            {...register("thumbnail")}
-            onChange={handleThumbnailChange}
-            className="absolute inset-0 opacity-0 cursor-pointer"
-            title="Upload new thumbnail"
-          />
-        </div>
+            <button
+              type="button"
+              onClick={() =>
+                document.querySelector('input[type="file"]').click()
+              }
+              className="mt-3 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-semibold"
+            >
+              Change Thumbnail
+            </button>
+          </div>
 
-        <button
-          type="button"
-          onClick={() => document.querySelector('input[type="file"]').click()}
-          className="mt-3 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-semibold"
-        >
-          Change Thumbnail
-        </button>
+          {/* Title */}
+          <div>
+            <label className="block text-sm text-gray-400 mb-2">Title</label>
+            <input
+              type="text"
+              {...register("title", { required: "Title is required" })}
+              className="w-full bg-[#1a1a1a] border border-gray-700 rounded-lg px-3 py-2 focus:outline-none"
+            />
+            {errors.title && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.title.message}
+              </p>
+            )}
+          </div>
+
+          {/* Description */}
+          <div>
+            <label className="block text-sm text-gray-400 mb-2">
+              Description
+            </label>
+            <textarea
+              {...register("description")}
+              rows="5"
+              className="w-full bg-[#1a1a1a] border border-gray-700 rounded-lg px-3 py-2 focus:outline-none"
+            />
+          </div>
+
+          {/* Save Button */}
+          <button
+            type="submit"
+            disabled={saving}
+            className={`${
+              saving
+                ? "bg-gray-600 cursor-not-allowed"
+                : "bg-green-600 hover:bg-green-700"
+            } px-6 py-2 rounded-lg font-semibold self-start`}
+          >
+            {saving ? "Saving..." : "Save Changes"}
+          </button>
+        </form>
       </div>
 
-      {/* Title */}
-      <div>
-        <label className="block text-sm text-gray-400 mb-2">Title</label>
-        <input
-          type="text"
-          {...register("title", { required: "Title is required" })}
-          className="w-full bg-[#1a1a1a] border border-gray-700 rounded-lg px-3 py-2 focus:outline-none"
+      {/* RIGHT PREVIEW SIDE */}
+      <div className="w-1/2 max-sm:hidden p-8 max-[640px]:pb-20 max-[640px]:p-3 flex justify-center items-center">
+        <video
+          src={video.videoFile?.url}
+          controls
+          className="rounded-lg w-full h-full object-cover border border-gray-700"
         />
-        {errors.title && (
-          <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
-        )}
       </div>
-
-      {/* Description */}
-      <div>
-        <label className="block text-sm text-gray-400 mb-2">Description</label>
-        <textarea
-          {...register("description")}
-          rows="5"
-          className="w-full bg-[#1a1a1a] border border-gray-700 rounded-lg px-3 py-2 focus:outline-none"
-        />
-      </div>
-
-      {/* Save Button */}
-      <button
-        type="submit"
-        disabled={saving}
-        className={`${
-          saving ? "bg-gray-600 cursor-not-allowed" : "bg-green-600 hover:bg-green-700"
-        } px-6 py-2 rounded-lg font-semibold self-start`}
-      >
-        {saving ? "Saving..." : "Save Changes"}
-      </button>
-    </form>
-  </div>
-
-  {/* RIGHT PREVIEW SIDE */}
-  <div className="w-1/2 max-sm:hidden p-8 max-[640px]:pb-20 max-[640px]:p-3 flex justify-center items-center">
-    <video
-      src={video.videoFile?.url}
-      controls
-      className="rounded-lg w-full h-full object-cover border border-gray-700"
-    />
-  </div>
-
-</div>
-
+    </div>
   );
 }
 

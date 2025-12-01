@@ -58,10 +58,18 @@ function Watchlater({ itemsToShow }) {
   };
 
   if (loading)
-    return <div className="text-center text-gray-400 py-8">Loading Watch Later videos...</div>;
+    return (
+      <div className="text-center text-gray-400 py-8">
+        Loading Watch Later videos...
+      </div>
+    );
 
   if (!videos.length)
-    return <div className="text-center text-gray-400 py-8">No videos in Watch Later</div>;
+    return (
+      <div className="text-center text-gray-400 py-8">
+        No videos in Watch Later
+      </div>
+    );
 
   return (
     <div className="p-3 text-white">
@@ -84,7 +92,9 @@ function Watchlater({ itemsToShow }) {
             </div>
 
             <div className="p-3 relative">
-              <h2 className="text-sm font-semibold line-clamp-2">{video.title}</h2>
+              <h2 className="text-sm font-semibold line-clamp-2">
+                {video.title}
+              </h2>
 
               <p className="text-gray-500 text-xs mt-1">
                 👁 {video.views || 0} views

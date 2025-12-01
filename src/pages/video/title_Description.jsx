@@ -104,8 +104,8 @@ function VideoDetails() {
           </button>
         </div>
 
-<div className="flex-1 overflow-y-auto pr-2 scrollbar-hide ">
-<div className="sm:w-1/2 w-full h-full sm:border-r border-gray-600 p-6 flex flex-col">
+        <div className="flex-1 overflow-y-auto pr-2 scrollbar-hide ">
+          <div className="sm:w-1/2 w-full h-full sm:border-r border-gray-600 p-6 flex flex-col">
             <label className="text-2xl font-semibold mb-4">
               Video Information
             </label>
@@ -181,7 +181,7 @@ function VideoDetails() {
           </div>
 
           {/* RIGHT SIDE — VIDEO PREVIEW */}
-<div className="sm:w-1/2 w-full h-[300px] sm:h-full flex items-center justify-center p-6 sm:mt-0 mt-4">
+          <div className="sm:w-1/2 w-full h-[300px] sm:h-full flex items-center justify-center p-6 sm:mt-0 mt-4">
             {videourl ? (
               <video
                 src={videourl}

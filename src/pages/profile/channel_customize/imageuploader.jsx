@@ -53,7 +53,9 @@ const ImageUploader = ({
         <div className="flex flex-col justify-start gap-3">
           {recommendedSize && (
             <>
-              <p className="text-gray-400  max-[400px]:text-sm text-base">{des}</p>
+              <p className="text-gray-400  max-[400px]:text-sm text-base">
+                {des}
+              </p>
               <p className="text-gray-400 text-base  max-[400px]:text-sm">
                 Recommended size: {recommendedSize}.
               </p>

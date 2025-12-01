@@ -83,7 +83,13 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
   ];
 
   const allowedTabletItems = ["Home", "Subscription", "Settings", "You"];
-  const allowedmobileitems = ["Home", "Subscription", "create", "Settings", "You"];
+  const allowedmobileitems = [
+    "Home",
+    "Subscription",
+    "create",
+    "Settings",
+    "You",
+  ];
 
   return (
     <>
@@ -97,14 +103,14 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
         >
           <nav className="flex flex-col gap-1 text-white pb-13">
             {navItems
-             .filter((item) => {
-  if (item.name === "create") return false; // ⛔ Hide in main sidebar
+              .filter((item) => {
+                if (item.name === "create") return false; // ⛔ Hide in main sidebar
 
-  if (mobileOpen) return true;
-  if (isTablet) return allowedTabletItems.includes(item.name);
-  if (collapse) return allowedTabletItems.includes(item.name);
-  return true;
-})
+                if (mobileOpen) return true;
+                if (isTablet) return allowedTabletItems.includes(item.name);
+                if (collapse) return allowedTabletItems.includes(item.name);
+                return true;
+              })
               .map((item) => (
                 <React.Fragment key={item.name}>
                   <NavLink
@@ -193,12 +199,12 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
               ))}
           </nav>
         </div>
-      <div
-  className={`md:hidden fixed top-0 left-0 h-full w-60 bg-black  text-white p-6 
+        <div
+          className={`md:hidden fixed top-0 left-0 h-full w-60 bg-black  text-white p-6 
     transition-transform duration-300 overflow-y-auto scrollbar-hide z-999
     ${mobileOpen ? "translate-x-0" : "-translate-x-full"}
 `}
->
+        >
           <button
             onClick={() => setMobileOpen(false)}
             className="text-white text-xl mb-6"

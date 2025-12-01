@@ -5,15 +5,32 @@ import { NavLink } from "react-router-dom";
 const Sidebar = ({ collapsed }) => {
   const { data, loading } = useSelector((state) => state.user);
 
-  if (loading) return <p className="text-white text-center mt-10">Loading...</p>;
+  if (loading)
+    return <p className="text-white text-center mt-10">Loading...</p>;
   if (!data)
-    return <p className="text-white text-center mt-10">No user found. Please log in.</p>;
+    return (
+      <p className="text-white text-center mt-10">
+        No user found. Please log in.
+      </p>
+    );
 
   const navItems = [
-    { to: "/dashboard", label: "Dashboard", icon: <Home className="w-7 h-7" /> },
+    {
+      to: "/dashboard",
+      label: "Dashboard",
+      icon: <Home className="w-7 h-7" />,
+    },
     { to: "/content", label: "Content", icon: <Users className="w-7 h-7" /> },
-    { to: "/channel-customize", label: "Customization", icon: <PlayCircle className="w-7 h-7" /> },
-    { to: "/settings", label: "Settings", icon: <Settings className="w-7 h-7" /> },
+    {
+      to: "/channel-customize",
+      label: "Customization",
+      icon: <PlayCircle className="w-7 h-7" />,
+    },
+    {
+      to: "/settings",
+      label: "Settings",
+      icon: <Settings className="w-7 h-7" />,
+    },
   ];
 
   return (
@@ -31,7 +48,9 @@ const Sidebar = ({ collapsed }) => {
         </div>
       )}
 
-      <nav className={`flex flex-col gap-3 mt-6 px-2 ${collapsed ? "items-center" : ""}`}>
+      <nav
+        className={`flex flex-col gap-3 mt-6 px-2 ${collapsed ? "items-center" : ""}`}
+      >
         {navItems.map(({ to, label, icon }) => (
           <NavLink
             key={to}
@@ -43,7 +62,9 @@ const Sidebar = ({ collapsed }) => {
             `
             }
           >
-            <div className="w-8 h-8 flex items-center justify-center">{icon}</div>
+            <div className="w-8 h-8 flex items-center justify-center">
+              {icon}
+            </div>
             {!collapsed && <span className="text-lg">{label}</span>}
           </NavLink>
         ))}

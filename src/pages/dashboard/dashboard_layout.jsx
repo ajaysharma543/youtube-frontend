@@ -37,7 +37,7 @@ const DashboardLayout = ({ children }) => {
       if (width <= 1310 && width >= 768) {
         setIsTablet(true);
         setIsCollapsed(true);
-      } 
+      }
       // Desktop mode: 1311+
       else {
         setIsTablet(false);

@@ -166,7 +166,7 @@ function App() {
           </DashboardLayout>
         }
       />
-      
+
       <Route
         path="/c/:username"
         element={

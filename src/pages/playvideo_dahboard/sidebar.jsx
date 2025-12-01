@@ -15,7 +15,7 @@ import {
   Video,
   Watch,
 } from "lucide-react";
-const Sidebar = ( { sidebarOpen, setSidebarOpen  }) => {
+const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { data: user } = useSelector((state) => state.user);
   const [subscriptions, setSubscriptions] = useState([]);
 
@@ -85,13 +85,14 @@ const Sidebar = ( { sidebarOpen, setSidebarOpen  }) => {
 
   return (
     <>
-  <aside
+      <aside
         className={`
           fixed top-0 left-0 h-full z-40 border-r border-black bg-black text-white
           transition-transform duration-300 overflow-y-auto scrollbar-hide
           w-64 p-6
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
-        `}>
+        `}
+      >
         <button
           onClick={() => setSidebarOpen(false)}
           className="absolute top-4 right-4 md:hidden"
@@ -160,7 +161,7 @@ const Sidebar = ( { sidebarOpen, setSidebarOpen  }) => {
         </nav>
       </aside>
 
-     {sidebarOpen && (
+      {sidebarOpen && (
         <div
           onClick={() => setSidebarOpen(false)}
           className="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden"

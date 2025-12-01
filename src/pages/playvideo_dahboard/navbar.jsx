@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchCurrentUser } from "../../redux/features/userdetailsslice";
 import { setSearchQuery } from "../../redux/features/fetchvideoslice";
 
-function Navbar({ setCollapse}) {
+function Navbar({ setCollapse }) {
   const [showDropdown, setShowDropdown] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,7 +32,6 @@ function Navbar({ setCollapse}) {
   return (
     <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between bg-gradient-to-r from-black via-gray-900 to-black px-6 py-3 shadow-lg border-b border-gray-800">
       <div className="relative flex items-center gap-3">
-
         <Menu
           className="text-white w-7 h-7 cursor-pointer absolute left-0 top-1/2 -translate-y-1/2 z-50"
           onClick={() => setCollapse((prev) => !prev)}

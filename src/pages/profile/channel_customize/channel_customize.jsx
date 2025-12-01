@@ -169,8 +169,8 @@ function CustomizeChannel() {
 
   return (
     <div className="min-h-screen mt-10 bg-black  text-white flex flex-col">
-  <div
-  className="
+      <div
+        className="
     h-[30%] 
     flex items-center justify-between
     px-10 pb-4 
@@ -183,21 +183,21 @@ function CustomizeChannel() {
     max-[640px]:px-4 
     max-[640px]:py-4
   "
->
-  {/* TITLE */}
-  <h1
-    className="
+      >
+        {/* TITLE */}
+        <h1
+          className="
       text-3xl font-bold
       max-[640px]:text-xl 
       max-[640px]:pb-4
     "
-  >
-    Customize Channel
-  </h1>
+        >
+          Customize Channel
+        </h1>
 
-  {/* BUTTON ROW / COLUMN */}
-  <div
-    className="
+        {/* BUTTON ROW / COLUMN */}
+        <div
+          className="
       flex gap-4 
       items-center
 
@@ -211,43 +211,43 @@ function CustomizeChannel() {
       max-[400px]:items-stretch
       max-[400px]:gap-3
     "
-  >
-    {/* BUTTON 1 */}
-    <button
-      type="button"
-      onClick={() => navigate('/profile')}
-      className="
+        >
+          {/* BUTTON 1 */}
+          <button
+            type="button"
+            onClick={() => navigate("/profile")}
+            className="
         bg-gray-800 hover:bg-gray-700 
         px-5 py-2 rounded-full font-semibold
 
         max-[640px]:px-3 max-[640px]:py-1 max-[640px]:text-sm
         max-[400px]:w-full
       "
-    >
-      View Your Channel
-    </button>
+          >
+            View Your Channel
+          </button>
 
-    {/* BUTTON 2 */}
-  <div className="flex justify-end">
-      <button
-      type="button"
-      className="
+          {/* BUTTON 2 */}
+          <div className="flex justify-end">
+            <button
+              type="button"
+              className="
         bg-gray-700 hover:bg-gray-600 
         px-5 py-2 rounded-full font-semibold mr-3
 
         max-[640px]:px-3 max-[640px]:py-1 max-[640px]:text-sm
         max-[400px]:w-full
       "
-    >
-      Cancel
-    </button>
+            >
+              Cancel
+            </button>
 
-    {/* BUTTON 3 */}
-    <button
-      form="channelForm"
-      type="submit"
-      disabled={isPublishDisabled}
-      className={`
+            {/* BUTTON 3 */}
+            <button
+              form="channelForm"
+              type="submit"
+              disabled={isPublishDisabled}
+              className={`
         px-5 py-2 rounded-full font-semibold 
         flex items-center justify-center gap-2 transition-all
 
@@ -260,14 +260,13 @@ function CustomizeChannel() {
             : "bg-red-600 hover:bg-red-700 cursor-pointer"
         }
       `}
-    >
-      {isloading && <Loader2 className="animate-spin w-5 h-5" />}
-      {isloading ? "Publishing..." : "Publish"}
-    </button>
-  </div>
-  </div>
-</div>
-
+            >
+              {isloading && <Loader2 className="animate-spin w-5 h-5" />}
+              {isloading ? "Publishing..." : "Publish"}
+            </button>
+          </div>
+        </div>
+      </div>
 
       <form
         id="channelForm"

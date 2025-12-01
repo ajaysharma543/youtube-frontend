@@ -137,9 +137,13 @@ bg-[linear-gradient(to_right,#1f1f1f,#000000)] p-0"
           </div>
         </div>
 
-        <h1 className="text-white text-2xl font-bold mb-3 bg-transparent bg-[linear-gradient(to_right,#1f1f1f,#000000)]">{video.title}</h1>
-        <div className="flex items-center  max-sm:flex-col max-sm:items-start  justify-between mb-4 bg-[linear-gradient(to_right#1f1f1f,#000000)]
-">
+        <h1 className="text-white text-2xl font-bold mb-3 bg-transparent bg-[linear-gradient(to_right,#1f1f1f,#000000)]">
+          {video.title}
+        </h1>
+        <div
+          className="flex items-center  max-sm:flex-col max-sm:items-start  justify-between mb-4 bg-[linear-gradient(to_right#1f1f1f,#000000)]
+"
+        >
           <div className="flex items-center max-sm:pb-4 gap-3 cursor-pointer">
             <div
               className="flex justify-center"

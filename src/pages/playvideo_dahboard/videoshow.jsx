@@ -83,10 +83,10 @@ const VideoCard = ({ video, onSelect }) => {
           >
             {" "}
             <div className="relative  flex   flex-shrink-0">
-            <img
-  src={video.thumbnail.url}
-  alt={video.title}
-  className="
+              <img
+                src={video.thumbnail.url}
+                alt={video.title}
+                className="
     w-full
     h-30
     max-sm:h-70
@@ -96,7 +96,7 @@ const VideoCard = ({ video, onSelect }) => {
     rounded-2xl
     [@media(min-width:1014px)]:w-40
   "
-/>
+              />
 
               <div className="absolute bottom-1 right-1 bg-black bg-opacity-80 text-white text-xs px-2 py-1 rounded">
                 {formatDuration(video.duration)}
