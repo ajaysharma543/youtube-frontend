@@ -27,7 +27,7 @@ const Sidebar = ({ collapsed }) => {
       icon: <PlayCircle className="w-7 h-7" />,
     },
     {
-      to: "/settings",
+      to: "/profile/settings",
       label: "Settings",
       icon: <Settings className="w-7 h-7" />,
     },

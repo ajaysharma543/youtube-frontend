@@ -157,7 +157,6 @@ function Dashboard() {
     max-[639px]:flex-row max-[639px]:gap-4 max-[639px]:items-start
   "
           >
-            {/* --- IMAGE --- */}
             <div className="w-2/5 max-[639px]:w-[25%]">
               <img
                 src={channelUser.avatar?.url}
@@ -168,7 +167,6 @@ function Dashboard() {
               />
             </div>
 
-            {/* --- NAME + USERNAME + SUBSCRIBERS --- */}
             <div
               className="
       w-2/5 flex flex-col

@@ -291,7 +291,7 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
             className="fixed inset-0 bg-transparent bg-opacity-50 md:hidden z-40"
           />
         )}
-        <div className="hidden max-sm:flex fixed bottom-0 left-0 w-full bg-black text-white border-t border-gray-800 z-50 justify-between px-6 py-3">
+        <div className="hidden max-sm:flex fixed bottom-0 left-0 w-full bg-black text-white border-t border-gray-800 z-50 justify-between px-4 py-3">
           {navItems
             .filter((item) => allowedmobileitems.includes(item.name))
             .map((item) => (
@@ -305,7 +305,7 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
                 }
               >
                 {item.icon}
-                <span className="text-[10px] mt-1">{item.name}</span>
+                <span className="text-[13px] mt-1">{item.name}</span>
               </NavLink>
             ))}
         </div>

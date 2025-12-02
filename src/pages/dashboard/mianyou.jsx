@@ -254,7 +254,6 @@ function Mianyou() {
             onClick={() => handleVideoClick(video._id)}
             className=" rounded-xl shadow-lg hover:scale-105 transform transition-all cursor-pointer overflow-visible"
           >
-            {/* Thumbnail */}
             <div className="w-full relative h-48 bg-black overflow-hidden">
               <img
                 src={video.thumbnail?.url || "/default-thumbnail.jpg"}
@@ -268,7 +267,6 @@ function Mianyou() {
               )}
             </div>
 
-            {/* Details */}
             <div className="p-4 relative">
               <h3 className="text-white font-semibold text-base truncate">
                 {video.title}
@@ -279,7 +277,6 @@ function Mianyou() {
                 {new Date(video.createdAt).toLocaleDateString()}
               </p>
 
-              {/* 3-DOTS MENU */}
               <div className="absolute bottom-3 right-0 z-50">
                 <Playlist video={video}>
                   <button

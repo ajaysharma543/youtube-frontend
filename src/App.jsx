@@ -31,6 +31,7 @@ import Allsubscriptions from "./pages/dashboard/subscription/allsubscriptions";
 import Mianyou from "./pages/dashboard/mianyou";
 import Seting from "./pages/dashboard/seting";
 import Subscriptionphone from "./pages/dashboard/subscription/subscriptionphone";
+import Setings from "./pages/dashboard/setting";
 function App() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -140,6 +141,14 @@ function App() {
           <DashboardLayout>
             <Seting />
           </DashboardLayout>
+        }
+      />
+      <Route
+        path="/profile/settings"
+        element={
+          <ProfileDashboardLayout>
+            <Setings />
+          </ProfileDashboardLayout>
         }
       />
       <Route

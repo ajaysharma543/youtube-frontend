@@ -85,14 +85,30 @@ function History() {
   const groupedHistory = groupByDate(filteredHistory);
 
   return (
-    <div className="p-6 ">
+    <div className="p-6 bg-black">
       <h1 className="text-2xl font-bold mb-6 text-white">Watch History</h1>
 
       {history.length === 0 ? (
         <p className="text-black">No watch history found.</p>
       ) : (
-        <div className="flex w-full gap-8">
-          <div className="flex flex-col gap-8 w-[70%]">
+        <div className="flex max-[640px]:flex-col items-center justify-center  w-full gap-8">
+          <div className="w-[100%] sm:hidden flex  gap-6 text-white">
+            <input
+              type="text"
+              placeholder="Search watch history..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-[70%] p-3 rounded-xl bg-[#1e1e1e] text-white outline-none border border-gray-700"
+            />
+
+            <button
+              onClick={handleClearAll}
+              className="w-[30%] py-3 bg-red-600 rounded-xl hover:bg-red-700 transition"
+            >
+              Clear All Watch History
+            </button>
+          </div>
+          <div className="flex flex-col gap-8 w-[70%] max-[640px]:w-full max-[640px]:pb-20">
             {Object.entries(groupedHistory).map(
               ([group, videos]) =>
                 videos.length > 0 && (
@@ -168,7 +184,7 @@ function History() {
             )}
           </div>
 
-          <div className="w-[30%] flex flex-col gap-6 text-white">
+          <div className="w-[30%] max-[640px]:hidden flex flex-col gap-6 text-white">
             <input
               type="text"
               placeholder="Search watch history..."

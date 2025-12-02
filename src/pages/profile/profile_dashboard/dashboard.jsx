@@ -15,7 +15,11 @@ const ProfileDashboardLayout = ({ children }) => {
       label: "Customize",
       icon: <PlayCircle size={22} />,
     },
-    { to: "/settings", label: "Settings", icon: <Settings size={22} /> },
+    {
+      to: "/profile/settings",
+      label: "Settings",
+      icon: <Settings size={22} />,
+    },
   ];
 
   return (

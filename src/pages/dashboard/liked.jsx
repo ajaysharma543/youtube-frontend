@@ -66,7 +66,7 @@ function Liked() {
   return (
     <div className="flex gap-8 p-6 bg-black min-h-screen text-white">
       {/* LEFT 30% FIXED SECTION */}
-      <aside className="w-1/3 sticky top-0 self-start h-screen">
+      <aside className="w-1/3 sticky top-0 self-start h-screen max-[640px]:hidden ">
         <div className="bg-neutral-900 rounded-2xl p-4 flex flex-col gap-4 h-full">
           {/* COVER IMAGE */}
           <div className="relative w-full h-2/3 rounded-2xl overflow-hidden">
@@ -109,7 +109,7 @@ function Liked() {
         </div>
       </aside>
 
-      <main className="w-2/3 max-h-screen overflow-y-auto scrollbar-hide pr-2">
+      <main className="w-2/3 max-[640px]:w-full max-h-screen overflow-y-auto scrollbar-hide pr-2">
         <div className="flex flex-col">
           {liked.map((video, idx) => (
             <div
