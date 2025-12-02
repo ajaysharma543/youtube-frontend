@@ -73,7 +73,7 @@ function Watchlater({ itemsToShow }) {
 
   return (
     <div className="p-3 text-white">
-      <div className="grid max-[400px]:grid-cols-1 max-[640px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid  max-[640px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {videos.map((video) => (
           <div
             key={video._id}
