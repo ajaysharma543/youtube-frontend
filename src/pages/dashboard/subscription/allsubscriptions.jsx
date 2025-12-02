@@ -81,7 +81,7 @@ function Allsubscriptions() {
       </div>
       <div className="w-full">
         {subscriptions.map((video) => (
-          <div className="border-b border-gray-500 ">
+          <div className="border-b border-gray-500">
             <div
               key={video._id}
               className="relative cursor-pointer pb-16  w-[80%] max-[640px]:w-full overflow-hidden shadow-md hover:shadow-lg transition-shadow"
@@ -104,7 +104,7 @@ function Allsubscriptions() {
                 className="flex  max-[640px]:flex-col max-[640px]:w-full  gap-4"
                 onClick={() => navigate(`/video/${video._id}`)}
               >
-                <div className=" w-63 max-[640px]:w-full h-40 max-[640px]:h-55 relative">
+                <div className=" w-63 max-[640px]:w-full  max-[640px]:h-55 relative">
                   <img
                     src={video.thumbnail.url || "/default-thumbnail.jpg"}
                     alt={video.title}

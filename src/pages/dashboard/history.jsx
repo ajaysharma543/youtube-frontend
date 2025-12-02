@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import authApi from "../../api/userapi";
 import Playlist from "../playvideo_dahboard/playlist/playlist";
 import { Delete } from "lucide-react";
+import Smhistory from "./smhistory";
 
 function History() {
   const [history, setHistory] = useState([]);
@@ -85,121 +86,196 @@ function History() {
   const groupedHistory = groupByDate(filteredHistory);
 
   return (
+<>
+ <div className="hidden sm:block">
   <div className="p-6 bg-black min-h-screen">
-  <h1 className="text-2xl font-bold mb-6 text-white">Watch History</h1>
+    <h1 className="text-2xl font-bold mb-6 text-white">Watch History</h1>
 
-  {history.length === 0 ? (
-    <p className="text-gray-400">No watch history found.</p>
-  ) : (
-    <div className="flex max-sm:flex-col items-start w-full gap-8">
+    {history.length === 0 ? (
+      <p className="text-gray-400">No watch history found.</p>
+    ) : (
+      <div className="flex max-sm:flex-col items-start w-full gap-8">
 
-      {/* Mobile Search */}
-      <div className="w-full sm:hidden flex gap-4 text-white">
-        <input
-          type="text"
-          placeholder="Search watch history..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full p-3 rounded-xl bg-[#1e1e1e] text-white outline-none border border-gray-700"
-        />
+        {/* Desktop Search */}
+       
 
-        <button
-          onClick={handleClearAll}
-          className="py-3 px-4 bg-red-600 rounded-xl hover:bg-red-700 transition whitespace-nowrap"
-        >
-          Clear All
-        </button>
-      </div>
+        {/* Desktop History List */}
+        <div className="flex flex-col gap-8 w-full">
+          {Object.entries(groupedHistory).map(([group, videos]) =>
+            videos.length > 0 && (
+              <div key={group}>
+                <h2 className="text-white font-semibold text-lg mb-4">
+                  {group}
+                </h2>
 
-      {/* History List */}
-      <div className="flex flex-col gap-8 w-full max-sm:pb-20">
-        {Object.entries(groupedHistory).map(([group, videos]) =>
-          videos.length > 0 ? (
-            <div key={group}>
-              <h2 className="text-white font-semibold text-lg mb-4">{group}</h2>
-
-              <div className="flex flex-col gap-6 w-full">
-                {videos.map((video) => (
-                  <div
-                    key={video._id}
-                    onClick={() => handleVideoClick(video._id)}
-                    className="bg-black flex gap-4 p-3 rounded-xl transition cursor-pointer relative"
-                  >
-                    {/* Thumbnail */}
-                    <div className="relative w-40 h-24 rounded-xl overflow-hidden bg-neutral-800">
-                      <img
-                        src={video.thumbnail.url}
-                        alt={video.title}
-                        className="w-full h-full object-cover"
-                      />
-
-                      <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-0.5 rounded">
-                        {formatDuration(video.duration)}
-                      </div>
-                    </div>
-
-                    {/* Right */}
-                    <div className="flex flex-col justify-between w-full">
-                      <h3 className="text-white font-semibold text-base line-clamp-2">
-                        {video.title}
-                      </h3>
-
-                      <div className="text-gray-300 text-sm flex gap-1 pt-1">
-                        <p className="truncate">{video.owner?.fullname}</p>
-                        <span>·</span>
-                        <p>{video.views} views</p>
-                      </div>
-
-                      {video.description && (
-                        <p className="text-gray-400 text-xs mt-2 line-clamp-2">
-                          {video.description}
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Menu */}
+                <div className="flex flex-col gap-6 w-full">
+                  {videos.map((video) => (
                     <div
-                      onClick={(e) => e.stopPropagation()}
-                      className="absolute top-2 right-2 z-50"
+                      key={video._id}
+                      onClick={() => handleVideoClick(video._id)}
+                      className="bg-black flex gap-4 p-3 rounded-xl transition cursor-pointer relative"
                     >
-                      <Playlist video={video}>
-                        <button
-                          onClick={() => removeFromHistory(video._id)}
-                          className="w-full flex gap-2 items-center px-4 py-2 hover:bg-gray-700 text-white"
-                        >
-                          <Delete size={18} />
-                          Remove
-                        </button>
-                      </Playlist>
+                      {/* Thumbnail */}
+                      <div className="relative w-40 h-24 rounded-xl overflow-hidden bg-neutral-800">
+                        <img
+                          src={video.thumbnail.url}
+                          alt={video.title}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-0.5 rounded">
+                          {formatDuration(video.duration)}
+                        </div>
+                      </div>
+
+                      {/* Right */}
+                      <div className="flex flex-col justify-between w-full">
+                        <h3 className="text-white font-semibold text-base line-clamp-2">
+                          {video.title}
+                        </h3>
+
+                        <div className="text-gray-300 text-sm flex gap-1 pt-1">
+                          <p className="truncate">{video.owner?.fullname}</p>
+                          <span>·</span>
+                          <p>{video.views} views</p>
+                        </div>
+
+                        {video.description && (
+                          <p className="text-gray-400 text-xs mt-2 line-clamp-2">
+                            {video.description}
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Menu */}
+                      <div
+                        onClick={(e) => e.stopPropagation()}
+                        className="absolute top-2 right-2 z-50"
+                      >
+                        <Playlist video={video}>
+                          <button
+                            onClick={() => removeFromHistory(video._id)}
+                            className="w-full flex gap-2 items-center px-4 py-2 hover:bg-gray-700 text-white"
+                          >
+                            <Delete size={18} />
+                            Remove
+                          </button>
+                        </Playlist>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )
+          )}
+        </div>
+         <div className="w-full flex flex-col gap-6 text-white">
+          <input
+            type="text"
+            placeholder="Search watch history..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full p-3 rounded-xl bg-[#1e1e1e] text-white outline-none border border-gray-700"
+          />
+
+          <button
+            onClick={handleClearAll}
+            className="w-full py-3 bg-red-600 rounded-xl hover:bg-red-700 transition"
+          >
+            Clear All Watch History
+          </button>
+        </div>
+      </div>
+    )}
+  </div>
+</div>
+<div className="block sm:hidden">
+  <div className="p-4 bg-black min-h-screen text-white">
+
+    <h1 className="text-xl font-semibold mb-4">Watch History</h1>
+
+    <input
+      type="text"
+      placeholder="Search watch history..."
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+      className="w-full p-3 mb-4 rounded-xl bg-[#1e1e1e] text-white outline-none border border-gray-700"
+    />
+
+    <button
+      onClick={handleClearAll}
+      className="w-full mt-6 py-3 bg-red-600 rounded-xl text-white font-semibold hover:bg-red-700"
+    >
+      Clear All Watch History
+    </button>
+
+    <div className="flex flex-col gap-6">
+      {Object.entries(groupedHistory).map(([group, videos]) =>
+        videos.length > 0 && (
+          <div key={group}>
+            <h2 className="text-white font-semibold text-base mb-3">
+              {group}
+            </h2>
+
+            <div className="flex flex-col gap-4">
+              {videos.map((video) => (
+                <div
+                  key={video._id}
+                  onClick={() => handleVideoClick(video._id)}
+                  className="bg-[#111] rounded-xl overflow-hidden shadow-md cursor-pointer relative"
+                >
+                  <div className="relative w-full aspect-video bg-neutral-800">
+                    <img
+                      src={video.thumbnail.url}
+                      alt={video.title}
+                      className="w-full h-full object-cover"
+                    />
+
+                    <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-0.5 rounded">
+                      {formatDuration(video.duration)}
                     </div>
                   </div>
-                ))}
-              </div>
+
+                  <div className="p-3 flex flex-col gap-1">
+                    <h3 className="font-semibold text-sm line-clamp-2">
+                      {video.title}
+                    </h3>
+
+                    <p className="text-gray-300 text-xs">
+                      {video.owner?.fullname} • {video.views} views
+                    </p>
+
+                    {video.description && (
+                      <p className="text-gray-400 text-xs line-clamp-2">
+                        {truncateDescription(video.description, 20)}
+                      </p>
+                    )}
+                  </div>
+
+                  <div
+                    onClick={(e) => e.stopPropagation()}
+                    className="absolute bottom-10 right-0 z-50"
+                  >
+                    <Playlist video={video}>
+                      <button
+                        onClick={() => removeFromHistory(video._id)}
+                        className="w-full flex gap-2 items-center px-4 py-2 hover:bg-gray-700 text-white"
+                      >
+                        <Delete /> Remove
+                      </button>
+                    </Playlist>
+                  </div>
+                </div>
+              ))}
             </div>
-          ) : null
-        )}
-      </div>
-
-      {/* Desktop Search */}
-      <div className="w-full max-sm:hidden flex flex-col gap-6 text-white">
-        <input
-          type="text"
-          placeholder="Search watch history..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full p-3 rounded-xl bg-[#1e1e1e] text-white outline-none border border-gray-700"
-        />
-
-        <button
-          onClick={handleClearAll}
-          className="w-full py-3 bg-red-600 rounded-xl hover:bg-red-700 transition"
-        >
-          Clear All Watch History
-        </button>
-      </div>
+          </div>
+        )
+      )}
     </div>
-  )}
+
+  </div>
 </div>
+
+</>
 
   );
 }

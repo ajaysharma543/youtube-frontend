@@ -16,11 +16,6 @@
     display: block;
   }
 }
-html, body {
-  max-width: 100%;
-  overflow-x: hidden !important;
-  touch-action: manipulation;
-}
 
 .scrollbar-hide {
   -ms-overflow-style: none; /* IE and Edge */

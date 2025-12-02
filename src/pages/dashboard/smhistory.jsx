@@ -85,7 +85,6 @@ function Smhistory() {
 
   return (
     <>
-      return (
       <div className="p-4 bg-black min-h-screen text-white">
         {/* Header */}
         <h1 className="text-xl font-semibold mb-4">Watch History</h1>
@@ -117,17 +116,18 @@ function Smhistory() {
                         className="bg-[#111] rounded-xl overflow-hidden shadow-md cursor-pointer relative"
                       >
                         {/* Thumbnail */}
-                        <div className="relative w-full h-44 bg-neutral-800">
-                          <img
-                            src={video.thumbnail.url}
-                            alt={video.title}
-                            className="w-full h-full object-cover"
-                          />
+                      <div className="relative w-full aspect-video bg-neutral-800">
+  <img
+    src={video.thumbnail.url}
+    alt={video.title}
+    className="w-full h-full object-cover"
+  />
 
-                          <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-0.5 rounded">
-                            {formatDuration(video.duration)}
-                          </div>
-                        </div>
+  <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-0.5 rounded">
+    {formatDuration(video.duration)}
+  </div>
+</div>
+
 
                         {/* Video Info */}
                         <div className="p-3 flex flex-col gap-1">
@@ -177,7 +177,6 @@ function Smhistory() {
           Clear All Watch History
         </button>
       </div>
-      );
     </>
   );
 }
