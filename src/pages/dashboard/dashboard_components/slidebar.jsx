@@ -291,7 +291,7 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
             className="fixed inset-0 bg-transparent bg-opacity-50 md:hidden z-40"
           />
         )}
-      <div className="hidden max-sm:flex fixed bottom-0 left-0 w-full bg-black text-white border-t border-gray-800 z-50 justify-between px-4 py-3">
+      <div className="hidden max-sm:flex fixed bottom-0 left-0 w-full bg-black text-white border-t border-gray-800 z-50 justify-between px-1 py-3">
   {navItems
     .filter((item) => allowedmobileitems.includes(item.name))
     .map((item) => (
@@ -299,7 +299,7 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
         key={item.name}
         to={item.path}
         className={({ isActive }) =>
-          `flex-1 flex flex-col items-center justify-center text-xs ${
+          `flex-1 flex flex-col w-[10%] items-center justify-center text-xs ${
             isActive ? "text-white" : "text-gray-400"
           }`
         }
