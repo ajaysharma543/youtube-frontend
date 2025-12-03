@@ -19,9 +19,6 @@ function Dashboard() {
     stats = {},
     loading,
   } = useSelector((state) => state.videos);
-  console.log("video",videos);
-  console.log("stasts",stats);
-  
 
   const publishedVideos = videos
     .filter((v) => v.isPublished === true)
@@ -86,9 +83,10 @@ function Dashboard() {
                 </div>
 
                 <button
+                  onClick={() => navigate("/profile")}
                   className="mt-6 w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 rounded-lg transition-all"
                 >
-                  comments : {stats.totalcomments || 0}
+                  comments : {videos.commentcount || 0}
                 </button>
               </div>
             </>
