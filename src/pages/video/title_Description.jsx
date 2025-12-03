@@ -104,95 +104,73 @@ function VideoDetails() {
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto pr-2 scrollbar-hide ">
-          <div className="sm:w-1/2 w-full h-full sm:border-r border-gray-600 p-6 flex flex-col">
-            <label className="text-2xl font-semibold mb-4">
-              Video Information
-            </label>
+      <div className="flex-1 flex flex-col sm:flex-row overflow-y-auto pr-2 scrollbar-hide">
+  
+  {/* LEFT: Title, Description, Thumbnail */}
+  <div className="sm:w-1/2 w-full h-full sm:border-r border-gray-600 p-6 flex flex-col">
+    <label className="text-2xl font-semibold mb-4">Video Information</label>
 
-            <div className="flex-1 overflow-y-auto pr-2 scrollbar-hide">
-              {/* TITLE */}
-              <input
-                type="text"
-                placeholder="Enter video title"
-                {...register("title", { required: "Title is required" })}
-                className="w-full p-3 mb-4 rounded-xl bg-gray-700 text-white border border-transparent 
-                hover:border-white focus:border-white focus:ring-0 outline-none transition-colors"
-              />
-              {errors.title && (
-                <p className="text-red-500 text-sm mb-2">
-                  {errors.title.message}
-                </p>
-              )}
+    <div className="flex-1 overflow-y-auto pr-2 scrollbar-hide">
+      {/* TITLE */}
+      <input
+        type="text"
+        placeholder="Enter video title"
+        {...register("title", { required: "Title is required" })}
+        className="w-full p-3 mb-4 rounded-xl bg-gray-700 text-white"
+      />
 
-              {/* DESCRIPTION */}
-              <textarea
-                placeholder="Write your video description..."
-                {...register("description", {
-                  required: "Description is required",
-                })}
-                rows="6"
-                className="w-full p-3 mb-4 rounded-xl bg-gray-700 text-white border border-transparent 
-                hover:border-white focus:border-white focus:ring-0 outline-none transition-colors resize-none"
-              ></textarea>
-              {errors.description && (
-                <p className="text-red-500 text-sm mb-2">
-                  {errors.description.message}
-                </p>
-              )}
+      {/* DESCRIPTION */}
+      <textarea
+        placeholder="Write your video description..."
+        {...register("description", { required: "Description is required" })}
+        rows="6"
+        className="w-full p-3 mb-4 rounded-xl bg-gray-700 text-white resize-none"
+      />
 
-              {/* THUMBNAIL — MANUAL INPUT */}
-              <label className="text-sm font-semibold mb-2">Thumbnail</label>
-              <label
-                htmlFor="thumbnailUpload"
-                className="flex flex-col items-center justify-center border-2 border-dashed border-gray-500 
-                rounded-xl p-6 cursor-pointer hover:border-white focus-within:border-white transition-all"
-              >
-                {thumbnailPreview ? (
-                  <img
-                    src={thumbnailPreview}
-                    alt="Thumbnail Preview"
-                    className="rounded-lg max-h-48 object-cover"
-                  />
-                ) : (
-                  <>
-                    <ImagePlus size={48} className="text-gray-400 mb-2" />
-                    <p className="text-sm text-gray-400">
-                      Click to upload thumbnail
-                    </p>
-                  </>
-                )}
-                <input
-                  type="file"
-                  id="thumbnailUpload"
-                  accept="image/*"
-                  onChange={handleThumbnailChange}
-                  className="hidden"
-                />
-              </label>
+      {/* THUMBNAIL */}
+      <label className="text-sm font-semibold mb-2">Thumbnail</label>
+      <label
+        htmlFor="thumbnailUpload"
+        className="flex flex-col items-center justify-center border-2 border-dashed border-gray-500 
+        rounded-xl p-6 cursor-pointer hover:border-white"
+      >
+        {thumbnailPreview ? (
+          <img
+            src={thumbnailPreview}
+            alt="Thumbnail Preview"
+            className="rounded-lg max-h-48 object-cover"
+          />
+        ) : (
+          <>
+            <ImagePlus size={48} className="text-gray-400 mb-2" />
+            <p className="text-sm text-gray-400">Click to upload thumbnail</p>
+          </>
+        )}
+        <input
+          type="file"
+          id="thumbnailUpload"
+          accept="image/*"
+          onChange={handleThumbnailChange}
+          className="hidden"
+        />
+      </label>
+    </div>
+  </div>
 
-              {!thumbnailFile && (
-                <p className="text-red-500 text-sm mt-2">
-                  Thumbnail is required
-                </p>
-              )}
-              {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
-            </div>
-          </div>
+  {/* RIGHT: Video Preview */}
+  <div className="sm:w-1/2 w-full h-[300px] sm:h-full flex items-center justify-center p-6 sm:mt-0 mt-4">
+    {videourl ? (
+      <video
+        src={videourl}
+        controls
+        className="w-full h-full object-contain rounded-xl border border-gray-700"
+      ></video>
+    ) : (
+      <p className="text-gray-400">No video uploaded yet</p>
+    )}
+  </div>
+</div>
 
-          {/* RIGHT SIDE — VIDEO PREVIEW */}
-          <div className="sm:w-1/2 w-full h-[300px] sm:h-full flex items-center justify-center p-6 sm:mt-0 mt-4">
-            {videourl ? (
-              <video
-                src={videourl}
-                controls
-                className="w-full h-full object-contain rounded-xl border border-gray-700"
-              ></video>
-            ) : (
-              <p className="text-gray-400">No video uploaded yet</p>
-            )}
-          </div>
-        </div>
 
         {/* FOOTER */}
         <div className="w-full border-t border-gray-600 flex justify-end px-8 py-4 bg-black/40">

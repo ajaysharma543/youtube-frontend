@@ -70,7 +70,7 @@ function Allsubscriptions() {
   };
 
   return (
-    <div className="p-4  max-[640px]:p-0">
+    <div className="p-4  max-[640px]:p-0 ">
       <div className="w-[90%] flex justify-end max-[640px]:hidden">
         <button
           className="font-bold cursor-pointer p-2  rounded-2xl text-blue-400 hover:bg-gray-600"
@@ -104,7 +104,7 @@ function Allsubscriptions() {
                 className="flex  max-[640px]:flex-col max-[640px]:w-full  gap-4"
                 onClick={() => navigate(`/video/${video._id}`)}
               >
-                <div className=" w-63 max-[640px]:w-full  max-[640px]:h-55 relative">
+                <div className=" w-63 max-[640px]:w-full h-40  max-[640px]:h-55 relative">
                   <img
                     src={video.thumbnail.url || "/default-thumbnail.jpg"}
                     alt={video.title}
@@ -141,7 +141,7 @@ function Allsubscriptions() {
                 </div>
               </div>
               <div
-                className="absolute right-0 z-50 
+                className="absolute right-0 z-20 
   top-7           
   max-[640px]:top-auto 
   max-[640px]:bottom-30

@@ -87,8 +87,8 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
     "Home",
     "Subscription",
     "create",
-    "Settings",
     "You",
+    "Settings"
   ];
 
   return (
@@ -291,9 +291,9 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
             className="fixed inset-0 bg-transparent bg-opacity-50 md:hidden z-40"
           />
         )}
-      <div className="hidden max-sm:flex fixed bottom-0 left-0 w-full bg-black text-white border-t border-gray-800 z-50 justify-between px-1 py-3">
-  {navItems
-    .filter((item) => allowedmobileitems.includes(item.name))
+   <div className="hidden max-sm:flex fixed bottom-0 left-0 w-full bg-black text-white border-t border-gray-800 z-50 justify-between px-1 py-3">
+  {allowedmobileitems
+    .map((name) => navItems.find(item => item.name === name )).filter(Boolean)
     .map((item) => (
       <NavLink
         key={item.name}

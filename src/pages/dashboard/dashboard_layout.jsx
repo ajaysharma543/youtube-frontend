@@ -68,13 +68,14 @@ const DashboardLayout = ({ children }) => {
 
         <main
           className={`
-            flex-1 overflow-y-auto p-6 max-md:p-0 pt-20 transition-all duration-300
+            flex-1 overflow-y-auto min-h-screen bg-black p-6 max-md:p-0 pt-20 transition-all duration-300
             ml-0
             ${isCollapsed ? "md:ml-20" : "md:ml-60"}
           `}
         >
           {children}
         </main>
+        
       </div>
     </div>
   );

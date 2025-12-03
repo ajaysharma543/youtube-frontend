@@ -115,7 +115,7 @@ function Subscriptondash() {
           ))
         )}
       </div>
-      <div className="sm:hidden bg-black">
+      <div className="sm:hidden bg-black min-h-screen">
         <Subscriptionphone />
       </div>
     </div>

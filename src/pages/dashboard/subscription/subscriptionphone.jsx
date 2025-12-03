@@ -24,7 +24,7 @@ function Subscriptionphone() {
 
   return (
     <>
-      <div className="sm:hidden bg-black w-full px-4">
+      <div className="sm:hidden bg-black w-full px-4 max-[640px]:px-0">
         {/* MOBILE ONLY */}
 
         {/* IMAGE SCROLL ROW */}
@@ -62,7 +62,6 @@ function Subscriptionphone() {
           )}
         </div>
 
-        {/* VIDEOS WHEN USER SELECTED */}
         {selectedUser && (
           <div className="mt-4 w-full">
             <Showallvideos
@@ -73,9 +72,8 @@ function Subscriptionphone() {
           </div>
         )}
 
-        {/* IF NO USER SELECTED → SHOW ALL SUBSCRIPTIONS */}
         {!selectedUser && (
-          <div className="mt-4">
+          <div className="mt-4 ">
             <Allsubscriptions />
           </div>
         )}

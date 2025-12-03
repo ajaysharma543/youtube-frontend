@@ -109,7 +109,7 @@ const VideoCard = ({ video }) => {
           </div>
         </div>
 
-        <div className="absolute bottom-3 right-3 z-50">
+        <div className="absolute bottom-3 right-3 z-20">
           <Playlist video={video} />
         </div>
       </div>

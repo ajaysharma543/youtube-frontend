@@ -296,7 +296,7 @@ function Dashboard() {
           {displayedVideos.length === 0 ? (
             <p>No Video Found</p>
           ) : (
-            <div className="grid max-[570px]:grid-cols-1 sm:grid-cols-2 max-[960px]:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid max-[570px]:grid-cols-1 pb-20 sm:grid-cols-2 max-[960px]:grid-cols-2 lg:grid-cols-3 gap-4">
               {displayedVideos.map((item) => (
                 <VideoCard key={item._id} video={item} />
               ))}
