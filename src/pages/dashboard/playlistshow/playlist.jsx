@@ -104,7 +104,7 @@ function Playlist({ data }) {
         return (
           <div
             key={playlist._id}
-            className="flex flex-col  items-start gap-2 bg-black rounded-2xl relative w-72 max-[640px]:w-full"
+            className="flex flex-col  items-start gap-2 bg-white rounded-2xl relative w-72 max-[640px]:w-full"
           >
             {/* Thumbnail */}
             <div
@@ -121,41 +121,41 @@ function Playlist({ data }) {
                   className="w-full h-full object-cover rounded-2xl"
                 />
               ) : (
-                <div className="w-full h-full bg-black flex items-center justify-center text-white">
+                <div className="w-full h-full bg-black flex items-center justify-center text-black">
                   🎵
                 </div>
               )}
               {playlist.videos && playlist.videos.length > 0 && (
-                <span className="absolute bottom-1 right-1 bg-black bg-opacity-70 text-white text-xs px-1 rounded">
-                  {playlist.videos.length} vid
+                <span className="absolute bottom-1 right-1 bg-black text-white bg-opacity-70  text-xs px-1 rounded">
+                  {playlist.videos.length} video
                 </span>
               )}
             </div>
 
-            <div className="flex flex-col w-full px-2 relative">
-              <h3 className="text-white font-semibold text-md truncate">
+            <div className="flex flex-col p-2 w-full px-2 relative">
+              <h3 className="text-black font-semibold text-md truncate">
                 {playlist.name}
               </h3>
-              <p className="text-white truncate">private: Playlist videos</p>
+              <p className="text-black truncate">private: Playlist videos</p>
 
               <div
-                className="absolute top-0 right-0 text-white text-xl cursor-pointer px-2 py-1"
+                className="absolute top-0 right-0 text-black text-xl cursor-pointer px-2 py-1"
                 onClick={() => handleDropdownToggle(playlist._id)}
               >
                 ⋮
               </div>
 
               {openDropdownId === playlist._id && (
-                <div className="absolute top-6 right-0 bg-gray-800 border border-gray-700 rounded-md shadow-lg w-28 z-10">
+                <div className="absolute top-6 right-0 bg-gray-200 border border-gray-300 rounded-md shadow-lg w-28 z-10">
                   <button
                     onClick={() => handleEdit(playlist)}
-                    className="block w-full text-left px-3 py-2 text-white hover:bg-gray-700 rounded-t-md"
+                    className="block w-full text-left px-3 py-2 text-black hover:bg-gray-300 rounded-t-md"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => deleteplaylist(playlist._id)}
-                    className="block w-full text-left px-3 py-2 text-white hover:bg-gray-700 rounded-b-md"
+                    className="block w-full text-left px-3 py-2 text-black hover:bg-gray-300 rounded-b-md"
                   >
                     Delete
                   </button>
@@ -164,7 +164,7 @@ function Playlist({ data }) {
 
               {editingPlaylist?._id === playlist._id && (
                 <div className="absolute top-[-130px] right-[-120px] mr-2 bg-gray-900 border border-gray-700 rounded-xl shadow-lg w-80 z-20 p-4">
-                  <h2 className="text-white font-semibold mb-2">
+                  <h2 className="text-black font-semibold mb-2">
                     Edit Playlist
                   </h2>
 
@@ -181,18 +181,18 @@ function Playlist({ data }) {
 
                   <form onSubmit={handleSubmit(editplaylist)}>
                     <div className="mb-2">
-                      <label className="text-white text-sm">Title</label>
+                      <label className="text-black text-sm">Title</label>
                       <input
                         type="text"
-                        className="w-full mt-1 p-2 rounded-md bg-gray-800 text-white"
+                        className="w-full mt-1 p-2 rounded-md bg-gray-800 text-black"
                         {...register("title", { required: true })}
                       />
                     </div>
 
                     <div className="mb-2">
-                      <label className="text-white text-sm">Description</label>
+                      <label className="text-black text-sm">Description</label>
                       <textarea
-                        className="w-full mt-1 p-2 rounded-md bg-gray-800 text-white"
+                        className="w-full mt-1 p-2 rounded-md bg-gray-800 text-black"
                         rows={3}
                         {...register("description")}
                       />
@@ -204,14 +204,14 @@ function Playlist({ data }) {
                     <div className="flex justify-end gap-2 mt-2">
                       <button
                         onClick={handleCancelEdit}
-                        className="px-3 py-1 bg-gray-700 text-white rounded-md hover:bg-gray-600"
+                        className="px-3 py-1 bg-gray-700 text-black rounded-md hover:bg-gray-600"
                       >
                         Cancel
                       </button>
                       <button
                         type="submit"
                         disabled={loading}
-                        className={`px-3 py-1 rounded-md text-white ${
+                        className={`px-3 py-1 rounded-md text-black ${
                           loading
                             ? "bg-gray-500 cursor-not-allowed"
                             : "bg-red-600 hover:bg-red-500"
@@ -224,10 +224,10 @@ function Playlist({ data }) {
                 </div>
               )}
 
-              <p className="text-gray-400 text-sm mt-1">
+              <p className="text-black text-sm mt-1">
                 Last updated: {lastUpdated}
               </p>
-              <p className="text-white text-sm mt-1 cursor-pointer">
+              <p className="text-black text-sm mt-1 cursor-pointer">
                 View full playlist
               </p>
             </div>

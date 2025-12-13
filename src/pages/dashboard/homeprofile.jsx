@@ -3,7 +3,7 @@ import Showallvideos from "./showallvideos";
 
 function Homeprofile({ userId }) {
   return (
-    <div className="text-white">
+    <div className="text-black">
       <div className="border-b border-gray-500 pb-10">
         <p className="text-lg font-semibold mb-2">Popular Videos</p>
         <Showallvideos

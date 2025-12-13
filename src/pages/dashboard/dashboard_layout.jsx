@@ -52,7 +52,7 @@ const DashboardLayout = ({ children }) => {
   }, [collapse]);
 
   return (
-    <div className="flex flex-col flex-wrap mt-15 min-h-screen bg-black text-white">
+    <div className="flex flex-col flex-wrap mt-15 min-h-screen bg-white text-white">
       <Navbar
         onToggleSidebar={() => setCollapse((prev) => !prev)}
         onToggleMobile={() => setMobileOpen((prev) => !prev)}
@@ -68,7 +68,7 @@ const DashboardLayout = ({ children }) => {
 
         <main
           className={`
-            flex-1 overflow-y-auto min-h-screen bg-black p-6 max-md:p-0 pt-20 transition-all duration-300
+            flex-1 overflow-y-auto min-h-screen bg-gray-200 p-6 max-md:p-0 pt-10 transition-all duration-300
             ml-0
             ${isCollapsed ? "md:ml-20" : "md:ml-60"}
           `}

@@ -97,11 +97,11 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
         <div
           className={`hidden md:flex flex-col fixed 
       ${collapse ? "w-23 p-2" : "w-64 p-6"}
-      h-screen bg-black text-white  
+      h-screen bg-gray-200 text-black  
       transition-all duration-300 overflow-y-auto scrollbar-hide z-50
     `}
         >
-          <nav className="flex flex-col gap-1 text-white pb-13">
+          <nav className="flex flex-col gap-1 text-black pb-13">
             {navItems
               .filter((item) => {
                 if (item.name === "create") return false; // ⛔ Hide in main sidebar
@@ -120,8 +120,8 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
                         isActive
                           ? isTablet
                             ? "bg-transparent"
-                            : "bg-[#1c1c1c] text-white shadow-md"
-                          : "hover:text-white hover:bg-[#1c1c1c]"
+                            : "bg-white text-black shadow-md"
+                          : "hover:text-black hover:bg-white shadow-gray-200"
                       }`
                     }
                   >
@@ -164,7 +164,7 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
                             key={sub._id}
                             to={`/c/${sub.username}`}
                             className="flex items-center gap-3 w-full px-3 py-2
-                    rounded-xl transition-all duration-200 text-white shadow-md hover:bg-gray-800"
+                    rounded-xl transition-all duration-200 text-black  hover:bg-white"
                           >
                             <div className="w-10 h-10 flex-shrink-0">
                               <img
@@ -174,7 +174,7 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
                               />
                             </div>
 
-                            <span className="text-sm text-gray-300 font-medium truncate">
+                            <span className="text-sm text-black ">
                               {sub.fullname}
                             </span>
                           </Link>
@@ -200,24 +200,24 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
           </nav>
         </div>
         <div
-          className={`md:hidden fixed top-0 left-0 h-full w-60 bg-black  text-white p-6 
+          className={`md:hidden fixed top-0 left-0 h-full w-60 bg-gray-200  text-black p-6 
     transition-transform duration-300 overflow-y-auto scrollbar-hide z-999
     ${mobileOpen ? "translate-x-0" : "-translate-x-full"}
 `}
         >
           <button
             onClick={() => setMobileOpen(false)}
-            className="text-white text-xl mb-6"
+            className="text-black text-xl mb-6"
           >
             <div className="flex items-center gap-3 cursor-pointer">
               <Menu />
               <Youtube className="text-red-600 w-8 h-8" />
-              <h1 className="text-2xl font-bold text-white tracking-wide">
+              <h1 className="text-2xl font-bold text-black tracking-wide">
                 Tube<span className="text-red-600">Hub</span>
               </h1>{" "}
             </div>
           </button>
-          <nav className="flex flex-col gap-1 text-white pb-13">
+          <nav className="flex flex-col gap-1 text-black pb-13">
             {navItems.map((item) => (
               <React.Fragment key={item.name}>
                 <NavLink
@@ -226,8 +226,8 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
                   className={({ isActive }) =>
                     `flex items-center justify-start text-md px-2 py-1.5 rounded-2xl transition-all duration-200 ${
                       isActive
-                        ? "bg-[#1c1c1c] text-white shadow-md"
-                        : "hover:text-white hover:bg-[#1c1c1c]"
+                        ? "bg-[#1c1c1c] text-black shadow-md"
+                        : "hover:text-black hover:bg-[#1c1c1c]"
                     }`
                   }
                 >
@@ -257,7 +257,7 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
                           onClick={() => setMobileOpen(false)}
                           to={`/c/${sub.username}`}
                           className="flex items-center gap-3 w-full px-3 py-2
-                    rounded-xl transition-all duration-200 text-white shadow-md hover:bg-gray-800"
+                    rounded-xl transition-all duration-200 text-black shadow-md hover:bg-gray-800"
                         >
                           <div className="w-10 h-10 flex-shrink-0">
                             <img
@@ -291,7 +291,7 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
             className="fixed inset-0 bg-transparent bg-opacity-50 md:hidden z-40"
           />
         )}
-   <div className="hidden max-sm:flex fixed bottom-0 left-0 w-full bg-black text-white border-t border-gray-800 z-50 justify-between px-1 py-3">
+   <div className="hidden max-sm:flex fixed bottom-0 left-0 w-full bg-gray-200 text-black border-t border-gray-800 z-50 justify-between px-1 py-3">
   {allowedmobileitems
     .map((name) => navItems.find(item => item.name === name )).filter(Boolean)
     .map((item) => (
@@ -300,7 +300,7 @@ const Sidebar = ({ collapse, setMobileOpen, mobileOpen, isTablet }) => {
         to={item.path}
         className={({ isActive }) =>
           `flex-1 flex flex-col w-[10%] items-center justify-center text-xs ${
-            isActive ? "text-white" : "text-gray-400"
+            isActive ? "text-black" : "text-gray-700"
           }`
         }
       >

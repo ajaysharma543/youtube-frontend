@@ -21,8 +21,8 @@ function Profiledatashow({ userId }) {
             onClick={() => setActive(tab.id)}
             className={`pb-2 text-lg cursor-pointer font-medium transition-all ${
               active === tab.id
-                ? "text-white border-b-2 border-white"
-                : "text-gray-400 hover:text-white"
+                ? "text-black border-b-2 border-black"
+                : "text-black hover:text-black"
             }`}
           >
             {tab.label}
@@ -30,7 +30,7 @@ function Profiledatashow({ userId }) {
         ))}
       </div>
 
-      <div className="mt-6 text-white text-xl">
+      <div className="mt-6 text-black text-xl">
         {active === "home" && <Homeprofile userId={userId} />}
         {active === "videos" && <Showallvideos userId={userId} />}
         {active === "playlists" && <Playlist />}

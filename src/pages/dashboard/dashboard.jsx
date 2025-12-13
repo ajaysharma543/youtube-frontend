@@ -147,7 +147,7 @@ function Dashboard() {
   };
 
   return (
-    <div className="p-0 xs:p-4  min-h-screen bg-black text-white">
+    <div className="p-0 xs:p-4  min-h-screen bg-gray-200 text-white">
       {channelUser && (
         <div className="mb-8">
           <div
@@ -230,7 +230,7 @@ function Dashboard() {
                         src={item.thumbnail?.url}
                         className="w-full h-55 object-cover rounded-lg"
                       />
-                      <span className="absolute bottom-2 right-2 bg-black bg-opacity-80 text-xs px-2 py-0.5 rounded">
+                      <span className="absolute bottom-2 right-2 bg-white bg-opacity-80 text-xs px-2 py-0.5 rounded">
                         {formatDuration(item.duration)}
                       </span>
                     </div>
@@ -296,7 +296,7 @@ function Dashboard() {
           {displayedVideos.length === 0 ? (
             <p>No Video Found</p>
           ) : (
-            <div className="grid max-[570px]:grid-cols-1 pb-20 sm:grid-cols-2 max-[960px]:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid bg-gray-200 max-[570px]:grid-cols-1 pb-20 sm:grid-cols-2 max-[960px]:grid-cols-2 lg:grid-cols-3 gap-6">
               {displayedVideos.map((item) => (
                 <VideoCard key={item._id} video={item} />
               ))}

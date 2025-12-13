@@ -55,64 +55,80 @@ const VideoCard = ({ video }) => {
   return (
     <>
       {isloading && (
-        <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-white bg-opacity-80 flex items-center justify-center z-50">
           <div className="flex flex-col items-center">
-            <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
-            <p className="text-white mt-4 text-lg">Redirecting to Signup...</p>
+            <div className="w-12 h-12 border-4 border-black border-t-transparent rounded-full animate-spin"></div>
+            <p className="text-black mt-4 text-lg">Redirecting to Signup...</p>
           </div>
         </div>
       )}
       {loading && (
-        <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-white bg-opacity-80 flex items-center justify-center z-50">
           <div className="flex flex-col items-center">
             <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
           </div>
         </div>
       )}
 
-      <div className="relative group cursor-pointer bg-black rounded-2xl ">
-        <div
-          className="absolute inset-0 bg-[#3b3333] rounded-2xl scale-100 opacity-0 
-                  group-hover:scale-106 group-hover:opacity-100 
-                  transition-all duration-700 ease-in-out pointer-events-none"
-        ></div>
+     <div className="relative group cursor-pointer">
+  {/* Hover Glow */}
+  <div
+    className="absolute inset-0 rounded-2xl bg-black/5 
+               opacity-0 group-hover:opacity-100 
+               transition-all duration-500 pointer-events-none"
+  ></div>
 
-        <div
-          onClick={handleClick}
-          className="relative pb-2 p-0 bg-black rounded-2xl transition-all duration-700 ease-in-out"
-        >
-          <img
-            src={video.thumbnail.url}
-            alt={video.title}
-            className="w-full h-55 sm:h-50 md:h-45 lg:h-50 xl:h-55 2xl:h-60 object-cover rounded-t-2xl"
-          />
-          <div className="p-1  ">
-            <h3 className="text-white font-semibold text-lg truncate">
-              {video.title}
-            </h3>
+  {/* Card */}
+  <div
+    onClick={handleClick}
+    className="relative bg-white rounded-2xl overflow-hidden
+               shadow-md hover:shadow-xl
+               transition-all duration-500 ease-in-out"
+  >
+    {/* Thumbnail */}
+    <img
+      src={video.thumbnail.url}
+      alt={video.title}
+            className="w-full h-60 sm:h-55 md:h-50 lg:h-50 xl:h-52 2xl:h-50 object-cover rounded-t-2xl"
+    />
 
-            <div className="flex items-center gap-2 mt-2">
-              <img
-                src={video.owner?.avatar?.url}
-                alt={video.owner?.username}
-                className="w-6 h-6 rounded-full"
-              />
-              <span className="text-gray-300 text-sm">
-                {video.owner?.username}
-              </span>
-            </div>
+    {/* Content */}
+    <div className="p-2 space-y-1">
+   
 
-            <div className="flex pl-2 items-center mt-3 text-gray-400 text-sm">
-              <span className="pl-2">{video.views} views ·</span>
-              <span className="pl-2">{uploadTime}</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="absolute bottom-3 right-3 z-20">
-          <Playlist video={video} />
-        </div>
+      {/* Channel */}
+      <div className="flex items-center gap-2">
+        <img
+          src={video.owner?.avatar?.url}
+          alt={video.owner?.username}
+          className="w-7 h-7 rounded-full object-cover"
+        />
+         <div className="flex flex-col">
+            <h3 className="text-black font-semibold text-base line-clamp-2">
+        {video.title}
+      </h3>
+        <span className="text-gray-700 text-sm">
+          {video.owner?.username}
+        </span>
+         </div>
       </div>
+
+      {/* Views & Time */}
+      <div className="flex items-center ml-8 text-gray-600 text-xs gap-1">
+        
+        <span>{video.views} views</span>
+        <span>•</span>
+        <span>{uploadTime}</span>
+      </div>
+    </div>
+  </div>
+
+  {/* Playlist Icon */}
+  <div className="absolute bottom-10 right-3 z-20">
+    <Playlist video={video} />
+  </div>
+</div>
+
     </>
   );
 };

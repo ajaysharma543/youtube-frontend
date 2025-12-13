@@ -73,7 +73,7 @@ function Allsubscriptions() {
     <div className="p-4  max-[640px]:p-0 ">
       <div className="w-[90%] flex justify-end max-[640px]:hidden">
         <button
-          className="font-bold cursor-pointer p-2  rounded-2xl text-blue-400 hover:bg-gray-600"
+          className="font-bold cursor-pointer p-2  rounded-2xl text-blue-400 hover:bg-black hover:text-white"
           onClick={() => navigate("/Subscription")}
         >
           manage
@@ -84,18 +84,18 @@ function Allsubscriptions() {
           <div className="border-b border-gray-500">
             <div
               key={video._id}
-              className="relative cursor-pointer pb-16  w-[80%] max-[640px]:w-full overflow-hidden shadow-md hover:shadow-lg transition-shadow"
+              className="relative cursor-pointer pb-16  w-[80%] max-[640px]:w-full overflow-hidden transition-shadow"
             >
               <div
                 className="flex max-[640px]:hidden items-center gap-3 p-3"
                 onClick={() => navigate(`/c/${video.owner.username}`)}
               >
                 <img
-                  src={video.owner.avatar?.url || "/default-avatar.png"}
+                  src={video.owner.avatar?.url || "/default-avatar.png"} 
                   alt={video.owner.fullname}
                   className="w-10 h-10 rounded-full object-cover"
                 />
-                <span className="text-white font-semibold">
+                <span className="text-black font-semibold">
                   {video.owner.fullname}
                 </span>
               </div>
@@ -110,17 +110,17 @@ function Allsubscriptions() {
                     alt={video.title}
                     className="w-full h-full object-cover rounded-lg"
                   />
-                  <div className="absolute bottom-1 right-1 bg-black opacity-70 bg-opacity-80 text-white text-xs px-2 py-1 rounded">
+                  <div className="absolute bottom-1 right-1 opacity-70 bg-opacity-80 text-black text-xs px-2 py-1 rounded">
                     {formatDuration(video.duration)}
                   </div>
                 </div>
 
                 <div className="flex-1">
-                  <h3 className="text-white mb-2 font-semibold text-2xl">
+                  <h3 className="text-black mb-2 font-semibold text-2xl">
                     {video.title}
                   </h3>
-                  <div className="flex flex-col w-[80%] justify-start items-start mb-3 text-gray-300 text-sm">
-                    <div className="flex items-center mb-1">
+                  <div className="flex flex-col w-[80%] justify-start items-start mb-1 text-black text-sm">
+                    <div className="flex items-center">
                       <img
                         src={video.owner.avatar?.url || "/default-avatar.png"}
                         alt="avatar"
@@ -129,15 +129,16 @@ function Allsubscriptions() {
                       <span>{video.owner.username}</span>
                     </div>
 
-                    <div className="flex items-center ml-10">
+                    <div className="flex items-center p-0 ml-13">
                       <span className="pr-3">{video.views} views</span>
                       <span>{getTimeAgo(video.createdAt)}</span>
                     </div>
-                  </div>
-
-                  <p className="text-gray-400 text-sm w-full max-[640px]:hidden">
+                      <p className="text-black text-sm w-full pl-13 max-[640px]:hidden">
                     {truncateWords(video.description, 30)}
                   </p>
+                  </div>
+
+                
                 </div>
               </div>
               <div

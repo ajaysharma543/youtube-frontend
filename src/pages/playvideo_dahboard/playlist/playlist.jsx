@@ -82,15 +82,15 @@ function Playlist({ video, children }) {
             setShowPlaylistMenu(false);
             setcreatePlaylistMenu(false);
           }}
-          className="text-white cursor-pointer w-3 text-2xl hover:text-gray-300"
+          className="text-black cursor-pointer w-3 text-2xl"
         >
           ⋮
         </button>
 
         {open && !showPlaylistMenu && !createPlaylistMenu && (
-          <div className="absolute -top-8 right-6 mt-2 w-44 bg-[#222222] text-white rounded-xl shadow-lg border border-gray-700 z-9999">
+          <div className="absolute -top-8 right-6 mt-2 w-44 bg-gray-300 text-black rounded-xl shadow-lg border border-gray-700 z-9999">
             <button
-              className="w-full text-left px-4 py-2 hover:bg-[#333333] transition-colors"
+              className="w-full text-left px-4 py-2 hover:bg-white rounded-xl transition-colors"
               onClick={(e) => {
                 (setOpen(false), watchlater(e));
               }}
@@ -99,7 +99,7 @@ function Playlist({ video, children }) {
             </button>
 
             <button
-              className="w-full text-left px-4 py-2 hover:bg-[#333333] transition-colors"
+              className="w-full text-left px-4 py-2 hover:bg-white rounded-xl transition-colors"
               onClick={(e) => {
                 e.stopPropagation();
                 setShowPlaylistMenu(true);

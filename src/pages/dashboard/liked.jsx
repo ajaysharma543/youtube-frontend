@@ -56,20 +56,20 @@ function Liked() {
 
   if (loading)
     return (
-      <p className="text-white text-center py-4">Loading liked videos...</p>
+      <p className="text-black text-center py-4">Loading liked videos...</p>
     );
   if (!liked.length)
-    return <p className="text-white text-center py-4">No liked videos yet!</p>;
+    return <p className="text-black text-center py-4">No liked videos yet!</p>;
 
   const latestVideo = liked[0];
 
   return (
   <>
-   <div className="hidden sm:flex gap-8 p-6 bg-black min-h-screen text-white">
+   <div className="hidden sm:flex gap-8 p-6 bg-gray-200 min-h-screen text-black">
 
   {/* LEFT SIDEBAR */}
   <aside className="w-1/3 sticky top-0 self-start h-screen">
-    <div className="bg-neutral-900 rounded-2xl p-4 flex flex-col gap-4 h-full">
+    <div className="bg-gray-300 rounded-2xl p-4 flex flex-col gap-4 h-full">
 
       {/* COVER IMAGE */}
       <div className="relative w-full h-2/3 rounded-2xl overflow-hidden">
@@ -80,10 +80,10 @@ function Liked() {
             className="w-full h-full object-cover"
           />
         ) : (
-          <div className="w-full h-full bg-gray-800 flex items-center justify-center text-5xl">🎵</div>
+          <div className="w-full h-full bg-gray-300 flex items-center justify-center text-5xl">🎵</div>
         )}
 
-        <span className="absolute bottom-3 left-3 bg-black/70 text-white text-sm px-3 py-1 rounded">
+        <span className="absolute bottom-3 left-3 bg-gray-300 text-black text-sm px-3 py-1 rounded">
           {liked.length} videos
         </span>
       </div>
@@ -92,15 +92,15 @@ function Liked() {
         <div>
           <h2 className="text-2xl font-bold">Liked videos</h2>
           <h6 className="text-sm">{latestVideo.owner.username}</h6>
-          <span className="text-gray-400">{latestVideo.views} views</span>
-          <span className="text-gray-400 block">updated today</span>
+          <span className="text-gray-700">{latestVideo.views} views</span>
+          <span className="text-gray-700 block">updated today</span>
         </div>
 
         <div className="flex gap-3 mt-4">
           <button className="bg-white text-black px-4 py-2 rounded-lg font-semibold hover:bg-gray-200">
             Play all
           </button>
-          <button className="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700">
+          <button className="bg-gray-300 text-black px-4 py-2 rounded-lg hover:bg-gray-700">
             Shuffle
           </button>
         </div>
@@ -115,10 +115,10 @@ function Liked() {
       {liked.map((video, idx) => (
         <div
           key={video._id}
-          className="flex items-center gap-4 bg-neutral-900 rounded-2xl p-3 mb-3 cursor-pointer"
+          className="flex items-center gap-4 bg-gray-300 rounded-2xl p-3 mb-3 cursor-pointer"
           onClick={() => handleVideoClick(video._id)}
         >
-          <div className="text-gray-400 font-semibold w-6 text-right">{idx + 1}</div>
+          <div className="text-black font-semibold w-6 text-right">{idx + 1}</div>
 
           {/* Thumbnail */}
           <div className="relative w-48 h-28 rounded-lg overflow-hidden flex-shrink-0">
@@ -136,8 +136,8 @@ function Liked() {
 
           {/* Video Info */}
           <div className="flex flex-col justify-center w-full">
-            <h3 className="text-white font-semibold text-base line-clamp-2">{video.title}</h3>
-            <p className="text-gray-400 text-sm mt-1">
+            <h3 className="text-black font-semibold text-base line-clamp-2">{video.title}</h3>
+            <p className="text-gray-800 text-sm mt-1">
               {video.views ?? 0} views • {new Date(video.createdAt).toLocaleDateString()}
             </p>
           </div>
@@ -150,8 +150,8 @@ function Liked() {
                   e.stopPropagation();
                   removelike(video._id);
                 }}
-                className="w-full flex items-center text-left hover:bg-gray-700 text-white px-4 py-2"
-              >
+                className="w-full flex items-center text-left rounded-2xl hover:bg-white text-black px-4 py-2"
+              > 
                 <Trash className="mr-2 w-5 h-5" /> Remove
               </button>
             </Playlist>
@@ -164,7 +164,7 @@ function Liked() {
 
 </div>
 {/* MOBILE VERSION */}
-<div className="block sm:hidden p-4 bg-black min-h-screen text-white">
+<div className="block sm:hidden p-4 bg-gray-300 min-h-screen text-black">
 
   {/* Header */}
   <div className="mb-4">
@@ -184,7 +184,7 @@ function Liked() {
       <div className="w-full h-full flex items-center justify-center text-4xl">🎵</div>
     )}
 
-    <span className="absolute bottom-2 left-2 bg-black/70 px-2 py-1 text-xs rounded">
+    <span className="absolute bottom-2 left-2 bgray-30070 px-2 py-1 text-xs rounded">
       {liked.length} videos
     </span>
   </div>
@@ -194,7 +194,7 @@ function Liked() {
     <button className="bg-white text-black px-4 py-2 rounded-lg font-semibold w-full">
       Play all
     </button>
-    <button className="bg-gray-800 text-white px-4 py-2 rounded-lg w-full">
+    <button className="bg-black text-white px-4 py-2 rounded-lg w-full">
       Shuffle
     </button>
   </div>
@@ -232,7 +232,7 @@ function Liked() {
                 e.stopPropagation();
                 removelike(video._id);
               }}
-              className="w-full flex items-center text-left hover:bg-gray-700 text-white px-4 py-2"
+              className="w-full flex items-center text-left hover:bg-gray-700 text-black px-4 py-2"
             >
               <Trash className="mr-2 w-5 h-5" /> Remove
             </button>

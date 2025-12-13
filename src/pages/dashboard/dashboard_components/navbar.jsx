@@ -66,14 +66,14 @@ function Navbar({ onToggleSidebar, onToggleMobile }) {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-50 bg-black px-6 py-3 shadow-lg transition-all duration-300 
+        className={`fixed top-0 left-0 w-full z-50 bg-gray-200 px-6 py-3 shadow-lg transition-all duration-300 
         ${mobileSearchOpen ? "hidden" : "flex"}
         items-center justify-between`}
       >
         <div className="flex items-center gap-3 cursor-pointer">
           <Menu
             className={`
-    text-white mr-3 w-7 h-7
+    text-black mr-3 w-7 h-7
     ${isMobile639 ? "hidden" : ""} 
     ${isTabletRange ? "hidden" : "block"}
   `}
@@ -88,7 +88,7 @@ function Navbar({ onToggleSidebar, onToggleMobile }) {
           />
 
           <Youtube className="text-red-600 w-8 h-8" />
-          <h1 className="text-2xl font-bold text-white tracking-wide">
+          <h1 className="text-2xl font-bold text-black tracking-wide">
             Tube<span className="text-red-600">Hub</span>
           </h1>
           <PartyPopperIcon className="text-yellow-400 w-5 h-5 animate-bounce" />
@@ -96,7 +96,7 @@ function Navbar({ onToggleSidebar, onToggleMobile }) {
         <div className="relative w-150 hidden md:block">
           <Search
             onClick={handleSearch}
-            className="absolute right-0 top-1/2 bg-[#252525] rounded-r-full -translate-y-1/2 text-gray-400 w-16 h-10 cursor-pointer"
+            className="absolute right-0 top-1/2 rounded-r-full -translate-y-1/2 text-gray-400 w-12 h-10 cursor-pointer"
           />
 
           <input
@@ -105,24 +105,23 @@ function Navbar({ onToggleSidebar, onToggleMobile }) {
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             type="search"
             placeholder="Search videos..."
-            className="w-full border border-gray-700 text-white placeholder-gray-500 rounded-full pl-5 pr-10 py-2 outline-none focus:ring-2 focus:ring-white transition"
+            className="w-full border border-gray-700 text-black placeholder-gray-500 rounded-full pl-5 pr-10 py-2 outline-none focus:ring-2 focus:ring-white transition"
           />
         </div>
-        <div className="flex items-center justify-between ">
-          {/* CREATE button - hide on <= 569px */}
+        <div className="flex items-center bg0wh justify-between ">
           <div className="relative max-[569px]:hidden">
             <button
               onClick={() => setShowDropdown((prev) => !prev)}
-              className="bg-gray-900 mr-5 hover:bg-red-700 text-white font-semibold px-5 py-2 rounded-full transition-all duration-200 shadow-md"
+              className=" mr-5 hover:bg-red-700 text-black hover:text-white font-semibold px-5 py-2 rounded-full transition-all duration-200 shadow-md"
             >
               Create +
             </button>
 
             {showDropdown && (
-              <div className="absolute right-0 top-12 w-44 bg-gray-900 border border-gray-700 rounded-xl shadow-lg overflow-hidden z-50">
+              <div className="absolute right-0 top-12 w-44  border border-gray-700 rounded-xl shadow-lg overflow-hidden z-50">
                 <button
                   onClick={handleUploadClick}
-                  className="block w-full text-left px-5 py-3 text-white hover:bg-red-700 transition"
+                  className="block w-full text-left px-5 py-3 text-black hover:bg-red-700 hover:text-white transition"
                 >
                   Upload Video
                 </button>
@@ -133,7 +132,7 @@ function Navbar({ onToggleSidebar, onToggleMobile }) {
           <div
             onClick={() => navigate("/profile")}
             className="w-10 h-10 flex items-center justify-center rounded-full bg-red-600 
-             text-white font-bold text-lg cursor-pointer hover:bg-red-700 max-[640px]:mr-4 transition 
+             text-black font-bold text-lg cursor-pointer hover:bg-red-700 max-[640px]:mr-4 transition 
              overflow-hidden"
           >
             {data?.avatar?.url ? (
@@ -149,16 +148,16 @@ function Navbar({ onToggleSidebar, onToggleMobile }) {
             )}
           </div>
           <Search
-            className="text-white w-7 h-7 cursor-pointer md:hidden"
+            className="text-black w-7 h-7 cursor-pointer md:hidden"
             onClick={() => setMobileSearchOpen(true)}
           />
         </div>
       </header>
       {mobileSearchOpen && (
-        <div className="fixed top-0 left-0 w-full h-16 bg-black flex items-center justify-between px-4 z-50">
+        <div className="fixed top-0 left-0 w-full h-16  flex items-center justify-between px-4 z-50">
           {/* BACK BUTTON */}
           <ArrowLeft
-            className="text-white w-7 h-7 cursor-pointer"
+            className="text-black w-7 h-7 cursor-pointer"
             onClick={() => {
               setMobileSearchOpen(false);
               setSearchValue(""); // clear input
@@ -175,12 +174,12 @@ function Navbar({ onToggleSidebar, onToggleMobile }) {
             autoFocus
             type="search"
             placeholder="Search videos..."
-            className="flex-1 mx-3 border border-gray-700 bg-black text-white placeholder-gray-500 rounded-full px-4 py-2 outline-none"
+            className="flex-1 mx-3 border border-gray-700  text-black placeholder-gray-500 rounded-full px-4 py-2 outline-none"
           />
 
           {/* SEARCH ICON */}
           <Search
-            className="text-white w-7 h-7 cursor-pointer"
+            className="text-black w-7 h-7 cursor-pointer"
             onClick={handleSearch}
           />
         </div>

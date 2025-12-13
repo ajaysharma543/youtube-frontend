@@ -94,7 +94,7 @@ function Showallvideos({ userId, limit, sortBy, sortType }) {
             <div
               key={video._id}
               onClick={() => handleVideoClick(video._id)}
-              className="bg-[#0f0f0f] cursor-pointer rounded-xl p-1 hover:bg-[#181818] transition-all relative"
+              className="bg-gray-200 shadow-2xl cursor-pointer rounded-xl hover:bg-white transition-all relative"
             >
               <div className="relative">
                 <img
@@ -106,17 +106,17 @@ function Showallvideos({ userId, limit, sortBy, sortType }) {
                 </span>
               </div>
 
-              <div className="mt-3 px-1">
-                <h3 className="text-white font-semibold text-md truncate">
+              <div className="mt-3  p-4">
+                <h3 className="text-black font-semibold text-md truncate">
                   {video.title}
                 </h3>
 
-                <p className="text-gray-400 text-xs mt-1">
+                <p className="text-gray-800 text-xs mt-1">
                   {video.views} views · {getTimeAgo(video.createdAt)}
                 </p>
               </div>
 
-              <div className="absolute bottom-2 right-2 text-sm">
+              <div className="absolute bottom-10 right-2 text-sm">
                 <Playlist video={video} />
               </div>
             </div>

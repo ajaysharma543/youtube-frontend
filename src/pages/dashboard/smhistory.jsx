@@ -85,7 +85,7 @@ function Smhistory() {
 
   return (
     <>
-      <div className="p-4 bg-black min-h-screen text-white">
+      <div className="p-4 bg-white min-h-screen text-white">
         {/* Header */}
         <h1 className="text-xl font-semibold mb-4">Watch History</h1>
 

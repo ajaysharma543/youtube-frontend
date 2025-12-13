@@ -88,11 +88,11 @@ function History() {
   return (
 <>
  <div className="hidden sm:block">
-  <div className="p-6 bg-black min-h-screen">
-    <h1 className="text-2xl font-bold mb-6 text-white">Watch History</h1>
+  <div className="p-6 bg-gray-200 min-h-screen">
+    <h1 className="text-2xl font-bold mb-6 text-black">Watch History</h1>
 
     {history.length === 0 ? (
-      <p className="text-gray-400">No watch history found.</p>
+      <p className="text-gray-800">No watch history found.</p>
     ) : (
       <div className="flex max-sm:flex-col items-start w-full gap-8">
 
@@ -104,7 +104,7 @@ function History() {
           {Object.entries(groupedHistory).map(([group, videos]) =>
             videos.length > 0 && (
               <div key={group}>
-                <h2 className="text-white font-semibold text-lg mb-4">
+                <h2 className="text-black font-semibold text-lg mb-4">
                   {group}
                 </h2>
 
@@ -113,34 +113,34 @@ function History() {
                     <div
                       key={video._id}
                       onClick={() => handleVideoClick(video._id)}
-                      className="bg-black flex gap-4 p-3 rounded-xl transition cursor-pointer relative"
+                      className="bg-gray-200  shadow-2xl flex gap-4 p-3 rounded-xl transition cursor-pointer relative"
                     >
                       {/* Thumbnail */}
-                      <div className="relative w-40 h-24 rounded-xl overflow-hidden bg-neutral-800">
+                      <div className="relative w-40 h-24 rounded-xl overflow-hidden bg-gray-300">
                         <img
                           src={video.thumbnail.url}
                           alt={video.title}
                           className="w-full h-full object-cover"
                         />
-                        <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-0.5 rounded">
+                        <div className="absolute bottom-1 right-1 bg-black/80 text-white text-xs px-2 py-0.5 rounded">
                           {formatDuration(video.duration)}
                         </div>
                       </div>
 
                       {/* Right */}
                       <div className="flex flex-col justify-between w-full">
-                        <h3 className="text-white font-semibold text-base line-clamp-2">
+                        <h3 className="text-black font-semibold text-base line-clamp-2">
                           {video.title}
                         </h3>
 
-                        <div className="text-gray-300 text-sm flex gap-1 pt-1">
+                        <div className="text-gray-700 text-sm flex gap-1 pt-1">
                           <p className="truncate">{video.owner?.fullname}</p>
                           <span>·</span>
                           <p>{video.views} views</p>
                         </div>
 
                         {video.description && (
-                          <p className="text-gray-400 text-xs mt-2 line-clamp-2">
+                          <p className="text-gray-700 text-xs mt-2 line-clamp-2">
                             {video.description}
                           </p>
                         )}
@@ -154,7 +154,7 @@ function History() {
                         <Playlist video={video}>
                           <button
                             onClick={() => removeFromHistory(video._id)}
-                            className="w-full flex gap-2 items-center px-4 py-2 hover:bg-gray-700 text-white"
+                            className="w-full flex gap-2 items-center px-4 py-2 hover:bg-white rounded-2xl text-gray-700"
                           >
                             <Delete size={18} />
                             Remove
@@ -174,7 +174,7 @@ function History() {
             placeholder="Search watch history..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full p-3 rounded-xl bg-[#1e1e1e] text-white outline-none border border-gray-700"
+            className="w-full p-3 rounded-xl bg-gray-200 text-black outline-none border border-black"
           />
 
           <button
@@ -258,7 +258,7 @@ function History() {
                     <Playlist video={video}>
                       <button
                         onClick={() => removeFromHistory(video._id)}
-                        className="w-full flex gap-2 items-center px-4 py-2 hover:bg-gray-700 text-white"
+                        className="w-full flex gap-2 items-center px-4 py-2 hover:bg-gray-700 text-black"
                       >
                         <Delete /> Remove
                       </button>

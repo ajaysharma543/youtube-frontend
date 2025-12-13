@@ -135,7 +135,7 @@ function Mianyou() {
 
   if (loading)
     return (
-      <p className="text-white text-center py-4">Loading liked videos...</p>
+      <p className="text-black text-center py-4">Loading liked videos...</p>
     );
   return (
     <div>
@@ -150,9 +150,9 @@ function Mianyou() {
         />
 
         <div>
-          <p className="text-white text-lg font-semibold">{user?.fullname}</p>
+          <p className="text-black text-lg font-semibold">{user?.fullname}</p>
           <div className="flex">
-            <p className="text-gray-400 text-sm">@{user?.username}</p>
+            <p className="text-black text-sm">@{user?.username}</p>
 
             <p className="text-blue-400 pl-2 text-sm cursor-pointer hover:underline">
               View Channel
@@ -164,16 +164,16 @@ function Mianyou() {
         className="flex justify-between mt-10 cursor-pointer mb-4"
         onClick={() => navigate("/history")}
       >
-        <h1 className="text-white text-xl font-semibold mb-4">Watch History</h1>
-        <button className="hover:bg-gray-700 px-7 py-2 rounded-2xl">
+        <h1 className="text-black text-xl font-semibold mb-4">Watch History</h1>
+        <button className="hover:bg-gray-700 hover:text-white px-7 py-2 text-black rounded-2xl">
           see all
         </button>
       </div>
-     <div className="grid grid-cols-2 p-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
+     <div className="grid grid-cols-2 p-2  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
   {history.map((v) => (
     <div
       key={v._id}
-      className="cursor-pointer relative w-full"
+      className="cursor-pointer relative shadow-2xl  rounded-2xl w-full"
       onClick={() => handleVideoClick(v._id)}
     >
       {/* Thumbnail */}
@@ -190,7 +190,7 @@ function Mianyou() {
       </div>
 
       {/* Video Info */}
-      <div className="flex gap-3 mt-3">
+      <div className="flex gap-3 p-2 rounded-2xl bg-gray-200 mt-3">
         <img
           src={v.owner?.avatar?.url || "/default-avatar.png"}
           alt={v.owner?.fullname}
@@ -198,13 +198,13 @@ function Mianyou() {
         />
 
         <div>
-          <p className="text-white font-semibold text-sm line-clamp-2">
+          <p className="text-black font-semibold text-sm line-clamp-2">
             {v.title}
           </p>
 
-          <p className="text-gray-300 text-xs mt-1">{v.owner?.fullname}</p>
+          <p className="text-black text-xs mt-1">{v.owner?.fullname}</p>
 
-          <p className="text-gray-500 text-xs">
+          <p className="text-black text-xs">
             {v.views} views • {getTimeAgo(v.createdAt)}
           </p>
         </div>
@@ -218,7 +218,7 @@ function Mianyou() {
         <Playlist video={v}>
           <button
             onClick={() => removeFromHistory(v._id)}
-            className="w-full flex text-left justify-center px-4 py-2 hover:bg-gray-700 text-white"
+            className="w-full flex text-left justify-center px-4 py-2 rounded-xl hover:bg-white text-black"
           >
             <Delete size={18} />
             Remove
@@ -233,8 +233,8 @@ function Mianyou() {
         className="flex justify-between mt-10 mb-4 cursor-pointer"
         onClick={() => navigate("/playlist")}
       >
-        <h1 className="text-white text-xl font-semibold">Your Playlists</h1>
-        <button className="hover:bg-gray-700 px-7  rounded-2xl">see all</button>
+        <h1 className="text-black text-xl font-semibold">Your Playlists</h1>
+        <button className="hover:bg-gray-700 hover:text-white px-7 text-black rounded-2xl">see all</button>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 p-2 lg:grid-cols-4 gap-4">
         {latestFour.map((p) => (
@@ -245,47 +245,47 @@ function Mianyou() {
         className="flex justify-between mt-10 mb-4 cursor-pointer"
         onClick={() => navigate("/liked")}
       >
-        <h1 className="text-white text-xl font-semibold">Liked Videos</h1>
-        <button className="hover:bg-gray-700 px-7  rounded-2xl">see all</button>
+        <h1 className="text-black text-xl font-semibold">Liked Videos</h1>
+        <button className="hover:bg-gray-700 hover:text-white px-7 text-black rounded-2xl">see all</button>
       </div>
       <div className="grid grid-cols-2 p-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {latestlikes.map((video) => (
           <div
             key={video._id}
             onClick={() => handleVideoClick(video._id)}
-            className=" rounded-xl shadow-lg hover:scale-105 transform transition-all cursor-pointer overflow-visible"
+            className="  shadow-lg rounded-2xl hover:scale-105 transform transition-all cursor-pointer overflow-visible"
           >
-            <div className="w-full relative h-48 bg-black overflow-hidden">
+            <div className="w-full relative rounded-2xl h-48 bg-gray-200 overflow-hidden">
               <img
                 src={video.thumbnail?.url || "/default-thumbnail.jpg"}
                 alt={video.title}
                 className="w-full h-full object-cover"
               />
               {typeof video.duration === "number" && (
-                <span className="absolute bottom-0 right-0 bg-black bg-opacity-80 text-xs px-2 py-0.5 rounded">
+                <span className="absolute bottom-0 right-0 bg-black text-white bg-opacity-80 text-xs px-2 py-0.5 rounded">
                   {formatDuration(video.duration)}
                 </span>
               )}
             </div>
 
             <div className="p-4 relative">
-              <h3 className="text-white font-semibold text-base truncate">
+              <h3 className="text-black font-semibold text-base truncate">
                 {video.title}
               </h3>
 
-              <p className="text-gray-400 text-sm mt-1">
+              <p className="text-black text-sm mt-1">
                 {video.views ?? 0} views •{" "}
                 {new Date(video.createdAt).toLocaleDateString()}
               </p>
 
-              <div className="absolute bottom-3 right-0 z-50">
+              <div className="absolute bottom-3 text-black right-0 z-50">
                 <Playlist video={video}>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       removelike(video._id);
                     }}
-                    className="w-full flex items-center text-left hover:bg-gray-700 text-white px-4 py-2"
+                    className="w-full flex items-center text-left hover:bg-white rounded-xl text-black px-4 py-2"
                   >
                     <Trash className="mr-2 w-5 h-5" />
                     Remove
@@ -301,8 +301,8 @@ function Mianyou() {
         className="flex justify-between mt-10 mb-4 cursor-pointer"
         onClick={() => navigate("/watchlater")}
       >
-        <h1 className="text-white text-xl font-semibold ">Watch Later</h1>
-        <button className="hover:bg-gray-700 px-7  rounded-2xl">see all</button>
+        <h1 className="text-black text-xl font-semibold ">Watch Later</h1>
+        <button className="hover:bg-gray-700 hover:text-white text-black px-7  rounded-2xl">see all</button>
       </div>
       <div className="p-0">
         <Watchlater itemsToShow={itemsToShow} />

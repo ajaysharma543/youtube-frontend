@@ -72,7 +72,7 @@ function Watchlater({ itemsToShow }) {
     );
 
   return (
-    <div className="p-3 text-white">
+    <div className="p-3 text-black">
       <div className="grid  max-[640px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {videos.map((video) => (
           <div
@@ -96,18 +96,18 @@ function Watchlater({ itemsToShow }) {
                 {video.title}
               </h2>
 
-              <p className="text-gray-500 text-xs mt-1">
+              <p className="text-gray-700 text-xs mt-1">
                 👁 {video.views || 0} views
               </p>
 
-              <div className="absolute bottom-2 right-2">
+              <div className="absolute bottom-2 hover:bg-white right-2">
                 <Playlist video={video}>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       deletewatchlater(video._id);
                     }}
-                    className="flex items-center px-3 py-1 hover:bg-gray-700 rounded"
+                    className="flex items-center px-3 py-1 hover:bg-white text-black  rounded"
                   >
                     <Delete className="w-4 h-4 mr-1" />
                     Remove
