@@ -174,11 +174,11 @@ function Dashboard() {
       max-[639px]:text-sm max-[639px]:leading-tight
     "
             >
-              <h2 className="text-2xl font-bold max-[639px]:text-base">
+              <h2 className="text-2xl text-black font-bold max-[639px]:text-base">
                 {channelUser.fullname}
               </h2>
 
-              <div className="flex text-gray-400 max-[639px]:flex-col max-[639px]:gap-0">
+              <div className="flex text-gray-800 max-[639px]:flex-col max-[639px]:gap-0">
                 <p className="pr-2 max-[639px]:pr-0">@{channelUser.username}</p>
                 <p className="pr-2 max-[639px]:pr-0">
                   {channelUser.totalsubscriber} subscribers
@@ -230,7 +230,7 @@ function Dashboard() {
                         src={item.thumbnail?.url}
                         className="w-full h-55 object-cover rounded-lg"
                       />
-                      <span className="absolute bottom-2 right-2 bg-white bg-opacity-80 text-xs px-2 py-0.5 rounded">
+                      <span className="absolute bottom-2 right-2 text-white bg-black bg-opacity-80 text-xs px-2 py-0.5 rounded">
                         {formatDuration(item.duration)}
                       </span>
                     </div>
@@ -238,7 +238,7 @@ function Dashboard() {
                     {/* Right Section */}
                     <div className="w-[60%] flex flex-col gap-1 max-[639px]:w-full">
                       {/* Title */}
-                      <h2 className="text-lg font-semibold line-clamp-2 pb-2 leading-tight max-[639px]:text-sm">
+                      <h2 className="text-lg text-black font-semibold line-clamp-2 pb-2 leading-tight max-[639px]:text-sm">
                         {item.title}
                       </h2>
 
@@ -250,7 +250,7 @@ function Dashboard() {
           "
                       >
                         {/* LEFT SIDE: Views + Time */}
-                        <div className="flex items-center gap-3 max-[639px]:text-xs">
+                        <div className="flex items-center text-black gap-3 max-[639px]:text-xs">
                           <h3>{item.views} views</h3>
                           <h3>{getTimeAgo(item.createdAt)}</h3>
                         </div>
@@ -259,16 +259,16 @@ function Dashboard() {
                         <div className="flex items-center gap-2 max-[639px]:text-xs">
                           <img
                             src={channelUser.avatar?.url}
-                            className="w-6 h-6 rounded-full object-cover max-[639px]:w-4 max-[639px]:h-4"
+                            className="w-6 h-6 rounded-full object-cover  max-[639px]:w-4 max-[639px]:h-4"
                           />
-                          <h3 className="font-semibold text-sm max-[639px]:text-xs">
+                          <h3 className="font-semibold text-black text-sm max-[639px]:text-xs">
                             {channelUser.fullname}
                           </h3>
                         </div>
                       </div>
 
                       {/* Description (hidden on mobile) */}
-                      <p className="text-gray-400 text-sm line-clamp-2 pt-3 max-[639px]:hidden">
+                      <p className="text-gray-800 text-sm line-clamp-2 pt-3 max-[639px]:hidden">
                         {item.description}
                       </p>
                     </div>
@@ -277,7 +277,7 @@ function Dashboard() {
                     <div
                       onClick={(e) => e.stopPropagation()}
                       className="
-          absolute top-2 right-2 z-50 
+          absolute top-2 right-2 z-50 text-black
           max-[639px]:top-auto max-[639px]:right-2 max-[639px]:bottom-2
         "
                     >

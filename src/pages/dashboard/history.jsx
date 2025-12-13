@@ -189,16 +189,16 @@ function History() {
   </div>
 </div>
 <div className="block sm:hidden">
-  <div className="p-4 bg-black min-h-screen text-white">
+  <div className="p-4 bg-gray-200 min-h-screen text-white">
 
-    <h1 className="text-xl font-semibold mb-4">Watch History</h1>
+    <h1 className="text-xl text-black font-semibold mb-4">Watch History</h1>
 
     <input
       type="text"
       placeholder="Search watch history..."
       value={searchQuery}
       onChange={(e) => setSearchQuery(e.target.value)}
-      className="w-full p-3 mb-4 rounded-xl bg-[#1e1e1e] text-white outline-none border border-gray-700"
+      className="w-full p-3 mb-4 rounded-xl bg-white text-black outline-none border border-gray-700"
     />
 
     <button
@@ -221,9 +221,9 @@ function History() {
                 <div
                   key={video._id}
                   onClick={() => handleVideoClick(video._id)}
-                  className="bg-[#111] rounded-xl overflow-hidden shadow-md cursor-pointer relative"
+                  className="bg-white rounded-xl overflow-hidden shadow-md cursor-pointer relative"
                 >
-                  <div className="relative w-full aspect-video bg-neutral-800">
+                  <div className="relative w-full aspect-video bg-gray-200">
                     <img
                       src={video.thumbnail.url}
                       alt={video.title}
@@ -236,16 +236,16 @@ function History() {
                   </div>
 
                   <div className="p-3 flex flex-col gap-1">
-                    <h3 className="font-semibold text-sm line-clamp-2">
+                    <h3 className="font-semibold text-sm text-black line-clamp-2">
                       {video.title}
                     </h3>
 
-                    <p className="text-gray-300 text-xs">
+                    <p className="text-gray-800 text-xs">
                       {video.owner?.fullname} • {video.views} views
                     </p>
 
                     {video.description && (
-                      <p className="text-gray-400 text-xs line-clamp-2">
+                      <p className="text-gray-800 text-xs line-clamp-2">
                         {truncateDescription(video.description, 20)}
                       </p>
                     )}
@@ -253,7 +253,7 @@ function History() {
 
                   <div
                     onClick={(e) => e.stopPropagation()}
-                    className="absolute bottom-10 right-0 z-50"
+                    className="absolute bottom-10 right-0 z-100"
                   >
                     <Playlist video={video}>
                       <button

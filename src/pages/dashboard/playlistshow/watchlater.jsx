@@ -100,16 +100,16 @@ function Watchlater({ itemsToShow }) {
                 👁 {video.views || 0} views
               </p>
 
-              <div className="absolute bottom-2 hover:bg-white right-2">
+              <div className="absolute bottom-2 right-2">
                 <Playlist video={video}>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       deletewatchlater(video._id);
                     }}
-                    className="flex items-center px-3 py-1 hover:bg-white text-black  rounded"
+                    className="flex items-center w-full rounded-2xl px-3 py-1 hover:bg-white text-black "
                   >
-                    <Delete className="w-4 h-4 mr-1" />
+                    <Delete className="w-4 h-4 mr-2" />
                     Remove
                   </button>
                 </Playlist>

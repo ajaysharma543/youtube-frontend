@@ -54,21 +54,21 @@ function Subscriptondash() {
   };
 
   return (
-    <div className="p-4 bg-black">
+    <div className="p-4 bg-white">
       <h1 className="text-2xl font-bold mb-4 max-[640px]:hidden">
         All Subscriptions
       </h1>
 
       <div className="flex justify-center items-center sm:flex-col flex-row w-full">
         {subs.length === 0 ? (
-          <p className="text-gray-400 text-lg mt-10">No subscriptions found.</p>
+          <p className="text-gray-700 text-lg mt-10">No subscriptions found.</p>
         ) : (
           subs.map((ch) => (
             <div
               key={ch._id}
-              className="w-full flex sm:w-[80%]  p-4 rounded-xl shadow"
+              className="w-full flex sm:w-[80%] mb-2  p-4 rounded-xl shadow-xl"
             >
-              <div className="hidden sm:flex w-full items-start cursor-pointer gap-4">
+              <div className="hidden sm:flex w-full items-center cursor-pointer gap-4">
                 <div
                   className="flex gap-4"
                   onClick={() => navigate(`/c/${ch.username}`)}
@@ -80,9 +80,9 @@ function Subscriptondash() {
                   />
 
                   <div className="flex flex-col w-[50%] min-w-[250px]">
-                    <h2 className="text-lg font-semibold">{ch.fullname}</h2>
+                    <h2 className="text-lg text-black font-semibold">{ch.fullname}</h2>
 
-                    <div className="flex items-center gap-1 text-sm text-gray-400">
+                    <div className="flex items-center gap-1 text-sm text-gray-800">
                       <p>@{ch.username} :</p>
                       <p>{ch.totalsubscriber || 0}</p>
                       <span>Subscribers</span>

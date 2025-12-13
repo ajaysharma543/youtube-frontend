@@ -24,7 +24,7 @@ function Subscriptionphone() {
 
   return (
     <>
-      <div className="sm:hidden bg-black w-full px-4 max-[640px]:px-0">
+      <div className="sm:hidden bg-white w-full px-4 max-[640px]:px-0">
         {/* MOBILE ONLY */}
 
         {/* IMAGE SCROLL ROW */}
